@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>基于Fragment的安卓插件化Demo | Same&#39;s Blog</title>
+  <meta name="keywords" content=" Android ">
+  <meta name="description" content="基于Fragment的安卓插件化Demo | Same&#39;s Blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="施工中。。。。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://same4869.github.io/about/index.html">
+<meta property="og:site_name" content="Same&#39;s Blog">
+<meta property="og:description" content="施工中。。。。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2024-03-18T08:05:23.996Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="about">
+<meta name="twitter:description" content="施工中。。。。">
+
+
+<link rel="icon" href="https://img0.baidu.com/it/u=2938741800,3443602320&fm=253&fmt=auto&app=138&f=JPEG?w=268&h=268">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0"></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.1.0"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="undefined">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true">
+  <input id="theme_highlight_on" value="true">
+  <input id="theme_code_copy" value="true">
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="https://img0.baidu.com/it/u=2938741800,3443602320&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=268&amp;h=268"/>
+</a>
+<div class="author">
+    <span>Same</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/same4869"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="jianshu"
+               href="http://www.jianshu.com/u/4165fccb3734"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-jianshu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+               href="mailto:same4869@126.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=119123059&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="All">All
+            
+                <small>(17)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+    <li>
+        <div data-rel="Android">
+            
+            Android
+            <small>(11)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+        
+            
+    <li>
+        <div data-rel="其他技术">
+            
+            其他技术
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+        
+            
+    <li>
+        <div data-rel="个人随笔">
+            
+            个人随笔
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">About</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">Friends</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="17">
+<input type="hidden" id="yelog_site_word_count" value="57.4k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        Links
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://ccflower.github.io/">ccflower的博客</a></li>
+            
+            <li><a target="_blank" href="http://todd2010.github.io/">todd2010的博客</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">All</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Android</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>blockchain</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>otherTec</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>个人随笔</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="All Android "
+           href="/2019/03/22/手撸Android-Nexus私有Maven仓库GOGOGO/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="手撸Android-Nexus私有Maven仓库GOGOGO">手撸Android-Nexus私有Maven仓库GOGOGO</span>
+            <span class="post-date" title="2019-03-22 00:00:00">2019/03/22</span>
+        </a>
+        
+        
+        <a  class="All 其他技术 "
+           href="/2018/07/08/EOS爬行记1/"
+           data-tag="blockchain"
+           data-author="" >
+            <span class="post-title" title="EOS爬行记（章一） --- EOS环境搭建与基本命令">EOS爬行记（章一） --- EOS环境搭建与基本命令</span>
+            <span class="post-date" title="2018-07-08 00:00:00">2018/07/08</span>
+        </a>
+        
+        
+        <a  class="All 其他技术 "
+           href="/2018/04/05/DAPP开发实战之投票系统/"
+           data-tag="blockchain"
+           data-author="" >
+            <span class="post-title" title="DAPP开发实战之投票系统">DAPP开发实战之投票系统</span>
+            <span class="post-date" title="2018-04-05 00:00:00">2018/04/05</span>
+        </a>
+        
+        
+        <a  class="All 其他技术 "
+           href="/2018/02/19/Hexo博客重新起飞/"
+           data-tag="otherTec"
+           data-author="" >
+            <span class="post-title" title="Hexo博客重新起飞">Hexo博客重新起飞</span>
+            <span class="post-date" title="2018-02-19 00:00:00">2018/02/19</span>
+        </a>
+        
+        
+        <a  class="All 个人随笔 "
+           href="/2017/12/25/东京女子图鉴/"
+           data-tag="个人随笔"
+           data-author="" >
+            <span class="post-title" title="《东京女子图鉴》碎碎念">《东京女子图鉴》碎碎念</span>
+            <span class="post-date" title="2017-12-25 00:00:00">2017/12/25</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/12/19/《APP技术封装与选择》总览/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《APP技术封装与选择》总览">《APP技术封装与选择》总览</span>
+            <span class="post-date" title="2017-12-19 00:00:00">2017/12/19</span>
+        </a>
+        
+        
+        <a  class="All 其他技术 "
+           href="/2017/10/19/《精通Python网络爬虫》读书笔记/"
+           data-tag="otherTec"
+           data-author="" >
+            <span class="post-title" title="《精通Python网络爬虫》读书笔记">《精通Python网络爬虫》读书笔记</span>
+            <span class="post-date" title="2017-10-19 00:00:00">2017/10/19</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/10/10/commlib使用指南/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="commlib使用指南">commlib使用指南</span>
+            <span class="post-date" title="2017-10-10 00:00:00">2017/10/10</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/08/21/APP研发录/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《APP研发录》读书笔记">《APP研发录》读书笔记</span>
+            <span class="post-date" title="2017-08-21 00:00:00">2017/08/21</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/08/08/《Android技能树探索》总览/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》总览">《Android技能树探索》总览</span>
+            <span class="post-date" title="2017-08-08 00:00:00">2017/08/08</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/07/19/《易读》APP分析/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《易读》APP分析">《易读》APP分析</span>
+            <span class="post-date" title="2017-07-19 00:00:00">2017/07/19</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/06/07/《Android技能树探索》基础篇---Broadcast/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》基础篇---Broadcast">《Android技能树探索》基础篇---Broadcast</span>
+            <span class="post-date" title="2017-06-07 00:00:00">2017/06/07</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/05/10/Android下载模块探究/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="Android下载模块探究">Android下载模块探究</span>
+            <span class="post-date" title="2017-05-10 00:00:00">2017/05/10</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/04/05/《Android技能树探索》基础篇---Service/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》基础篇---Service">《Android技能树探索》基础篇---Service</span>
+            <span class="post-date" title="2017-04-05 00:00:00">2017/04/05</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/04/01/基于Fragment的安卓插件化Demo/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="基于Fragment的安卓插件化Demo">基于Fragment的安卓插件化Demo</span>
+            <span class="post-date" title="2017-04-01 00:00:00">2017/04/01</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/03/21/Android深度主题切换探究/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="Android深度主题切换探究">Android深度主题切换探究</span>
+            <span class="post-date" title="2017-03-21 00:00:00">2017/03/21</span>
+        </a>
+        
+        
+        <a  class="All 个人随笔 "
+           href="/2017/02/11/精进/"
+           data-tag="个人随笔"
+           data-author="" >
+            <span class="post-title" title="《精进：如何成为一个很厉害的人》读书笔记">《精进：如何成为一个很厉害的人》读书笔记</span>
+            <span class="post-date" title="2017-02-11 00:00:00">2017/02/11</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-基于Fragment的安卓插件化Demo" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">基于Fragment的安卓插件化Demo</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="Android">Android</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">Android</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2024-03-18 15:24:57'>2017-04-01 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>Count:3.6k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-工程总体结构"><span class="toc-text">1.工程总体结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-依赖关系"><span class="toc-text">2.依赖关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-从零开始"><span class="toc-text">3.从零开始</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><p><strong>说明:</strong>本篇文章主要以代码的形式还原结构，并非从原理的角度来阐述插件化，相关原理请自行谷歌。</p>
+<h4 id="1-工程总体结构"><a href="#1-工程总体结构" class="headerlink" title="1.工程总体结构"></a>1.工程总体结构</h4><p><img src="/img/001/20170227-1.jpg" alt="Alt text"></p>
+<ul>
+<li>app是主module，也就是唯一一个配置成<code>com.android.application</code>的module，里面是不需要插件化的主页面等。</li>
+<li>bbcomm是公共依赖库，里面放一些app或者其他插件都会用到的公共资源与控件。</li>
+<li>login是没有被插件化的模块，作为app的依赖库，本质上和app没什么区别。</li>
+<li>p_scanword是插件。</li>
+<li>pluginbase是插件框架。</li>
+</ul>
+<h4 id="2-依赖关系"><a href="#2-依赖关系" class="headerlink" title="2.依赖关系"></a>2.依赖关系</h4><ul>
+<li>app依赖bbcomm（如果需要使用公共控件）和login</li>
+<li>bbcomm依赖pluginbase</li>
+<li>login依赖bbcomm（如果需要使用公共控件）</li>
+<li>p_scanword依赖bbcomm（如果需要使用公共控件）</li>
+<li>pluginbase不依赖任何其他</li>
+</ul>
+<a id="more"></a>
+<h4 id="3-从零开始"><a href="#3-从零开始" class="headerlink" title="3.从零开始"></a>3.从零开始</h4><ol>
+<li>新建一个app的module，类型是application，正常新建一个activity，打造万能测试页面，如下图所示：<br><img src="/img/001/20170328-1.png" alt="Alt text"><br>稍微解释下这个页面的元素：</li>
+</ol>
+<ul>
+<li>第一个button是跳转到login里面的另一个activity的。</li>
+<li>第二个button加载插件，把插件的页面展示到下面那个蓝色的layout里面去。</li>
+<li>第三个button来自于bbcomm，同时插件里也使用了bbcomm里面的这个控件。</li>
+</ul>
+<p>一个button没什么好说的，代码如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Intent loginIntent = <span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>,LoginMainActivity<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">startActivity(loginIntent);</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>在pluginbase里面先定义一个<code>PluginInfo</code>的实体类，里面包含了插件的相关信息，如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PluginInfo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> String libDir;</span><br><span class="line">    <span class="keyword">public</span> ClassLoader loader;</span><br><span class="line">    <span class="keyword">public</span> Resources resources;</span><br><span class="line">    <span class="keyword">public</span> Resources.Theme theme;</span><br><span class="line">    <span class="keyword">public</span> PluginBase pluginBase;</span><br><span class="line">    <span class="keyword">public</span> Context context;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其他基本都是基本类型或者安卓基本类型，那么<code>PluginBase</code>是什么东西呢？先看看PluginBase里面的代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">PluginBase</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String PLUGIN_SCANWORD = <span class="string">"p_scanword"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Context mContext;</span><br><span class="line">    <span class="keyword">private</span> FragmentManager mFragmentManager;</span><br><span class="line">    <span class="keyword">private</span> Context pluginContext;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">attach</span><span class="params">(Context context, FragmentManager manager)</span> </span>&#123;</span><br><span class="line">        mContext = context.getApplicationContext();</span><br><span class="line">        mFragmentManager = manager;</span><br><span class="line"></span><br><span class="line">        init();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Context <span class="title">getHostContext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mContext;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Context <span class="title">getPluginContext</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pluginContext != <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> pluginContext;</span><br><span class="line">        &#125;</span><br><span class="line">        pluginContext = PluginManager.getInstance(mContext).makePluginContext(getPluginName(), mContext);</span><br><span class="line">        <span class="keyword">return</span> pluginContext;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> FragmentManager <span class="title">getFragmentManager</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mFragmentManager;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> FragmentTransaction <span class="title">getFragmentTransaction</span><span class="params">()</span></span>&#123;</span><br><span class="line">        FragmentManager fragmentManager = getFragmentManager();</span><br><span class="line">        <span class="keyword">return</span> fragmentManager.beginTransaction();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> String <span class="title">getPluginName</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(<span class="keyword">int</span> containerId)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">hide</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">detach</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看出来，<code>PluginBase</code>是一个虚类，里面声明了若干的虚函数，有一个attch的公共方法来接收宿主的<code>context</code>和<code>FragmentManager</code>，并且提供公共方法让外部使用这两个属性，此外还实现了一个<code>getPluginContext</code>的方法，这个方法可以获得插件的<code>context</code>，对于插件化具有重要的意义。<br>说到<code>getPluginContext</code>方法，可以看看里面的实现，其实主要就是<code>PluginManager.getInstance(mContext).makePluginContext(getPluginName(), mContext);</code>这句话没错吧。<br>然后就可以看看<code>PluginManager</code>是什么鬼了。</p>
+<ol>
+<li>其实分123并没有啥卵用，只是为了稍微有点层次感不至于太累，好了继续吧。<br><code>PluginManager</code>既然是manager一般是单例的，所以首先是这样：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="title">PluginManager</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.appContext = context.getApplicationContext();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> PluginManager <span class="title">getInstance</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (sInstance == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (PluginManager<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (sInstance == <span class="keyword">null</span>) &#123;</span><br><span class="line">                sInstance = <span class="keyword">new</span> PluginManager(context);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sInstance;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这个没啥好说的，接下来看看刚刚那个<code>makePluginContext</code>方法:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Context <span class="title">makePluginContext</span><span class="params">(<span class="keyword">final</span> String name, <span class="keyword">final</span> Context outerContext)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (isPluginTestMode) &#123;</span><br><span class="line">           <span class="keyword">return</span> outerContext;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       Context context = mPluginMap.get(name).context;</span><br><span class="line">       <span class="keyword">if</span> (context != <span class="keyword">null</span>) &#123;</span><br><span class="line">           <span class="keyword">return</span> context;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       context = <span class="keyword">new</span> ContextWrapper(outerContext) &#123;</span><br><span class="line">           <span class="meta">@Override</span></span><br><span class="line">           <span class="function"><span class="keyword">public</span> Resources <span class="title">getResources</span><span class="params">()</span> </span>&#123;</span><br><span class="line">               <span class="keyword">return</span> mPluginMap.get(name).resources;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           <span class="meta">@Override</span></span><br><span class="line">           <span class="function"><span class="keyword">public</span> AssetManager <span class="title">getAssets</span><span class="params">()</span> </span>&#123;</span><br><span class="line">               <span class="keyword">return</span> mPluginMap.get(name).resources.getAssets();</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           <span class="meta">@Override</span></span><br><span class="line">           <span class="keyword">public</span> Resources.<span class="function">Theme <span class="title">getTheme</span><span class="params">()</span> </span>&#123;</span><br><span class="line">               <span class="keyword">return</span> mPluginMap.get(name).theme;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           <span class="meta">@Override</span></span><br><span class="line">           <span class="function"><span class="keyword">public</span> Object <span class="title">getSystemService</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">               <span class="keyword">if</span> (!Context.LAYOUT_INFLATER_SERVICE.equals(name)) &#123;</span><br><span class="line">                   <span class="keyword">return</span> <span class="keyword">super</span>.getSystemService(name);</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               LayoutInflater inflater = (LayoutInflater) <span class="keyword">super</span>.getApplicationContext()</span><br><span class="line">                       .getSystemService(Context.LAYOUT_INFLATER_SERVICE);</span><br><span class="line"></span><br><span class="line">               LayoutInflater proxyInflater = inflater.cloneInContext(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">               <span class="keyword">return</span> proxyInflater;</span><br><span class="line"></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">return</span> context;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>isPluginTestMode</code>这里可以先不管，我们可以看到这个<code>context</code>其实是根据name在一个名为<code>mPluginMap</code>的容器里面取出来的，如果取出为空就new一个<code>ContextWrapper</code>重新创建，并在各个重写方法里面都使用<code>mPluginMap</code>的值，这里需要注意的是<code>getSystemService</code>方法的重写，这样就能保证在使用<code>LayoutInflater</code>的时候能够使用正确的<code>context</code>而不会出错。<br>接下来需要看看<code>mPluginMap</code>是什么了吧，里面的数据是怎么放进去的。首先看看声明：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, PluginInfo&gt; mPluginMap = <span class="keyword">new</span> HashMap&lt;String, PluginInfo&gt;();</span><br></pre></td></tr></table></figure></p>
+<p>所以<code>mPluginMap</code>就是一个hashmap，key就是插件对应的name，而value就是插件对应的PluginInfo。来看看是怎么把数据塞进去的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> PluginInfo <span class="title">getPluginInfo</span><span class="params">(String pluginName)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (mPluginMap.containsKey(pluginName)) &#123;</span><br><span class="line">        <span class="keyword">return</span> mPluginMap.get(pluginName);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    String pluginPath = getPluginPath(pluginName);</span><br><span class="line"></span><br><span class="line">    PluginInfo pluginInfo = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        pluginInfo = loadPluginInfo(pluginName, pluginPath);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (pluginInfo != <span class="keyword">null</span>) &#123;</span><br><span class="line">        mPluginMap.put(pluginName, pluginInfo);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> pluginInfo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这种东西其实就像玩RPG游戏一样，游戏刚开始可能主角只想完成一个单纯的任务A，而在完成A的途中发现需要完成B，完成B的途中又要完成C才行，以此类推，所以一个游戏的任务链是A-&gt;B-&gt;C-&gt;…..-&gt;C-&gt;B-A，吐槽而已，同理，从代码中看到了其实核心方法是<code>loadPluginInfo</code>，而它的参数又由<code>getPluginPath</code>提供，所以先看看<code>getPluginPath</code>的内部代码吧：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> String <span class="title">getPluginPath</span><span class="params">(String pluginName)</span> </span>&#123;</span><br><span class="line">    File dir = <span class="keyword">new</span> File(appContext.getFilesDir(), PLUGIN_DIR);</span><br><span class="line">    <span class="keyword">if</span> (!dir.exists()) &#123;</span><br><span class="line">        dir.mkdirs();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    File saveFile = <span class="keyword">new</span> File(dir, pluginName + <span class="string">".apk"</span>); <span class="comment">// pluginA.apk</span></span><br><span class="line">    <span class="keyword">if</span> (saveFile != <span class="keyword">null</span> &amp;&amp; saveFile.exists() &amp;&amp; saveFile.isFile()) &#123;</span><br><span class="line">        saveFile.setExecutable(<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">return</span> saveFile.getAbsolutePath();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>里面的appContext是在初始化单例的时候传入的宿主context，代码上面已经有了，来看下上面这个方法，我们从特定的目录中去取插件的apk，如果有则返回插件的路径，没有则返回空。好了，终于可以看<code>loadPluginInfo</code>方法了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> PluginInfo <span class="title">loadPluginInfo</span><span class="params">(String pluginName, String pluginPath)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> ClassNotFoundException, InstantiationException, IllegalAccessException </span>&#123;</span><br><span class="line">        String optDir = getPluginOptDir(pluginName);</span><br><span class="line">        String libDir = getPluginLibDir(pluginName);</span><br><span class="line"></span><br><span class="line">        DexClassLoader dexClassLoader = createDexClassLoader(pluginPath, optDir, libDir);</span><br><span class="line">        AssetManager assetManager = createAssetManager(pluginPath);</span><br><span class="line">        Resources resources = createResources(assetManager);</span><br><span class="line"></span><br><span class="line">        PluginInfo pluginInfo = <span class="keyword">new</span> PluginInfo();</span><br><span class="line"></span><br><span class="line">        pluginInfo.libDir = libDir;</span><br><span class="line">        pluginInfo.loader = dexClassLoader;</span><br><span class="line">        pluginInfo.resources = resources;</span><br><span class="line"></span><br><span class="line">        Resources.Theme theme = resources.newTheme();</span><br><span class="line">        theme.setTo(appContext.getTheme());</span><br><span class="line">        pluginInfo.theme = theme;</span><br><span class="line"></span><br><span class="line">        Class cls = Class.forName(getPluginLauncherName(pluginName), <span class="keyword">true</span>, dexClassLoader);</span><br><span class="line">        PluginBase pluginBase = (PluginBase) cls.newInstance();</span><br><span class="line">        pluginInfo.pluginBase = pluginBase;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> pluginInfo;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>核心来了！！首先通过<code>getPluginOptDir</code>和<code>getPluginLibDir</code>这两个方法新建和指定下opt和dir的目录，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> String <span class="title">getPluginOptDir</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">       File dir = <span class="keyword">new</span> File(appContext.getFilesDir(), <span class="string">"/plugin/"</span> + name + <span class="string">"/opt"</span>);</span><br><span class="line">       dir.mkdirs();</span><br><span class="line">       <span class="keyword">return</span> dir.getAbsolutePath();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> String <span class="title">getPluginLibDir</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">       File dir = <span class="keyword">new</span> File(appContext.getFilesDir(), <span class="string">"/plugin/"</span> + name + <span class="string">"/libs"</span>);</span><br><span class="line">       dir.mkdirs();</span><br><span class="line">       <span class="keyword">return</span> dir.getAbsolutePath();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后通过<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> DexClassLoader <span class="title">createDexClassLoader</span><span class="params">(String pluginPath, String optDir, String libDir)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> DexClassLoader(pluginPath, optDir, libDir, appContext.getClassLoader());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个方法把<code>pluginPath</code>，<code>optDir</code>，<code>libDir</code>注入到<code>dexClassLoader</code>中生成新的<code>classLoader</code>，这个<code>classLoader</code>就会在我们指定的目录下面去找dex文件加载，这便是插件化中java代码插件化的原理了。<br>除了Java代码，当然还有资源文件，看到这两行代码木有：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AssetManager assetManager = createAssetManager(pluginPath);</span><br><span class="line">Resources resources = createResources(assetManager);</span><br></pre></td></tr></table></figure></p>
+<p>我们会构造一个resources出来，这个就是插件的resources的啦，那是怎么构造出来的呢，接着看：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> AssetManager <span class="title">createAssetManager</span><span class="params">(String dexPath)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           AssetManager assetManager = AssetManager<span class="class">.<span class="keyword">class</span>.<span class="title">newInstance</span>()</span>;</span><br><span class="line">           Method addAssetPath = assetManager.getClass().getMethod(<span class="string">"addAssetPath"</span>, String<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">           addAssetPath.invoke(assetManager, dexPath);</span><br><span class="line">           <span class="keyword">return</span> assetManager;</span><br><span class="line">       &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> Resources <span class="title">createResources</span><span class="params">(AssetManager assetManager)</span> </span>&#123;</span><br><span class="line">       Resources superRes = appContext.getResources();</span><br><span class="line">       Resources resources = <span class="keyword">new</span> Resources(assetManager, superRes.getDisplayMetrics(), superRes.getConfiguration());</span><br><span class="line">       <span class="keyword">return</span> resources;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>第一个方法是通过反射把插件路径注入到<code>assetManager</code>中生成能够支持插件<code>assetManager</code>，然后用这个<code>assetManager</code>重新构造出一个<br><code>resources</code>。<br>好了，万事俱备了，可以构建<code>pluginInfo</code>了，翻上去看代码就懂了，然后会反射出一个<code>PluginBase</code>给<code>pluginInfo</code>的<code>PluginBase</code>赋值，看看是怎么反射出来的:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> String <span class="title">getPluginLauncherName</span><span class="params">(String pluginName)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> StringBuffer(<span class="string">"com.example.xunwang."</span>).append(pluginName).append(<span class="string">".LauncherPlugin"</span>).toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>是不是代码不要太简单，其实拼的这个字符串是我们每一个插件的入口，所以在每一个插件的这个路径下必须要有这样一个入口，不然当然就反射不到啦，再就是<code>LauncherPlugin</code>必须是继承<code>PluginBase</code>的，这个不用多说吧。<br>到现在为止<code>PluginInfo</code>已经全部初始化完毕了，是不是都忘了最开始要干啥了。</p>
+<ol>
+<li>经过上面的分析可能有点小晕了，还记得<code>getPluginPath</code>这个方法吗，不记得了翻回去看看，注意<code>File dir = new File(appContext.getFilesDir(), PLUGIN_DIR);</code>和<code>File saveFile = new File(dir, pluginName + &quot;.apk&quot;);</code>这两句话，其实这个路径是在getFilesDir()的PLUGIN_DIR文件夹下找pluginName.apk这个文件。<br>但是其实打包脚本是把插件的apk打包到app这个module的asset目录下的，那么就需要作一个拷贝操作了，也就是<code>PluginManager</code>的<code>loadPlugins</code>方法了：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loadPlugins</span><span class="params">(String[] pluginNames)</span> </span>&#123;</span><br><span class="line">        PluginLoader pluginLoader = <span class="keyword">new</span> PluginLoader(appContext);</span><br><span class="line">        pluginLoader.setPluginLoaderListener(<span class="keyword">new</span> PluginLoader.PluginLoaderListener() &#123;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loadResult</span><span class="params">(String[][] results)</span> </span>&#123;</span><br><span class="line">                Log.e(TAG <span class="string">"loadPlugins finished"</span>);</span><br><span class="line">                <span class="keyword">if</span> (results == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; results.length; i++) &#123;</span><br><span class="line">                    Log.e(TAG, results[i][<span class="number">0</span>] + <span class="string">":"</span> + results[i][<span class="number">1</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        pluginLoader.execute(pluginNames);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>执行了一个名叫<code>PluginLoader</code>的异步操作，里面有一个加载完成的回调，所谓的加载也就是把asset目录下插件的apk拷贝到getFilesDir()的PLUGIN_DIR目录下而已，不说了上代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">public class PluginLoader extends AsyncTask&lt;String, Void, String[][]&gt; &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String PLUGIN_DIR = <span class="string">"plugin"</span>;</span><br><span class="line">	<span class="keyword">private</span> Context mContext;</span><br><span class="line">	<span class="keyword">private</span> PluginLoaderListener pluginLoaderListener;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PluginLoaderListener</span> </span>&#123;</span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loadResult</span><span class="params">(String[][] result)</span></span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPluginLoaderListener</span><span class="params">(PluginLoaderListener pluginLoaderListener)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.pluginLoaderListener = pluginLoaderListener;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">PluginLoader</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.mContext = context;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">protected</span> String[][] doInBackground(String... params) &#123;</span><br><span class="line">		<span class="keyword">if</span> (params == <span class="keyword">null</span> || params.length == <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		String[][] results = <span class="keyword">new</span> String[params.length][<span class="number">2</span>];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; params.length; i++) &#123;</span><br><span class="line">			String apkPath = <span class="keyword">null</span>;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				apkPath = loadPlugin(params[i]);</span><br><span class="line">			&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">			results[i][<span class="number">0</span>] = params[i];</span><br><span class="line">			results[i][<span class="number">1</span>] = apkPath;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> results;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> String <span class="title">loadPlugin</span><span class="params">(String plugName)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		File dir = <span class="keyword">new</span> File(mContext.getFilesDir(), PLUGIN_DIR);</span><br><span class="line">		dir.mkdirs();</span><br><span class="line">		File saveFile = <span class="keyword">new</span> File(dir, plugName + <span class="string">".apk"</span>);</span><br><span class="line">		saveFile.setExecutable(<span class="keyword">true</span>);</span><br><span class="line">		FileOutputStream outputStream = <span class="keyword">null</span>;</span><br><span class="line">		InputStream inputStream = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">byte</span>[] buf = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">			inputStream = mContext.getAssets().open(plugName + <span class="string">".apk"</span>);</span><br><span class="line">			outputStream = <span class="keyword">new</span> FileOutputStream(saveFile);</span><br><span class="line">			<span class="keyword">while</span> ((count = inputStream.read(buf)) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">				outputStream.write(buf, <span class="number">0</span>, count);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">			inputStream.close();</span><br><span class="line">			outputStream.close();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		Log.e(TAG, <span class="string">"load pulgin write: "</span> + saveFile.length());</span><br><span class="line">		<span class="keyword">return</span> saveFile.getAbsolutePath();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPostExecute</span><span class="params">(String[][] result)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (pluginLoaderListener != <span class="keyword">null</span>) &#123;</span><br><span class="line">			pluginLoaderListener.loadResult(result);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>loadPlugins</code>通常在Application的时候就做这个操作，把所有的插件名放到一个数组中就行了：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> String[] plugins = &#123; PluginBase.PLUGIN_SCANWORD &#125;;</span><br><span class="line">PluginManager.getInstance(getApplicationContext()).loadPlugins(plugins);</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>到现在为止，又完成一大步了，我们来看看pluginbase这个module的文件<br><img src="/img/001/20170328-2.png" alt="Alt text"><br>后面四个文件上面基本上都了解完了，最后来看看PlugFragment吧。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">PlugFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Context context;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        context = PluginManager.getInstance(getActivity()).makePluginContext(getPluginName(), getActivity());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Context <span class="title">getContext</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> context;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> String <span class="title">getPluginName</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>它是所有插件里面fragment的基类，封装了context为插件的context，里面的实现前面也详细了解过了，所以PluginBase这个module就是这些啦，接下来看看插件模块应该怎么写。</p>
+<ol>
+<li>我们的插件名为<code>p_scanword</code>，这个名字必须和PluginBase类里面定义的插件名常量的名字是一样的，为什么呢，因为反射啊。而包名是<code>com.example.xunwang.scanword</code>,这个不用纠结了，如果后面有机会了解这个打包脚本再说吧。<br>还记得前面说的每个插件的入口类吗，没错就是它<code>LauncherPlugin</code>。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LauncherPlugin</span> <span class="keyword">extends</span> <span class="title">PluginBase</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> CONTAINER_ID;</span><br><span class="line">    <span class="keyword">private</span> Fragment mFragment;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPluginName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> PLUGIN_SCANWORD;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        mFragment = <span class="keyword">new</span> DefaultFragment();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(<span class="keyword">int</span> containerId)</span> </span>&#123;</span><br><span class="line">        CONTAINER_ID = containerId;</span><br><span class="line">        FragmentTransaction ft = getFragmentTransaction();</span><br><span class="line">        ft.replace(containerId, mFragment);</span><br><span class="line">        ft.commitAllowingStateLoss();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hide</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(mFragment.getView() != <span class="keyword">null</span>)&#123;</span><br><span class="line">            mFragment.getView().setVisibility(View.INVISIBLE);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">detach</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        getFragmentTransaction().detach(mFragment).commit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>可能看到这个还不是特别清楚，那再看看我在点击第二个button的时候在onclick里面做了啥事（不记得第二个button是干什么的翻到最前吧）:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">PluginInfo pluginInfo = PluginManager.getInstance(getApplicationContext()).getPluginInfo(</span><br><span class="line">					PluginBase.PLUGIN_SCANWORD);</span><br><span class="line">			Log.d(<span class="string">"kkkkkkkk"</span>, <span class="string">"pluginInfo --&gt; "</span> + pluginInfo);</span><br><span class="line">			PluginBase pluginBase = <span class="keyword">null</span>;</span><br><span class="line">			<span class="keyword">if</span> (pluginInfo != <span class="keyword">null</span>) &#123;</span><br><span class="line">				pluginBase = pluginInfo.pluginBase;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span> (pluginBase == <span class="keyword">null</span>) &#123;</span><br><span class="line">				Toast.makeText(getApplicationContext(), <span class="string">"plugin not loaded"</span>, Toast.LENGTH_SHORT).show();</span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			pluginBase.attach(MiniXbjMainActivity.<span class="keyword">this</span>, getSupportFragmentManager());</span><br><span class="line">			pluginBase.show(R.id.plugin_layout);</span><br></pre></td></tr></table></figure></p>
+<p>看到没有，第4段写了那么那么多，几乎整个<code>PluginManager</code>都是为了在构建<code>PluginInfo</code>这个东东，这个地方终于用了。<br>然后取出<code>PluginInfo</code>里面的<code>pluginBase</code>，是怎么生成的倒回去看吧，简而言之，就是通过<code>PluginBase.PLUGIN_SCANWORD</code>绕了好大一圈反射出了插件中的<code>LauncherPlugin</code>这个类，然后调了<code>LauncherPlugin</code>类的attach和show两个方法，attach之前我们说了其实是<code>PluginBase</code>的，相当于把宿主的<code>context</code>和<code>FragmentManager</code>传给插件，而show就是通过传进来的<code>FragmentManager</code>获得<code>FragmentTransaction</code>,然后使用replace实现显示插件页面的效果。<br>所以<code>LauncherPlugin</code>作为入口类一般是一个壳，生成的真正插件主页的fragment在它的init方法里获得，这里也就是<code>DefaultFragment</code>啦。<br>最后来看看<code>DefaultFragment</code>吧。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DefaultFragment</span> <span class="keyword">extends</span> <span class="title">PlugFragment</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> String <span class="title">getPluginName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> PluginBase.PLUGIN_SCANWORD;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Nullable</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">onCreateView</span><span class="params">(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle</span></span></span><br><span class="line"><span class="function"><span class="params">            savedInstanceState)</span> </span>&#123;</span><br><span class="line">        LayoutInflater factory = LayoutInflater.from(getContext());</span><br><span class="line">        ViewGroup viewGroup = (ViewGroup) factory.inflate(R.layout.pla_linear, container, <span class="keyword">false</span>);</span><br><span class="line">        <span class="keyword">return</span> viewGroup;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>LayoutInflater</code>的时候是不是传入的context不一样啦，其实也看不出来，其实它是plugFragment包装的那个插件context，因为pla_linear在插件的module里，不用插件的context绝逼是找不到的。<br><strong>再次强调插件开发的规则</strong>，宿主的资源使用宿主的context，插件的资源使用插件的context，公共组件的资源也使用宿主的context(因为在打包过程中，公共组件不打到插件中而是打到宿主中)，这个很重要，谁用谁知道。<br>到目前为止一个插件框架的基本雏形已经出来了，最后来看看bbcomm吧，我在项目里面添加了一个自定义view<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CommButtonView</span> <span class="keyword">extends</span> <span class="title">Button</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Drawable bg;</span><br><span class="line">    <span class="keyword">private</span> Paint paint;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">CommButtonView</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(context);</span><br><span class="line">        init(context);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">CommButtonView</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(context, attrs);</span><br><span class="line">        init(context);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">CommButtonView</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyleAttr)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>(context, attrs, defStyleAttr);</span><br><span class="line">        init(context);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        bg = context.getApplicationContext().getResources().getDrawable(R.drawable.audio_play_bg);</span><br><span class="line">        paint = <span class="keyword">new</span> Paint();</span><br><span class="line">        paint.setColor(Color.RED);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDraw(canvas);</span><br><span class="line">        canvas.drawBitmap(((BitmapDrawable)bg).getBitmap(), <span class="number">0</span>, <span class="number">0</span> , paint);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>audio_play_bg</code>这张图片放到bbcomm的module里的，注意到context没有，一言不合就会crash哟。<br>宿主和插件由于都是依赖bbcomm的，所以都正常使用这个自定义控件就行了，最后上一张图吧。<br><img src="/img/001/20170328-3.png" alt="Alt text"></p>
+<p><strong>总结:</strong>以上写了一大堆，也只不过是插件化的最基本雏形而已，但同时也是基础，虽然基于fragment的插件化目前已不再主流，但再某些地方总是会有用武之地，后面还有很长的路要走，多多站在巨人和别人的肩膀上会走得更快。</p>
+<p>PS：本文仅作为学习之用，不提供代码，禁止转载，敬请谅解。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至same4869@126.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2023-2024 Same
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>Help us with donation</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">alipay</label></span><span><label><input type="radio" name="pay" value="weixin">weixin</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

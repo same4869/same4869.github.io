@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>EOS爬行记（章一） --- EOS环境搭建与基本命令 | Same&#39;s Blog</title>
+  <meta name="keywords" content=" blockchain ">
+  <meta name="description" content="EOS爬行记（章一） --- EOS环境搭建与基本命令 | Same&#39;s Blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="施工中。。。。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://same4869.github.io/about/index.html">
+<meta property="og:site_name" content="Same&#39;s Blog">
+<meta property="og:description" content="施工中。。。。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2024-03-18T08:05:23.996Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="about">
+<meta name="twitter:description" content="施工中。。。。">
+
+
+<link rel="icon" href="https://img0.baidu.com/it/u=2938741800,3443602320&fm=253&fmt=auto&app=138&f=JPEG?w=268&h=268">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0"></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.1.0"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="undefined">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true">
+  <input id="theme_highlight_on" value="true">
+  <input id="theme_code_copy" value="true">
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="https://img0.baidu.com/it/u=2938741800,3443602320&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=268&amp;h=268"/>
+</a>
+<div class="author">
+    <span>Same</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/same4869"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="jianshu"
+               href="http://www.jianshu.com/u/4165fccb3734"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-jianshu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+               href="mailto:same4869@126.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=119123059&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="All">All
+            
+                <small>(17)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+    <li>
+        <div data-rel="Android">
+            
+            Android
+            <small>(11)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+        
+            
+    <li>
+        <div data-rel="其他技术">
+            
+            其他技术
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+        
+            
+    <li>
+        <div data-rel="个人随笔">
+            
+            个人随笔
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">About</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">Friends</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="17">
+<input type="hidden" id="yelog_site_word_count" value="57.4k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        Links
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://ccflower.github.io/">ccflower的博客</a></li>
+            
+            <li><a target="_blank" href="http://todd2010.github.io/">todd2010的博客</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">All</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Android</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>blockchain</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>otherTec</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>个人随笔</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="All Android "
+           href="/2019/03/22/手撸Android-Nexus私有Maven仓库GOGOGO/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="手撸Android-Nexus私有Maven仓库GOGOGO">手撸Android-Nexus私有Maven仓库GOGOGO</span>
+            <span class="post-date" title="2019-03-22 00:00:00">2019/03/22</span>
+        </a>
+        
+        
+        <a  class="All 其他技术 "
+           href="/2018/07/08/EOS爬行记1/"
+           data-tag="blockchain"
+           data-author="" >
+            <span class="post-title" title="EOS爬行记（章一） --- EOS环境搭建与基本命令">EOS爬行记（章一） --- EOS环境搭建与基本命令</span>
+            <span class="post-date" title="2018-07-08 00:00:00">2018/07/08</span>
+        </a>
+        
+        
+        <a  class="All 其他技术 "
+           href="/2018/04/05/DAPP开发实战之投票系统/"
+           data-tag="blockchain"
+           data-author="" >
+            <span class="post-title" title="DAPP开发实战之投票系统">DAPP开发实战之投票系统</span>
+            <span class="post-date" title="2018-04-05 00:00:00">2018/04/05</span>
+        </a>
+        
+        
+        <a  class="All 其他技术 "
+           href="/2018/02/19/Hexo博客重新起飞/"
+           data-tag="otherTec"
+           data-author="" >
+            <span class="post-title" title="Hexo博客重新起飞">Hexo博客重新起飞</span>
+            <span class="post-date" title="2018-02-19 00:00:00">2018/02/19</span>
+        </a>
+        
+        
+        <a  class="All 个人随笔 "
+           href="/2017/12/25/东京女子图鉴/"
+           data-tag="个人随笔"
+           data-author="" >
+            <span class="post-title" title="《东京女子图鉴》碎碎念">《东京女子图鉴》碎碎念</span>
+            <span class="post-date" title="2017-12-25 00:00:00">2017/12/25</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/12/19/《APP技术封装与选择》总览/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《APP技术封装与选择》总览">《APP技术封装与选择》总览</span>
+            <span class="post-date" title="2017-12-19 00:00:00">2017/12/19</span>
+        </a>
+        
+        
+        <a  class="All 其他技术 "
+           href="/2017/10/19/《精通Python网络爬虫》读书笔记/"
+           data-tag="otherTec"
+           data-author="" >
+            <span class="post-title" title="《精通Python网络爬虫》读书笔记">《精通Python网络爬虫》读书笔记</span>
+            <span class="post-date" title="2017-10-19 00:00:00">2017/10/19</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/10/10/commlib使用指南/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="commlib使用指南">commlib使用指南</span>
+            <span class="post-date" title="2017-10-10 00:00:00">2017/10/10</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/08/21/APP研发录/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《APP研发录》读书笔记">《APP研发录》读书笔记</span>
+            <span class="post-date" title="2017-08-21 00:00:00">2017/08/21</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/08/08/《Android技能树探索》总览/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》总览">《Android技能树探索》总览</span>
+            <span class="post-date" title="2017-08-08 00:00:00">2017/08/08</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/07/19/《易读》APP分析/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《易读》APP分析">《易读》APP分析</span>
+            <span class="post-date" title="2017-07-19 00:00:00">2017/07/19</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/06/07/《Android技能树探索》基础篇---Broadcast/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》基础篇---Broadcast">《Android技能树探索》基础篇---Broadcast</span>
+            <span class="post-date" title="2017-06-07 00:00:00">2017/06/07</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/05/10/Android下载模块探究/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="Android下载模块探究">Android下载模块探究</span>
+            <span class="post-date" title="2017-05-10 00:00:00">2017/05/10</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/04/05/《Android技能树探索》基础篇---Service/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》基础篇---Service">《Android技能树探索》基础篇---Service</span>
+            <span class="post-date" title="2017-04-05 00:00:00">2017/04/05</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/04/01/基于Fragment的安卓插件化Demo/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="基于Fragment的安卓插件化Demo">基于Fragment的安卓插件化Demo</span>
+            <span class="post-date" title="2017-04-01 00:00:00">2017/04/01</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/03/21/Android深度主题切换探究/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="Android深度主题切换探究">Android深度主题切换探究</span>
+            <span class="post-date" title="2017-03-21 00:00:00">2017/03/21</span>
+        </a>
+        
+        
+        <a  class="All 个人随笔 "
+           href="/2017/02/11/精进/"
+           data-tag="个人随笔"
+           data-author="" >
+            <span class="post-title" title="《精进：如何成为一个很厉害的人》读书笔记">《精进：如何成为一个很厉害的人》读书笔记</span>
+            <span class="post-date" title="2017-02-11 00:00:00">2017/02/11</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-EOS爬行记1" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">EOS爬行记（章一） --- EOS环境搭建与基本命令</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="其他技术">其他技术</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color1">blockchain</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2024-03-18 15:25:17'>2018-07-08 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>Count:1.7k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-环境说明"><span class="toc-text">1.环境说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-下载源码"><span class="toc-text">2.下载源码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-代码编译与安装"><span class="toc-text">3.代码编译与安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-启动服务器"><span class="toc-text">4.启动服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-常用操作与基本命令"><span class="toc-text">5.常用操作与基本命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#5-1-查看区块信息"><span class="toc-text">5.1 查看区块信息</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-2-钱包设置"><span class="toc-text">5.2 钱包设置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-3-创建其他钱包与查看钱包"><span class="toc-text">5.3 创建其他钱包与查看钱包</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-4-为账号部署合约"><span class="toc-text">5.4 为账号部署合约</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-5-创建2个key，导入key的私钥"><span class="toc-text">5.5 创建2个key，导入key的私钥</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-6-􏳔􏲤􏲟􏱼􏰍􏳕􏳓􏰄􏱯􏰘􏳖􏳐根据生成的公钥创建账号"><span class="toc-text">5.6 􏳔􏲤􏲟􏱼􏰍􏳕􏳓􏰄􏱯􏰘􏳖􏳐根据生成的公钥创建账号</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-7-查看账户信息"><span class="toc-text">5.7 查看账户信息</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-8-检测部署合约"><span class="toc-text">5.8 检测部署合约</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-9-创建货币"><span class="toc-text">5.9 创建货币</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-10-发行货币"><span class="toc-text">5.10 发行货币</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-11-查看账号信息"><span class="toc-text">5.11 查看账号信息</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-12-转账"><span class="toc-text">5.12 转账</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-总结"><span class="toc-text">6.总结</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote>
+<p>开篇：虽然币市低迷几近一年，不过并不影响EOS对于大众的关注程度，不管是暴涨还是暴跌，亦或是主网上线还是RAM的热度。作为一个IT从业人员来说，除了买买币之外还有另外的关注了解途径，也可谓是幸运的。笔者几个月下来，从以太坊玩到星云链，到现在也试图跨入EOS的大门，区块链的火爆表象下埋藏的是许许多多的计算机技术，数学知识，经济学原理，正如胡适说的那句话“怕什么真理无穷，进一寸有一寸的欢喜”。</p>
+<p>本来也是想网上找找教程就随便玩玩的，没想到EOS的坑实在是太多，相对配套的东西也远远不及以太坊，在这里记录一则是为自己留个备案日后查阅，再则有他人有需要，可以按坑对号查询。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="1-环境说明"><a href="#1-环境说明" class="headerlink" title="1.环境说明"></a>1.环境说明</h3><p>这个很重要，坑多的第一步就是因为不同的系统环境，系统版本，不同的EOS版本等等都会导致各种各样的坑，目前成功的相关参数如下：</p>
+<ul>
+<li>系统版本：MAC 0S 10.13.4</li>
+</ul>
+<p>此外网上有人建议至少20G硬盘与8G以上的内存。</p>
+<h3 id="2-下载源码"><a href="#2-下载源码" class="headerlink" title="2.下载源码"></a>2.下载源码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/eosio/eos --recursive</span><br></pre></td></tr></table></figure>
+<p>最后一个参数需要带上，当然忘了了带上相关的submodule就不会clone下来，执行下一步的时候也会提醒你输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule update --init --recursive</span><br></pre></td></tr></table></figure>
+<p>来补救。当然，然并卵，不知道是VPN的问题还是其他，总之前几天不管这么clone都下不来，就算把zip下下来了手动考进项目编译也会出现各种各样奇葩的问题，山穷水复中发现了别人下好的全套源码放到百度云里的，抱着破罐子破摔的心理试一试然后就可以了，如果有类似问题的话使用下来链接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://pan.baidu.com/s/1nXq32w2OBwI1GwUTslkBKg</span><br></pre></td></tr></table></figure>
+<h3 id="3-代码编译与安装"><a href="#3-代码编译与安装" class="headerlink" title="3.代码编译与安装"></a>3.代码编译与安装</h3><p>进入eos目录，使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./eosio_build.sh</span><br></pre></td></tr></table></figure>
+<p>然后就是各种下载或者编译进度条，只要不报错就没事，一直等着就行。报错就要搜搜对应的报错。</p>
+<p>可以看看参考文档的第二篇，基本有个错误是绝逼会遇到的，不过只要有解决方案就是秒秒钟的事情。</p>
+<p><img src="/img/014/20180708-01.jpg" alt="Alt text"></p>
+<p>看到以上这个就证明OK了，喜极而泣。</p>
+<p>eos目录中build文件夹已经开放，进去看看里面有啥吧</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eos/build/programs</span><br></pre></td></tr></table></figure>
+<p>大概解释如下：</p>
+<p><code>nodeos：</code> 区块链服务器节点生成组建</p>
+<p><code>cleos：</code> 和区块链交互的接口命令</p>
+<p><code>keosd：</code> EOS 钱包</p>
+<p><code>eosio-launcher：</code>节点网络组成和部署的应用</p>
+<p>在build目录下执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>可以把一些常用命令配置到系统中，然后可以use anywhere.</p>
+<h4 id="4-启动服务器"><a href="#4-启动服务器" class="headerlink" title="4.启动服务器"></a>4.启动服务器</h4><p>两条命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/eos/build/programs/nodeos</span><br><span class="line">./nodeos -e -p eosio --plugin eosio::wallet_api_plugin --plugin eosio::chain_api_plugin --plugin eosio::account_history_api_plugin</span><br></pre></td></tr></table></figure>
+<p>如果第二条觉得太麻烦可以做如下设置(基本上都会设置)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/Users/用户名/Library/Application&apos; &apos;Support/eosio/nodeos/config</span><br><span class="line"></span><br><span class="line">该目录下有一个config.ini文件，配置权限</span><br><span class="line"></span><br><span class="line">修改 enable-stale-production = false 为 enable-stale-production = true，记得去掉前面的#</span><br><span class="line"></span><br><span class="line">修改 producer-name = eosio ，记得去掉前面的#</span><br><span class="line"></span><br><span class="line">添加 plugin = eosio::producer_plugin </span><br><span class="line"></span><br><span class="line">添加 plugin = eosio::wallet_api_plugin </span><br><span class="line"></span><br><span class="line">添加 plugin = eosio::chain_api_plugin </span><br><span class="line"></span><br><span class="line">添加 plugin = eosio::http_plugin</span><br><span class="line"></span><br><span class="line">修改完后，下次执行./nodeos即可</span><br></pre></td></tr></table></figure>
+<p><img src="/img/014/20180708-02.jpg" alt="Alt text"></p>
+<p>看到以上不断输出的数据证明启动成功，CTRL+C可以停止。</p>
+<h4 id="5-常用操作与基本命令"><a href="#5-常用操作与基本命令" class="headerlink" title="5.常用操作与基本命令"></a>5.常用操作与基本命令</h4><p>单节点跑起来了，后面的操作都是基于这个本地节点的，故都需要重新起一个终端。</p>
+<p>看看一些命令</p>
+<h5 id="5-1-查看区块信息"><a href="#5-1-查看区块信息" class="headerlink" title="5.1 查看区块信息"></a>5.1 查看区块信息</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">➜  build git:(master) cleos -p 8888 get info</span><br><span class="line">&#123;</span><br><span class="line">  &quot;server_version&quot;: &quot;96ee0325&quot;,</span><br><span class="line">  &quot;head_block_num&quot;: 16792,</span><br><span class="line">  &quot;last_irreversible_block_num&quot;: 16791,</span><br><span class="line">  &quot;head_block_id&quot;: &quot;00004198c3c0e383c1e0baf889a06c7c8171ab8d7ce7432ca2c36225e63508ed&quot;,</span><br><span class="line">  &quot;head_block_time&quot;: &quot;2018-07-08T07:04:44&quot;,</span><br><span class="line">  &quot;head_block_producer&quot;: &quot;eosio&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="5-2-钱包设置"><a href="#5-2-钱包设置" class="headerlink" title="5.2 钱包设置"></a>5.2 钱包设置</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cleos wallet create</span><br></pre></td></tr></table></figure>
+<p>会创建一个名为default的钱包</p>
+<h5 id="5-3-创建其他钱包与查看钱包"><a href="#5-3-创建其他钱包与查看钱包" class="headerlink" title="5.3 创建其他钱包与查看钱包"></a>5.3 创建其他钱包与查看钱包</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">➜  build git:(master) cleos wallet create --name test</span><br><span class="line">Creating wallet: test</span><br><span class="line">Save password to use in the future to unlock this wallet.</span><br><span class="line">Without password imported keys will not be retrievable.</span><br><span class="line">&quot;PW5JELVZv15CJ51XDTTFBy4ZsEKQ1S3u4XhsANs7huigF8pnwD2bK&quot;</span><br><span class="line">➜  build git:(master) cleos wallet list              </span><br><span class="line">Wallets:</span><br><span class="line">[</span><br><span class="line">  &quot;default *&quot;,</span><br><span class="line">  &quot;test *&quot;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>当然命令有错时会给上相应的帮助</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">➜  build git:(master) cleos wallet     </span><br><span class="line">ERROR: RequiredError: Subcommand required</span><br><span class="line">Interact with local wallet</span><br><span class="line">Usage: cleos wallet SUBCOMMAND</span><br><span class="line"></span><br><span class="line">Subcommands:</span><br><span class="line">  create                      Create a new wallet locally</span><br><span class="line">  open                        Open an existing wallet</span><br><span class="line">  lock                        Lock wallet</span><br><span class="line">  lock_all                    Lock all unlocked wallets</span><br><span class="line">  unlock                      Unlock wallet</span><br><span class="line">  import                      Import private key into wallet</span><br><span class="line">  list                        List opened wallets, * = unlocked</span><br><span class="line">  keys                        List of private keys from all unlocked wallets in wif format.</span><br></pre></td></tr></table></figure>
+<h5 id="5-4-为账号部署合约"><a href="#5-4-为账号部署合约" class="headerlink" title="5.4 为账号部署合约"></a>5.4 为账号部署合约</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cleos set contract eosio ../../contracts/eosio.bios -p eosio</span><br></pre></td></tr></table></figure>
+<h5 id="5-5-创建2个key，导入key的私钥"><a href="#5-5-创建2个key，导入key的私钥" class="headerlink" title="5.5 创建2个key，导入key的私钥"></a>5.5 创建2个key，导入key的私钥</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">cleos create key</span><br><span class="line">Private key: 5Kg4i6WW6mfGXGjriU552KdAQ8tQyCU4mqtevVganWWbzQf1rD1 </span><br><span class="line">Public key: EOS5MSkE5DGgSurc7k3Sv9kWrev6E3GBBqasdiiC3yajPwrW7c4Uq</span><br><span class="line"></span><br><span class="line">cleos create key</span><br><span class="line">Private key: 5Kg2P7PRA7wWrW2s53JiaBur7PhDtDsCMZUwQ8Yvn8uAmu8xEMB</span><br><span class="line">Public key: EOS7wERhooVJwqYLuQn5v6UDZnL5KQpGJBDMQoktkxz4baNzicwLX</span><br><span class="line"></span><br><span class="line">cleos wallet import 5Kg4i6WW6mfGXGjriU552KdAQ8t QyCU4mqtevVganWWbzQf1rD1</span><br><span class="line">imported private key for: EOS5MSkE5DGgSurc7k3Sv9kWrev6E3GBBqasdiiC3yajPwrW7c 4Uq</span><br><span class="line"></span><br><span class="line">cleos wallet import 5Kg2P7PRA7wWrW2s53JiaBur7Ph DtDsCMZUwQ8Yvn8uAmu8xEMB</span><br><span class="line">imported private key for: EOS7wERhooVJwqYLuQn5v6UDZnL5KQpGJBDMQoktkxz4baNzic wLX</span><br></pre></td></tr></table></figure>
+<p>创建两个账户是因为需要生成两个权限不一样的账户，一个是owner，一个是active。</p>
+<h5 id="5-6-􏳔􏲤􏲟􏱼􏰍􏳕􏳓􏰄􏱯􏰘􏳖􏳐根据生成的公钥创建账号"><a href="#5-6-􏳔􏲤􏲟􏱼􏰍􏳕􏳓􏰄􏱯􏰘􏳖􏳐根据生成的公钥创建账号" class="headerlink" title="5.6 􏳔􏲤􏲟􏱼􏰍􏳕􏳓􏰄􏱯􏰘􏳖􏳐根据生成的公钥创建账号"></a>5.6 􏳔􏲤􏲟􏱼􏰍􏳕􏳓􏰄􏱯􏰘􏳖􏳐根据生成的公钥创建账号</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cleos create account eosio eostoken EOS5MSkE5</span><br><span class="line">  DGgSurc7k3Sv9kWrev6E3GBBqasdiiC3yajPwrW7c4Uq EOS7wERhooVJwqYLuQn5v6UDZnL5KQp</span><br><span class="line">  GJBDMQoktkxz4baNzicwLX</span><br></pre></td></tr></table></figure>
+<p>注意这个<code>eostoken</code>是账户名，是可以随便取的，不过一旦取了，后面就有很多地方要用，切记。</p>
+<h5 id="5-7-查看账户信息"><a href="#5-7-查看账户信息" class="headerlink" title="5.7 查看账户信息"></a>5.7 查看账户信息</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">➜  build git:(master) cleos get account eostoken</span><br><span class="line">&#123;</span><br><span class="line">  &quot;account_name&quot;: &quot;eostoken&quot;,</span><br><span class="line">  &quot;permissions&quot;: [&#123;</span><br><span class="line">      &quot;perm_name&quot;: &quot;active&quot;,</span><br><span class="line">      &quot;parent&quot;: &quot;owner&quot;,</span><br><span class="line">      &quot;required_auth&quot;: &#123;</span><br><span class="line">        &quot;threshold&quot;: 1,</span><br><span class="line">        &quot;keys&quot;: [&#123;</span><br><span class="line">            &quot;key&quot;: &quot;EOS6YN37pfrCgUmw8SuWvXo4bCTaJPHm9GaCoKq9hZK7rD6z4uLcT&quot;,</span><br><span class="line">            &quot;weight&quot;: 1</span><br><span class="line">          &#125;</span><br><span class="line">        ],</span><br><span class="line">        &quot;accounts&quot;: []</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,&#123;</span><br><span class="line">      &quot;perm_name&quot;: &quot;owner&quot;,</span><br><span class="line">      &quot;parent&quot;: &quot;&quot;,</span><br><span class="line">      &quot;required_auth&quot;: &#123;</span><br><span class="line">        &quot;threshold&quot;: 1,</span><br><span class="line">        &quot;keys&quot;: [&#123;</span><br><span class="line">            &quot;key&quot;: &quot;EOS7kkFv5AFj3r83fPmow5CC3bPqeDZXncabiN7at2Dxoz9v3bEvC&quot;,</span><br><span class="line">            &quot;weight&quot;: 1</span><br><span class="line">          &#125;</span><br><span class="line">        ],</span><br><span class="line">        &quot;accounts&quot;: []</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="5-8-检测部署合约"><a href="#5-8-检测部署合约" class="headerlink" title="5.8 检测部署合约"></a>5.8 检测部署合约</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cleos get code eostoken</span><br><span class="line">code hash: 0000000000000000000000000000000000000000000000000000000000000000</span><br><span class="line"></span><br><span class="line">cleos set contract eostoken ../../contracts/currency</span><br><span class="line"></span><br><span class="line">cleos get code eostoken</span><br><span class="line">code hash: d6c891fbdfcff597d82e17c81354574399b01d533e53d412093f03e1950fb9d4</span><br></pre></td></tr></table></figure>
+<h5 id="5-9-创建货币"><a href="#5-9-创建货币" class="headerlink" title="5.9 创建货币"></a>5.9 创建货币</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cleos push action eostoken create &apos;&#123;&quot;issuer&quot;:&quot;eostoken&quot;,&quot;maximum_supply&quot; :&quot;1000000.0000 CUR&quot;,&quot;can_freeze&quot;:&quot;0&quot;,&quot;can_recall&quot;:&quot;0&quot;,&quot;can_whitelist&quot;:&quot;0&quot;&#125;&apos; --permission eostoken@active</span><br></pre></td></tr></table></figure>
+<h5 id="5-10-发行货币"><a href="#5-10-发行货币" class="headerlink" title="5.10 发行货币"></a>5.10 发行货币</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cleos push action eostoken issue &apos;&#123;&quot;to&quot;:&quot;eostoken&quot;,&quot;quantity&quot;:&quot;1000.0000</span><br><span class="line">CUR&quot;,&quot;memo&quot;:&quot;&quot;&#125;&apos; --permission eostoken@active</span><br></pre></td></tr></table></figure>
+<h5 id="5-11-查看账号信息"><a href="#5-11-查看账号信息" class="headerlink" title="5.11 查看账号信息"></a>5.11 查看账号信息</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cleos get table eostoken eostoken accounts</span><br></pre></td></tr></table></figure>
+<h5 id="5-12-转账"><a href="#5-12-转账" class="headerlink" title="5.12 转账"></a>5.12 转账</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cleos push action eostoken transfer &apos;&#123;&quot;from&quot;:&quot;eostoken&quot;,&quot;to&quot;:&quot;eosio&quot;,&quot;quantity&quot;:&quot;20.0000 CUR&quot;,&quot;memo&quot;:&quot;my first transfer&quot;&#125;&apos; --permission eostoken@active</span><br></pre></td></tr></table></figure>
+<h4 id="6-总结"><a href="#6-总结" class="headerlink" title="6.总结"></a>6.总结</h4><p>网上资料不多且鱼龙混杂，想要迈出第一步的确不容易，以上虽然是跑通了但是很多概念很原理都没有系统性的了解，后面的路还很长，后面有新的东西再来更新。</p>
+<blockquote>
+<p>参考文档：<br>1.<a href="https://blog.csdn.net/munianhua/article/details/79796344" target="_blank" rel="noopener">https://blog.csdn.net/munianhua/article/details/79796344</a><br>2.<a href="http://blog.eosdata.io/index.php/tag/mac/" target="_blank" rel="noopener">http://blog.eosdata.io/index.php/tag/mac/</a><br>3.<a href="http://www.8btc.com/eos-develop-environment" target="_blank" rel="noopener">http://www.8btc.com/eos-develop-environment</a></p>
+</blockquote>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至same4869@126.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2023-2024 Same
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>Help us with donation</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">alipay</label></span><span><label><input type="radio" name="pay" value="weixin">weixin</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

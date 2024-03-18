@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>《Android技能树探索》基础篇---Service | Same&#39;s Blog</title>
+  <meta name="keywords" content=" Android ">
+  <meta name="description" content="《Android技能树探索》基础篇---Service | Same&#39;s Blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="施工中。。。。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://same4869.github.io/about/index.html">
+<meta property="og:site_name" content="Same&#39;s Blog">
+<meta property="og:description" content="施工中。。。。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2024-03-18T08:05:23.996Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="about">
+<meta name="twitter:description" content="施工中。。。。">
+
+
+<link rel="icon" href="https://img0.baidu.com/it/u=2938741800,3443602320&fm=253&fmt=auto&app=138&f=JPEG?w=268&h=268">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0"></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.1.0"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="undefined">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true">
+  <input id="theme_highlight_on" value="true">
+  <input id="theme_code_copy" value="true">
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="https://img0.baidu.com/it/u=2938741800,3443602320&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=268&amp;h=268"/>
+</a>
+<div class="author">
+    <span>Same</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/same4869"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="jianshu"
+               href="http://www.jianshu.com/u/4165fccb3734"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-jianshu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+               href="mailto:same4869@126.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=119123059&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="All">All
+            
+                <small>(17)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+    <li>
+        <div data-rel="Android">
+            
+            Android
+            <small>(11)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+        
+            
+    <li>
+        <div data-rel="其他技术">
+            
+            其他技术
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+        
+            
+    <li>
+        <div data-rel="个人随笔">
+            
+            个人随笔
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">About</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">Friends</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="17">
+<input type="hidden" id="yelog_site_word_count" value="57.4k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        Links
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://ccflower.github.io/">ccflower的博客</a></li>
+            
+            <li><a target="_blank" href="http://todd2010.github.io/">todd2010的博客</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">All</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Android</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>blockchain</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>otherTec</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>个人随笔</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="All Android "
+           href="/2019/03/22/手撸Android-Nexus私有Maven仓库GOGOGO/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="手撸Android-Nexus私有Maven仓库GOGOGO">手撸Android-Nexus私有Maven仓库GOGOGO</span>
+            <span class="post-date" title="2019-03-22 00:00:00">2019/03/22</span>
+        </a>
+        
+        
+        <a  class="All 其他技术 "
+           href="/2018/07/08/EOS爬行记1/"
+           data-tag="blockchain"
+           data-author="" >
+            <span class="post-title" title="EOS爬行记（章一） --- EOS环境搭建与基本命令">EOS爬行记（章一） --- EOS环境搭建与基本命令</span>
+            <span class="post-date" title="2018-07-08 00:00:00">2018/07/08</span>
+        </a>
+        
+        
+        <a  class="All 其他技术 "
+           href="/2018/04/05/DAPP开发实战之投票系统/"
+           data-tag="blockchain"
+           data-author="" >
+            <span class="post-title" title="DAPP开发实战之投票系统">DAPP开发实战之投票系统</span>
+            <span class="post-date" title="2018-04-05 00:00:00">2018/04/05</span>
+        </a>
+        
+        
+        <a  class="All 其他技术 "
+           href="/2018/02/19/Hexo博客重新起飞/"
+           data-tag="otherTec"
+           data-author="" >
+            <span class="post-title" title="Hexo博客重新起飞">Hexo博客重新起飞</span>
+            <span class="post-date" title="2018-02-19 00:00:00">2018/02/19</span>
+        </a>
+        
+        
+        <a  class="All 个人随笔 "
+           href="/2017/12/25/东京女子图鉴/"
+           data-tag="个人随笔"
+           data-author="" >
+            <span class="post-title" title="《东京女子图鉴》碎碎念">《东京女子图鉴》碎碎念</span>
+            <span class="post-date" title="2017-12-25 00:00:00">2017/12/25</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/12/19/《APP技术封装与选择》总览/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《APP技术封装与选择》总览">《APP技术封装与选择》总览</span>
+            <span class="post-date" title="2017-12-19 00:00:00">2017/12/19</span>
+        </a>
+        
+        
+        <a  class="All 其他技术 "
+           href="/2017/10/19/《精通Python网络爬虫》读书笔记/"
+           data-tag="otherTec"
+           data-author="" >
+            <span class="post-title" title="《精通Python网络爬虫》读书笔记">《精通Python网络爬虫》读书笔记</span>
+            <span class="post-date" title="2017-10-19 00:00:00">2017/10/19</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/10/10/commlib使用指南/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="commlib使用指南">commlib使用指南</span>
+            <span class="post-date" title="2017-10-10 00:00:00">2017/10/10</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/08/21/APP研发录/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《APP研发录》读书笔记">《APP研发录》读书笔记</span>
+            <span class="post-date" title="2017-08-21 00:00:00">2017/08/21</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/08/08/《Android技能树探索》总览/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》总览">《Android技能树探索》总览</span>
+            <span class="post-date" title="2017-08-08 00:00:00">2017/08/08</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/07/19/《易读》APP分析/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《易读》APP分析">《易读》APP分析</span>
+            <span class="post-date" title="2017-07-19 00:00:00">2017/07/19</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/06/07/《Android技能树探索》基础篇---Broadcast/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》基础篇---Broadcast">《Android技能树探索》基础篇---Broadcast</span>
+            <span class="post-date" title="2017-06-07 00:00:00">2017/06/07</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/05/10/Android下载模块探究/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="Android下载模块探究">Android下载模块探究</span>
+            <span class="post-date" title="2017-05-10 00:00:00">2017/05/10</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/04/05/《Android技能树探索》基础篇---Service/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》基础篇---Service">《Android技能树探索》基础篇---Service</span>
+            <span class="post-date" title="2017-04-05 00:00:00">2017/04/05</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/04/01/基于Fragment的安卓插件化Demo/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="基于Fragment的安卓插件化Demo">基于Fragment的安卓插件化Demo</span>
+            <span class="post-date" title="2017-04-01 00:00:00">2017/04/01</span>
+        </a>
+        
+        
+        <a  class="All Android "
+           href="/2017/03/21/Android深度主题切换探究/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="Android深度主题切换探究">Android深度主题切换探究</span>
+            <span class="post-date" title="2017-03-21 00:00:00">2017/03/21</span>
+        </a>
+        
+        
+        <a  class="All 个人随笔 "
+           href="/2017/02/11/精进/"
+           data-tag="个人随笔"
+           data-author="" >
+            <span class="post-title" title="《精进：如何成为一个很厉害的人》读书笔记">《精进：如何成为一个很厉害的人》读书笔记</span>
+            <span class="post-date" title="2017-02-11 00:00:00">2017/02/11</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-《Android技能树探索》基础篇---Service" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">《Android技能树探索》基础篇---Service</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="Android">Android</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">Android</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2024-03-18 15:23:33'>2017-04-05 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>Count:1.7k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Service有几种启动方式？"><span class="toc-text">1.Service有几种启动方式？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-bindService是怎么进行绑定的？"><span class="toc-text">2.bindService是怎么进行绑定的？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-bindService和startService的使用场景和注意事项？"><span class="toc-text">3.bindService和startService的使用场景和注意事项？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Service的onCreate回调函数可以做耗时的操作吗？"><span class="toc-text">4.Service的onCreate回调函数可以做耗时的操作吗？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Service的保活策略"><span class="toc-text">5.Service的保活策略</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-Service进程间通信"><span class="toc-text">6.Service进程间通信</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote>
+<p>开始填坑了，刚开始肯定也是从最基本的东西开始撸，其实东西最后要归根究底都没有什么最基础的，总之是一次自我复习的过程，能够发散多少也要看了。为了不显得特别零散，尽量保持一篇一个主题吧，内容保持问答的方式，也供人产生更多发散。</p>
+<h4 id="1-Service有几种启动方式？"><a href="#1-Service有几种启动方式？" class="headerlink" title="1.Service有几种启动方式？"></a>1.Service有几种启动方式？</h4><p>Service是一个专门在后台处理长时间任务的Android组件，它没有UI。它有两种启动方式，startService和bindService。</p>
+</blockquote>
+<p>startService只是启动Service，启动它的组件（如Activity）和Service并没有关联，只有当Service调用stopSelf或者其他组件调用stopService服务才会终止。<br>bindService方法启动Service，其他组件可以通过回调获取Service的代理对象和Service交互，而这两方也进行了绑定，当启动方销毁时，Service也会自动进行unBind操作，当发现所有绑定都进行了unBind时才会销毁Service。</p>
+<a id="more"></a>
+<p>在这里再附上一张service的生命周期<br><img src="/img/009/20170508-01.png" alt="Alt text"></p>
+<h4 id="2-bindService是怎么进行绑定的？"><a href="#2-bindService是怎么进行绑定的？" class="headerlink" title="2.bindService是怎么进行绑定的？"></a>2.bindService是怎么进行绑定的？</h4><p>和startService一样，bindService需要这样传参数：<code>bindService(bindIntent, connection, BIND_AUTO_CREATE);</code>，一个参数和startService传入的Intent一样，第二个参数是一个ServiceConnection的匿名类对象，一般可以如下声明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private ServiceConnection connection = new ServiceConnection() &#123;  </span><br><span class="line">  </span><br><span class="line">        @Override  </span><br><span class="line">        public void onServiceDisconnected(ComponentName name) &#123;  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        @Override  </span><br><span class="line">        public void onServiceConnected(ComponentName name, IBinder service) &#123;  </span><br><span class="line">            myBinder = (MyService.MyBinder) service;  </span><br><span class="line">            myBinder.startDownload();  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>所以在需要启动的Service里面的<code>onBind</code>方法就不能返回null了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">private MyBinder mBinder = new MyBinder();  </span><br><span class="line">  @Override  </span><br><span class="line">    public IBinder onBind(Intent intent) &#123;  </span><br><span class="line">        return mBinder;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    class MyBinder extends Binder &#123;  </span><br><span class="line">  </span><br><span class="line">        public void startDownload() &#123;  </span><br><span class="line">            Log.d(&quot;TAG&quot;, &quot;startDownload() executed&quot;);  </span><br><span class="line">            // 执行具体的下载任务  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>在<code>onServiceConnected</code>里面返回的这个<code>IBinder</code>对象就是service中定义的那个，所以相当于是activity拿到了service暴露的方法接口，然后想怎么浪都随意了。<br>第三个参数参考一下，一般用第一个flag</p>
+<blockquote>
+<p>BIND_AUTO_CREATE表示当收到绑定请求时，如果服务尚未创建，则即刻创建，在系统内存不足，需要先销毁优先级组件来释放内存，且只有驻留该服务的进程成为被销毁对象时，服务才可被销毁；<br>BIND_DEBUG_UNBIND通常用于调试场景中判断绑定的服务是否正确，但其会引起内存泄漏，因此非调试目的不建议使用；BIND_NOT_FOREGROUND表示系统将阻止驻留该服务的进程具有前台优先级，仅在后台运行，该标志位在Froyo中引入。</p>
+</blockquote>
+<h4 id="3-bindService和startService的使用场景和注意事项？"><a href="#3-bindService和startService的使用场景和注意事项？" class="headerlink" title="3.bindService和startService的使用场景和注意事项？"></a>3.bindService和startService的使用场景和注意事项？</h4><ul>
+<li>使用startService方式来启动Service时，生命周期是<code>onCreate</code>–&gt;<code>onStartCommand</code>，当在stopService之前多次startService会执行多次<code>onStartCommand</code>，但之后执行一次<code>onCreate</code>，使用<code>stopService</code>之后会调<code>onDestroy</code>。</li>
+<li>使用<code>bindService</code>生命周期是<code>onCreate</code>，不会走<code>onStartCommand</code>，绑定成功会回调传入<code>ServiceConnection</code>的<code>onServiceConnected</code>的方法。</li>
+<li><code>bindService</code>一旦绑定成功就相当于activity和service进行了一次连接，要么主动<code>unBindService</code>，要么actvity销毁的时候也会自动解绑。一个service可以和多个activity进行绑定，相当于多个activity可以功能操作一个service，这个也是bindService的精髓了，当所有activity和service解绑了，这个service也会销毁。</li>
+<li>如果我们既点击了Start Service按钮，又点击了Bind Service按钮，不管你是单独点击Stop Service按钮还是Unbind Service按钮，Service都不会被销毁，必要将两个按钮都点击一下，Service才会被销毁。也就是说，点击Stop Service按钮只会让Service停止，点击Unbind Service按钮只会让Service和Activity解除关联，一个Service必须要在既没有和任何Activity关联又处理停止状态的时候才会被销毁。</li>
+</ul>
+<h4 id="4-Service的onCreate回调函数可以做耗时的操作吗？"><a href="#4-Service的onCreate回调函数可以做耗时的操作吗？" class="headerlink" title="4.Service的onCreate回调函数可以做耗时的操作吗？"></a>4.Service的onCreate回调函数可以做耗时的操作吗？</h4><p>Service和Thread之间没有任何关系，Service中执行的代码也都是在主线程中执行的。<br>所以答案是不能。<br>使用Service主要是满足多个activity关注一个后台事件（比如下载，心跳，横竖屏切换状态恢复等）和一些其他需求（多进程，多APP间通信等），一定要和多线程区分开。<br>Service处理耗时操作同样是需要自己新开子线程来处理的，或者直接使用IntentService，可以直接在<code>onHandleIntent</code>方法里面处理耗时操作，里面东西设计到Handler的一些机制，后面有机会可以分析下，现在就不跑偏了。</p>
+<h4 id="5-Service的保活策略"><a href="#5-Service的保活策略" class="headerlink" title="5.Service的保活策略"></a>5.Service的保活策略</h4><p>APP保活永远都是一场博弈论，Service保活作为一个小小分支主要也是了解了解。</p>
+<ul>
+<li>将 Service 设置为 START_STICKY，利用系统机制在 Service 挂掉后自动拉活。</li>
+<li>在service 的onDestory里面重启服务。</li>
+<li>创建前台Service。<br><img src="/img/009/20170508-02.png" alt="Alt text"><br>可以通过以下方式来创建一个前台Service<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class MyService extends Service &#123;  </span><br><span class="line">  </span><br><span class="line">    public static final String TAG = &quot;MyService&quot;;  </span><br><span class="line">  </span><br><span class="line">    private MyBinder mBinder = new MyBinder();  </span><br><span class="line">  </span><br><span class="line">    @Override  </span><br><span class="line">    public void onCreate() &#123;  </span><br><span class="line">        super.onCreate();  </span><br><span class="line">        Notification notification = new Notification(R.drawable.ic_launcher,  </span><br><span class="line">                &quot;有通知到来&quot;, System.currentTimeMillis());  </span><br><span class="line">        Intent notificationIntent = new Intent(this, MainActivity.class);  </span><br><span class="line">        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,  </span><br><span class="line">                notificationIntent, 0);  </span><br><span class="line">        notification.setLatestEventInfo(this, &quot;这是通知的标题&quot;, &quot;这是通知的内容&quot;,  </span><br><span class="line">                pendingIntent);  </span><br><span class="line">        startForeground(1, notification);  </span><br><span class="line">        Log.d(TAG, &quot;onCreate() executed&quot;);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    .........  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="6-Service进程间通信"><a href="#6-Service进程间通信" class="headerlink" title="6.Service进程间通信"></a>6.Service进程间通信</h4><p>前面说到Service中执行耗时操作会阻塞UI线程导致ANR的，但是在注册Service的时候声明一下<code>android:process=&quot;:remote&quot;</code>就不会ANR了。<br>因为这样Service就会运行到其他进程中，虽然还是阻塞了线程，不过倒不会影响到界面中去。<br>但是这种情况想要通过bindService来启动就万万不行了，华丽丽地会挂吧。<br>针对于Service进程间通信安卓给出了很好的解决方案—AIDL。<br>这种进程间（也可以是APP间）的通信方案在很多地方都有用武之地的，一般都是Messenger&amp;AIDL。<br>大概流程就是自定义AIDL接口，系统会自动生成对应的JAVA类，这个类作为binder的子类可以通过bindService的方式传给activity，需要注意以下几点：</p>
+<ul>
+<li>在两个APP中都是用同一份AIDL文件，然后通过bindService的方式就可以进行通信，主要包名路径名也需要是一样的。</li>
+<li>再不同APP中，bindService的第一个参数那个intent需要使用隐式的action来启动，5.0后系统不允许隐式启动service，不过并没什么关系，网上搜索是有解决方案的。</li>
+<li>AIDL一般只能传递Java的基本数据类型、字符串、List或Map，传递自定义类型可以实现Parcelable接口。</li>
+</ul>
+<blockquote>
+<p>参考博客<br><a href="http://blog.csdn.net/guolin_blog/article/details/11952435" target="_blank" rel="noopener">http://blog.csdn.net/guolin_blog/article/details/11952435</a><br><a href="http://www.jianshu.com/p/7a7db9f8692d?utm_campaign=hugo&amp;utm_medium=reader_share&amp;utm_content=note&amp;utm_source=qq" target="_blank" rel="noopener">http://www.jianshu.com/p/7a7db9f8692d?utm_campaign=hugo&amp;utm_medium=reader_share&amp;utm_content=note&amp;utm_source=qq</a><br><a href="http://blog.csdn.net/lmj623565791/article/details/47143563" target="_blank" rel="noopener">http://blog.csdn.net/lmj623565791/article/details/47143563</a></p>
+</blockquote>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至same4869@126.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2023-2024 Same
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>Help us with donation</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">alipay</label></span><span><label><input type="radio" name="pay" value="weixin">weixin</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
