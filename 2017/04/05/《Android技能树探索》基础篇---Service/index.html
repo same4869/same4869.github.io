@@ -198,7 +198,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="17">
-<input type="hidden" id="yelog_site_word_count" value="57.4k">
+<input type="hidden" id="yelog_site_word_count" value="56.3k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -217,6 +217,8 @@
             <li><a target="_blank" href="https://ccflower.github.io/">ccflower的博客</a></li>
             
             <li><a target="_blank" href="http://todd2010.github.io/">todd2010的博客</a></li>
+            
+            <li><a target="_blank" href="https://yelog.org/">yelog的博客</a></li>
             
         </ul>
     </div>
@@ -513,9 +515,35 @@
 <p>startService只是启动Service，启动它的组件（如Activity）和Service并没有关联，只有当Service调用stopSelf或者其他组件调用stopService服务才会终止。<br>bindService方法启动Service，其他组件可以通过回调获取Service的代理对象和Service交互，而这两方也进行了绑定，当启动方销毁时，Service也会自动进行unBind操作，当发现所有绑定都进行了unBind时才会销毁Service。</p>
 <a id="more"></a>
 <p>在这里再附上一张service的生命周期<br><img src="/img/009/20170508-01.png" alt="Alt text"></p>
-<h4 id="2-bindService是怎么进行绑定的？"><a href="#2-bindService是怎么进行绑定的？" class="headerlink" title="2.bindService是怎么进行绑定的？"></a>2.bindService是怎么进行绑定的？</h4><p>和startService一样，bindService需要这样传参数：<code>bindService(bindIntent, connection, BIND_AUTO_CREATE);</code>，一个参数和startService传入的Intent一样，第二个参数是一个ServiceConnection的匿名类对象，一般可以如下声明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private ServiceConnection connection = new ServiceConnection() &#123;  </span><br><span class="line">  </span><br><span class="line">        @Override  </span><br><span class="line">        public void onServiceDisconnected(ComponentName name) &#123;  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        @Override  </span><br><span class="line">        public void onServiceConnected(ComponentName name, IBinder service) &#123;  </span><br><span class="line">            myBinder = (MyService.MyBinder) service;  </span><br><span class="line">            myBinder.startDownload();  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure></p>
-<p>所以在需要启动的Service里面的<code>onBind</code>方法就不能返回null了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">private MyBinder mBinder = new MyBinder();  </span><br><span class="line">  @Override  </span><br><span class="line">    public IBinder onBind(Intent intent) &#123;  </span><br><span class="line">        return mBinder;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    class MyBinder extends Binder &#123;  </span><br><span class="line">  </span><br><span class="line">        public void startDownload() &#123;  </span><br><span class="line">            Log.d(&quot;TAG&quot;, &quot;startDownload() executed&quot;);  </span><br><span class="line">            // 执行具体的下载任务  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>在<code>onServiceConnected</code>里面返回的这个<code>IBinder</code>对象就是service中定义的那个，所以相当于是activity拿到了service暴露的方法接口，然后想怎么浪都随意了。<br>第三个参数参考一下，一般用第一个flag</p>
+<h4 id="2-bindService是怎么进行绑定的？"><a href="#2-bindService是怎么进行绑定的？" class="headerlink" title="2.bindService是怎么进行绑定的？"></a>2.bindService是怎么进行绑定的？</h4><p>和startService一样，bindService需要这样传参数：<code>bindService(bindIntent, connection, BIND_AUTO_CREATE);</code>，一个参数和startService传入的Intent一样，第二个参数是一个ServiceConnection的匿名类对象，一般可以如下声明</p>
+<pre><code>private ServiceConnection connection = new ServiceConnection() {  
+
+        @Override  
+        public void onServiceDisconnected(ComponentName name) {  
+        }  
+
+        @Override  
+        public void onServiceConnected(ComponentName name, IBinder service) {  
+            myBinder = (MyService.MyBinder) service;  
+            myBinder.startDownload();  
+        }  
+    };
+</code></pre><p>所以在需要启动的Service里面的<code>onBind</code>方法就不能返回null了</p>
+<pre><code>private MyBinder mBinder = new MyBinder();  
+  @Override  
+    public IBinder onBind(Intent intent) {  
+        return mBinder;  
+    }  
+
+    class MyBinder extends Binder {  
+
+        public void startDownload() {  
+            Log.d(&quot;TAG&quot;, &quot;startDownload() executed&quot;);  
+            // 执行具体的下载任务  
+        }  
+
+    }
+</code></pre><p>在<code>onServiceConnected</code>里面返回的这个<code>IBinder</code>对象就是service中定义的那个，所以相当于是activity拿到了service暴露的方法接口，然后想怎么浪都随意了。<br>第三个参数参考一下，一般用第一个flag</p>
 <blockquote>
 <p>BIND_AUTO_CREATE表示当收到绑定请求时，如果服务尚未创建，则即刻创建，在系统内存不足，需要先销毁优先级组件来释放内存，且只有驻留该服务的进程成为被销毁对象时，服务才可被销毁；<br>BIND_DEBUG_UNBIND通常用于调试场景中判断绑定的服务是否正确，但其会引起内存泄漏，因此非调试目的不建议使用；BIND_NOT_FOREGROUND表示系统将阻止驻留该服务的进程具有前台优先级，仅在后台运行，该标志位在Froyo中引入。</p>
 </blockquote>
@@ -530,9 +558,25 @@
 <ul>
 <li>将 Service 设置为 START_STICKY，利用系统机制在 Service 挂掉后自动拉活。</li>
 <li>在service 的onDestory里面重启服务。</li>
-<li>创建前台Service。<br><img src="/img/009/20170508-02.png" alt="Alt text"><br>可以通过以下方式来创建一个前台Service<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class MyService extends Service &#123;  </span><br><span class="line">  </span><br><span class="line">    public static final String TAG = &quot;MyService&quot;;  </span><br><span class="line">  </span><br><span class="line">    private MyBinder mBinder = new MyBinder();  </span><br><span class="line">  </span><br><span class="line">    @Override  </span><br><span class="line">    public void onCreate() &#123;  </span><br><span class="line">        super.onCreate();  </span><br><span class="line">        Notification notification = new Notification(R.drawable.ic_launcher,  </span><br><span class="line">                &quot;有通知到来&quot;, System.currentTimeMillis());  </span><br><span class="line">        Intent notificationIntent = new Intent(this, MainActivity.class);  </span><br><span class="line">        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,  </span><br><span class="line">                notificationIntent, 0);  </span><br><span class="line">        notification.setLatestEventInfo(this, &quot;这是通知的标题&quot;, &quot;这是通知的内容&quot;,  </span><br><span class="line">                pendingIntent);  </span><br><span class="line">        startForeground(1, notification);  </span><br><span class="line">        Log.d(TAG, &quot;onCreate() executed&quot;);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    .........  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>创建前台Service。<br><img src="/img/009/20170508-02.png" alt="Alt text"><br>可以通过以下方式来创建一个前台Service<br>```<br>public class MyService extends Service {  </p>
+<p>  public static final String TAG = “MyService”;  </p>
+<p>  private MyBinder mBinder = new MyBinder();  </p>
+<p>  @Override<br>  public void onCreate() {  </p>
+<pre><code>  super.onCreate();  
+  Notification notification = new Notification(R.drawable.ic_launcher,  
+          &quot;有通知到来&quot;, System.currentTimeMillis());  
+  Intent notificationIntent = new Intent(this, MainActivity.class);  
+  PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,  
+          notificationIntent, 0);  
+  notification.setLatestEventInfo(this, &quot;这是通知的标题&quot;, &quot;这是通知的内容&quot;,  
+          pendingIntent);  
+  startForeground(1, notification);  
+  Log.d(TAG, &quot;onCreate() executed&quot;);  
+</code></pre><p>  }  </p>
+<p>  ………  </p>
 </li>
 </ul>
+<p>}<br>```</p>
 <h4 id="6-Service进程间通信"><a href="#6-Service进程间通信" class="headerlink" title="6.Service进程间通信"></a>6.Service进程间通信</h4><p>前面说到Service中执行耗时操作会阻塞UI线程导致ANR的，但是在注册Service的时候声明一下<code>android:process=&quot;:remote&quot;</code>就不会ANR了。<br>因为这样Service就会运行到其他进程中，虽然还是阻塞了线程，不过倒不会影响到界面中去。<br>但是这种情况想要通过bindService来启动就万万不行了，华丽丽地会挂吧。<br>针对于Service进程间通信安卓给出了很好的解决方案—AIDL。<br>这种进程间（也可以是APP间）的通信方案在很多地方都有用武之地的，一般都是Messenger&amp;AIDL。<br>大概流程就是自定义AIDL接口，系统会自动生成对应的JAVA类，这个类作为binder的子类可以通过bindService的方式传给activity，需要注意以下几点：</p>
 <ul>
 <li>在两个APP中都是用同一份AIDL文件，然后通过bindService的方式就可以进行通信，主要包名路径名也需要是一样的。</li>

@@ -198,7 +198,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="17">
-<input type="hidden" id="yelog_site_word_count" value="57.4k">
+<input type="hidden" id="yelog_site_word_count" value="56.3k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -217,6 +217,8 @@
             <li><a target="_blank" href="https://ccflower.github.io/">ccflower的博客</a></li>
             
             <li><a target="_blank" href="http://todd2010.github.io/">todd2010的博客</a></li>
+            
+            <li><a target="_blank" href="https://yelog.org/">yelog的博客</a></li>
             
         </ul>
     </div>
@@ -471,7 +473,7 @@
     </div>
     <div class="article-meta">
         
-        <span>Count:11.5k</span>
+        <span>Count:11.2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -540,8 +542,37 @@
 <li>与 web 世界里每次部署代码都会覆盖旧代码不同，在区块链上部署的合约是不可改变的，也就是说，如果你更新合约并再次部署，旧的合约仍然会在区块链上存在，并且合约的状态数据也依然存在。新的部署将会创建合约的一个新的实例。</li>
 </ul>
 <h4 id="2-2"><a href="#2-2" class="headerlink" title="2.2"></a>2.2</h4><p>下面直接看看投票合约代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^0.4.18;</span><br><span class="line"></span><br><span class="line">contract Voting &#123;</span><br><span class="line"></span><br><span class="line">  mapping (bytes32 =&gt; uint8) public votesReceived;</span><br><span class="line">  bytes32[] public candidateList;</span><br><span class="line"></span><br><span class="line">  function Voting(bytes32[] candidateNames) public &#123;</span><br><span class="line">    candidateList = candidateNames;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function totalVotesFor(bytes32 candidate) view public returns (uint8) &#123;</span><br><span class="line">    require(validCandidate(candidate));</span><br><span class="line">    return votesReceived[candidate];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function voteForCandidate(bytes32 candidate) public &#123;</span><br><span class="line">    require(validCandidate(candidate));</span><br><span class="line">    votesReceived[candidate]  += 1;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function validCandidate(bytes32 candidate) view public returns (bool) &#123;</span><br><span class="line">    for(uint i = 0; i &lt; candidateList.length; i++) &#123;</span><br><span class="line">      if (candidateList[i] == candidate) &#123;</span><br><span class="line">        return true;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>代码不长，大概有下面几个点</p>
+<pre><code>pragma solidity ^0.4.18;
+
+contract Voting {
+
+  mapping (bytes32 =&gt; uint8) public votesReceived;
+  bytes32[] public candidateList;
+
+  function Voting(bytes32[] candidateNames) public {
+    candidateList = candidateNames;
+  }
+
+  function totalVotesFor(bytes32 candidate) view public returns (uint8) {
+    require(validCandidate(candidate));
+    return votesReceived[candidate];
+  }
+
+  function voteForCandidate(bytes32 candidate) public {
+    require(validCandidate(candidate));
+    votesReceived[candidate]  += 1;
+  }
+
+  function validCandidate(bytes32 candidate) view public returns (bool) {
+    for(uint i = 0; i &lt; candidateList.length; i++) {
+      if (candidateList[i] == candidate) {
+        return true;
+      }
+    }
+    return false;
+   }
+}
+</code></pre><p>代码不长，大概有下面几个点</p>
 <ul>
 <li>编译器版本声明</li>
 <li>合约类声明，构造函数</li>
@@ -550,51 +581,132 @@
 </ul>
 <p>稍微看看应该就基本都能看懂。</p>
 <p>我们使用<code>solc</code>库来编译合约代码。然后使用<code>web3js</code>库，它能够让你通过RPC与区块链进行交互。我们将在node控制台里用这个库编译和部署合约，并与区块链进行交互。<br>首先，请确保ganache已经在第一个终端窗口中运行：<code>~$ ganache-cli</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ node</span><br><span class="line">&gt; Web3 = require(&apos;web3&apos;)</span><br><span class="line">&gt; web3 = new Web3(new Web3.providers.HttpProvider(&quot;http://localhost:8545&quot;));</span><br><span class="line">&gt; web3.eth.accounts</span><br></pre></td></tr></table></figure>
-<p>要编译合约，首先需要载入<code>Voting.sol</code>文件的内容，然后使用编译器（solc）的compile()方法对合约代码进行编译：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; code = fs.readFileSync(&apos;Voting.sol&apos;).toString()</span><br><span class="line">&gt; solc = require(&apos;solc&apos;)</span><br><span class="line">&gt; compiledCode = solc.compile(code)</span><br></pre></td></tr></table></figure>
-<p>以上只要没报错就OK，尤其是<code>compiledCode</code>,会出现特别多的输出信息。<br>其中包含两个重要的字段：</p>
+<pre><code>$ node
+&gt; Web3 = require(&#39;web3&#39;)
+&gt; web3 = new Web3(new Web3.providers.HttpProvider(&quot;http://localhost:8545&quot;));
+&gt; web3.eth.accounts
+</code></pre><p>要编译合约，首先需要载入<code>Voting.sol</code>文件的内容，然后使用编译器（solc）的compile()方法对合约代码进行编译：</p>
+<pre><code>&gt; code = fs.readFileSync(&#39;Voting.sol&#39;).toString()
+&gt; solc = require(&#39;solc&#39;)
+&gt; compiledCode = solc.compile(code)
+</code></pre><p>以上只要没报错就OK，尤其是<code>compiledCode</code>,会出现特别多的输出信息。<br>其中包含两个重要的字段：</p>
 <ul>
 <li><code>compiledCode.contracts[&#39;:Voting&#39;].bytecode</code>: 投票合约编译后的字节码，也是要部署到区块链上的代码。</li>
 <li><code>compiledCode.contracts[&#39;:Voting&#39;].interface</code>: 投票合约的接口，被称为应用二进制接口（ABI：Application Binary Interface），它声明了合约中包含的接口方法。无论何时需要跟一个合约进行交互，都需要该合约的abi定义。</li>
 </ul>
 <h4 id="2-3"><a href="#2-3" class="headerlink" title="2.3"></a>2.3</h4><p>合约编译基本已完成，接下来看看怎么部署到区块链上去。<br>为此，需要先传入合约的abi定义来创建合约对象<code>VotingContract</code>，然后利用该对象完成合约在链上的部署和初始化。<br>命令如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; abiDefinition = JSON.parse(compiledCode.contracts[&apos;:Voting&apos;].interface)</span><br><span class="line">&gt; VotingContract = web3.eth.contract(abiDefinition)</span><br><span class="line">&gt; byteCode = compiledCode.contracts[&apos;:Voting&apos;].bytecode</span><br><span class="line">&gt; deployedContract = VotingContract.new([&apos;Rama&apos;,&apos;Nick&apos;,&apos;Jose&apos;],&#123;data: byteCode, from: web3.eth.accounts[0], gas: 4700000&#125;)</span><br><span class="line">&gt; deployedContract.address</span><br><span class="line">&gt; contractInstance = VotingContract.at(deployedContract.address)</span><br></pre></td></tr></table></figure>
-<p>调用<code>VotingContract</code>对象的<code>new()</code>方法来将投票合约部署到区块链。<code>new()</code>方法参数列表应当与合约的构造函数要求相一致。对于投票合约而言，<code>new()</code>方法的第一个参数是候选人名单。</p>
+<pre><code>&gt; abiDefinition = JSON.parse(compiledCode.contracts[&#39;:Voting&#39;].interface)
+&gt; VotingContract = web3.eth.contract(abiDefinition)
+&gt; byteCode = compiledCode.contracts[&#39;:Voting&#39;].bytecode
+&gt; deployedContract = VotingContract.new([&#39;Rama&#39;,&#39;Nick&#39;,&#39;Jose&#39;],{data: byteCode, from: web3.eth.accounts[0], gas: 4700000})
+&gt; deployedContract.address
+&gt; contractInstance = VotingContract.at(deployedContract.address)
+</code></pre><p>调用<code>VotingContract</code>对象的<code>new()</code>方法来将投票合约部署到区块链。<code>new()</code>方法参数列表应当与合约的构造函数要求相一致。对于投票合约而言，<code>new()</code>方法的第一个参数是候选人名单。</p>
 <p><code>new()</code>方法的最后一个参数用来声明部署选项。先来看一下这个参数的内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  data: byteCode,             //合约字节码</span><br><span class="line">  from: web3.eth.accounts[0], //部署者账户，将从这个账户扣除执行部署交易的开销</span><br><span class="line">  gas: 4700000                //愿意为本次部署最多支付多少油费，单位：Wei</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>{
+  data: byteCode,             //合约字节码
+  from: web3.eth.accounts[0], //部署者账户，将从这个账户扣除执行部署交易的开销
+  gas: 4700000                //愿意为本次部署最多支付多少油费，单位：Wei
+}
+</code></pre><ul>
 <li>data: 这是合约编译后，需要部署到区块链上的合约字节码。</li>
 <li>from: 区块链必须跟踪是谁部署了一个合约。在本例中，我们简单地利用<code>web3.eth.accounts</code>返回的第一个账户，作为部署这个合约的账户。在提交交易之前，你必须拥有并解锁这个账户。不过为了方便起见，ganache默认会自动解锁这10个账户。</li>
 <li>gas: 与区块链进行交互需要消耗资金。这笔钱用来付给矿工，因为他们帮你把代码部署到在区块链里。你必须声明愿意花费多少资金让你的代码包含在区块链中，也就是设定<code>gas</code>的值。<code>from</code>字段声明的账户的余额将会被用来购买 <code>gas</code>。<code>gas</code>的价格则由区块链网络设定。</li>
 </ul>
 <h4 id="2-4"><a href="#2-4" class="headerlink" title="2.4"></a>2.4</h4><p>拿到<code>contractInstance</code>实例之后可以根据合约定义的接口进行一系列的操作了。</p>
 <p>调用合约的<code>totalVotesFor()</code>方法来查看某个候选人的得票数。<br>例如，下面的代码查看候选人Rama的得票数：<br><code>contractInstance.totalVotesFor.call(&#39;Rama&#39;)</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123; [String: &apos;0&apos;] s: 1, e: 0, c: [ 0 ] &#125;</span><br><span class="line">是数字 0 的科学计数法表示.</span><br></pre></td></tr></table></figure>
-<p>调用合约的<code>voteForCandidate()</code>方法投票给某个候选人。下面的代码就是给Rama投了三次票：</p>
+<pre><code>{ [String: &#39;0&#39;] s: 1, e: 0, c: [ 0 ] }
+是数字 0 的科学计数法表示.
+</code></pre><p>调用合约的<code>voteForCandidate()</code>方法投票给某个候选人。下面的代码就是给Rama投了三次票：</p>
 <p><code>&gt; contractInstance.voteForCandidate(&#39;Rama&#39;, {from: web3.eth.accounts[0]})</code><br><code>&gt; contractInstance.voteForCandidate(&#39;Rama&#39;, {from: web3.eth.accounts[0]})</code><br><code>&gt; contractInstance.voteForCandidate(&#39;Rama&#39;, {from: web3.eth.accounts[0]})</code></p>
 <p>现在我们再次查看Rama的得票数：<br><code>&gt;contractInstance.totalVotesFor.call(&#39;Rama&#39;).toLocaleString()</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;3&apos;</span><br></pre></td></tr></table></figure>
-<p>每执行一次投票，就会产生一次交易，因此<code>voteForCandidate()</code>方法将返回一个交易id，作为交易的凭据。比如：<code>0xdedc7ae544c3dde74ab5a0b07422c5a51b5240603d31074f5b75c0ebc786bf53</code>。交易id是交易发生的凭据，交易是不可篡改的，因此任何时候可以使用交易id引用或查看交易内容都会得到同样的结果。对于区块链而言，<code>交易不可篡改</code>是其核心特性。</p>
+<pre><code>&#39;3&#39;
+</code></pre><p>每执行一次投票，就会产生一次交易，因此<code>voteForCandidate()</code>方法将返回一个交易id，作为交易的凭据。比如：<code>0xdedc7ae544c3dde74ab5a0b07422c5a51b5240603d31074f5b75c0ebc786bf53</code>。交易id是交易发生的凭据，交易是不可篡改的，因此任何时候可以使用交易id引用或查看交易内容都会得到同样的结果。对于区块链而言，<code>交易不可篡改</code>是其核心特性。</p>
 <h4 id="2-5"><a href="#2-5" class="headerlink" title="2.5"></a>2.5</h4><p>让用户使用命令行显然是非常不友好的，所以接下来尝试使用网页来作为前端交互页面。<br><img src="/img/013/20180406-06.png" alt="Alt text"><br>页面的主要功能如下：</p>
 <ul>
 <li>列出所有的候选人及其得票数</li>
 <li>用户在页面中可以输入候选人的名称，然后点击投票按钮，网页中的JS代码将调用投票合约的<code>voteForCandidate()</code>方法 —— 和我们nodejs控制台里的流程一样。</li>
 </ul>
 <p>先来看看html代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line"> &lt;title&gt;Hello World DApp&lt;/title&gt;</span><br><span class="line"> &lt;link href=&apos;/lib/gfonts.css&apos; rel=&apos;stylesheet&apos; type=&apos;text/css&apos;&gt;</span><br><span class="line"> &lt;link href=&apos;/lib/bootstrap.min.css&apos; rel=&apos;stylesheet&apos; type=&apos;text/css&apos;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body class=&quot;container&quot;&gt;</span><br><span class="line"> &lt;h1&gt;A Simple Hello World Voting Application&lt;/h1&gt;</span><br><span class="line"> &lt;div class=&quot;table-responsive&quot;&gt;</span><br><span class="line">  &lt;table class=&quot;table table-bordered&quot;&gt;</span><br><span class="line">   &lt;thead&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">     &lt;th&gt;Candidate&lt;/th&gt;</span><br><span class="line">     &lt;th&gt;Votes&lt;/th&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">   &lt;/thead&gt;</span><br><span class="line">   &lt;tbody&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">     &lt;td&gt;Rama&lt;/td&gt;</span><br><span class="line">     &lt;td id=&quot;candidate-1&quot;&gt;&lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">     &lt;td&gt;Nick&lt;/td&gt;</span><br><span class="line">     &lt;td id=&quot;candidate-2&quot;&gt;&lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">     &lt;td&gt;Jose&lt;/td&gt;</span><br><span class="line">     &lt;td id=&quot;candidate-3&quot;&gt;&lt;/td&gt;</span><br><span class="line">    &lt;/tr&gt;</span><br><span class="line">   &lt;/tbody&gt;</span><br><span class="line">  &lt;/table&gt;</span><br><span class="line"> &lt;/div&gt;</span><br><span class="line"> &lt;input type=&quot;text&quot; id=&quot;candidate&quot; /&gt;</span><br><span class="line"> &lt;a href=&quot;#&quot; onclick=&quot;voteForCandidate()&quot; class=&quot;btn btn-primary&quot;&gt;Vote&lt;/a&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;script src=&quot;/lib/web3.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;/lib/jquery-3.1.1.slim.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;./index.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<p>里面引用了一些基本的JS库，此外还有<code>web3.js</code>和<code>index.js</code>，为了方便跑代码把这文章的相关代码都传上了git,需者自取。</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+ &lt;title&gt;Hello World DApp&lt;/title&gt;
+ &lt;link href=&#39;/lib/gfonts.css&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;&gt;
+ &lt;link href=&#39;/lib/bootstrap.min.css&#39; rel=&#39;stylesheet&#39; type=&#39;text/css&#39;&gt;
+&lt;/head&gt;
+&lt;body class=&quot;container&quot;&gt;
+ &lt;h1&gt;A Simple Hello World Voting Application&lt;/h1&gt;
+ &lt;div class=&quot;table-responsive&quot;&gt;
+  &lt;table class=&quot;table table-bordered&quot;&gt;
+   &lt;thead&gt;
+    &lt;tr&gt;
+     &lt;th&gt;Candidate&lt;/th&gt;
+     &lt;th&gt;Votes&lt;/th&gt;
+    &lt;/tr&gt;
+   &lt;/thead&gt;
+   &lt;tbody&gt;
+    &lt;tr&gt;
+     &lt;td&gt;Rama&lt;/td&gt;
+     &lt;td id=&quot;candidate-1&quot;&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+     &lt;td&gt;Nick&lt;/td&gt;
+     &lt;td id=&quot;candidate-2&quot;&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+     &lt;td&gt;Jose&lt;/td&gt;
+     &lt;td id=&quot;candidate-3&quot;&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+   &lt;/tbody&gt;
+  &lt;/table&gt;
+ &lt;/div&gt;
+ &lt;input type=&quot;text&quot; id=&quot;candidate&quot; /&gt;
+ &lt;a href=&quot;#&quot; onclick=&quot;voteForCandidate()&quot; class=&quot;btn btn-primary&quot;&gt;Vote&lt;/a&gt;
+&lt;/body&gt;
+&lt;script src=&quot;/lib/web3.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/lib/jquery-3.1.1.slim.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;./index.js&quot;&gt;&lt;/script&gt;
+&lt;/html&gt;
+</code></pre><p>里面引用了一些基本的JS库，此外还有<code>web3.js</code>和<code>index.js</code>，为了方便跑代码把这文章的相关代码都传上了git,需者自取。</p>
 <blockquote>
 <p><a href="https://github.com/same4869/dappDemo" target="_blank" rel="noopener">https://github.com/same4869/dappDemo</a></p>
 </blockquote>
 <p>其他的js文件包括<code>web3.js</code>都是库文件，没有业务逻辑，而需要我们关注的是<code>index.js</code>这个文件，也是我们自己写的js文件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">web3 = new Web3(new Web3.providers.HttpProvider(&quot;http://192.168.0.6:8545&quot;));</span><br><span class="line">abi = JSON.parse(&apos;[&#123;&quot;constant&quot;:false,&quot;inputs&quot;:[&#123;&quot;name&quot;:&quot;candidate&quot;,&quot;type&quot;:&quot;bytes32&quot;&#125;],&quot;name&quot;:&quot;totalVotesFor&quot;,&quot;outputs&quot;:[&#123;&quot;name&quot;:&quot;&quot;,&quot;type&quot;:&quot;uint8&quot;&#125;],&quot;payable&quot;:false,&quot;type&quot;:&quot;function&quot;&#125;,&#123;&quot;constant&quot;:false,&quot;inputs&quot;:[&#123;&quot;name&quot;:&quot;candidate&quot;,&quot;type&quot;:&quot;bytes32&quot;&#125;],&quot;name&quot;:&quot;validCandidate&quot;,&quot;outputs&quot;:[&#123;&quot;name&quot;:&quot;&quot;,&quot;type&quot;:&quot;bool&quot;&#125;],&quot;payable&quot;:false,&quot;type&quot;:&quot;function&quot;&#125;,&#123;&quot;constant&quot;:true,&quot;inputs&quot;:[&#123;&quot;name&quot;:&quot;&quot;,&quot;type&quot;:&quot;bytes32&quot;&#125;],&quot;name&quot;:&quot;votesReceived&quot;,&quot;outputs&quot;:[&#123;&quot;name&quot;:&quot;&quot;,&quot;type&quot;:&quot;uint8&quot;&#125;],&quot;payable&quot;:false,&quot;type&quot;:&quot;function&quot;&#125;,&#123;&quot;constant&quot;:true,&quot;inputs&quot;:[&#123;&quot;name&quot;:&quot;x&quot;,&quot;type&quot;:&quot;bytes32&quot;&#125;],&quot;name&quot;:&quot;bytes32ToString&quot;,&quot;outputs&quot;:[&#123;&quot;name&quot;:&quot;&quot;,&quot;type&quot;:&quot;string&quot;&#125;],&quot;payable&quot;:false,&quot;type&quot;:&quot;function&quot;&#125;,&#123;&quot;constant&quot;:true,&quot;inputs&quot;:[&#123;&quot;name&quot;:&quot;&quot;,&quot;type&quot;:&quot;uint256&quot;&#125;],&quot;name&quot;:&quot;candidateList&quot;,&quot;outputs&quot;:[&#123;&quot;name&quot;:&quot;&quot;,&quot;type&quot;:&quot;bytes32&quot;&#125;],&quot;payable&quot;:false,&quot;type&quot;:&quot;function&quot;&#125;,&#123;&quot;constant&quot;:false,&quot;inputs&quot;:[&#123;&quot;name&quot;:&quot;candidate&quot;,&quot;type&quot;:&quot;bytes32&quot;&#125;],&quot;name&quot;:&quot;voteForCandidate&quot;,&quot;outputs&quot;:[],&quot;payable&quot;:false,&quot;type&quot;:&quot;function&quot;&#125;,&#123;&quot;constant&quot;:true,&quot;inputs&quot;:[],&quot;name&quot;:&quot;contractOwner&quot;,&quot;outputs&quot;:[&#123;&quot;name&quot;:&quot;&quot;,&quot;type&quot;:&quot;address&quot;&#125;],&quot;payable&quot;:false,&quot;type&quot;:&quot;function&quot;&#125;,&#123;&quot;inputs&quot;:[&#123;&quot;name&quot;:&quot;candidateNames&quot;,&quot;type&quot;:&quot;bytes32[]&quot;&#125;],&quot;payable&quot;:false,&quot;type&quot;:&quot;constructor&quot;&#125;]&apos;)</span><br><span class="line">VotingContract = web3.eth.contract(abi);</span><br><span class="line">contractInstance = VotingContract.at(&apos;0x1eb79b83e6e8c9ca16355c5a817ad9fa456e1e03&apos;);</span><br><span class="line">candidates = &#123;&quot;Rama&quot;: &quot;candidate-1&quot;, &quot;Nick&quot;: &quot;candidate-2&quot;, &quot;Jose&quot;: &quot;candidate-3&quot;&#125;</span><br><span class="line"></span><br><span class="line">function voteForCandidate(candidate) &#123;</span><br><span class="line"> candidateName = $(&quot;#candidate&quot;).val();</span><br><span class="line"> try &#123;</span><br><span class="line">  contractInstance.voteForCandidate(candidateName, &#123;from: web3.eth.accounts[0]&#125;, function() &#123;</span><br><span class="line">   let div_id = candidates[candidateName];</span><br><span class="line">   $(&quot;#&quot;+div_id).html(contractInstance.totalVotesFor.call(candidateName).toString());</span><br><span class="line">  &#125;);</span><br><span class="line"> &#125; catch (err) &#123;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$(document).ready(function() &#123;</span><br><span class="line"> candidateNames = Object.keys(candidates);</span><br><span class="line"> for (var i = 0; i &lt; candidateNames.length; i++) &#123;</span><br><span class="line">  let name = candidateNames[i];</span><br><span class="line">  let val = contractInstance.totalVotesFor.call(name).toString()</span><br><span class="line">  $(&quot;#&quot;+candidates[name]).html(val);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>为了将页面运行起来，需要对JS代码进行一下调整：<br>节点的RPC API地址<br><code>web3 = new Web3(new Web3.providers.HttpProvider(&quot;http://localhost:8545&quot;));</code><br>HttpProvier()对象的构造函数参数是<code>web3js</code>库需要链接的以太坊节点RPC API的URL。</p>
+<pre><code>web3 = new Web3(new Web3.providers.HttpProvider(&quot;http://192.168.0.6:8545&quot;));
+abi = JSON.parse(&#39;[{&quot;constant&quot;:false,&quot;inputs&quot;:[{&quot;name&quot;:&quot;candidate&quot;,&quot;type&quot;:&quot;bytes32&quot;}],&quot;name&quot;:&quot;totalVotesFor&quot;,&quot;outputs&quot;:[{&quot;name&quot;:&quot;&quot;,&quot;type&quot;:&quot;uint8&quot;}],&quot;payable&quot;:false,&quot;type&quot;:&quot;function&quot;},{&quot;constant&quot;:false,&quot;inputs&quot;:[{&quot;name&quot;:&quot;candidate&quot;,&quot;type&quot;:&quot;bytes32&quot;}],&quot;name&quot;:&quot;validCandidate&quot;,&quot;outputs&quot;:[{&quot;name&quot;:&quot;&quot;,&quot;type&quot;:&quot;bool&quot;}],&quot;payable&quot;:false,&quot;type&quot;:&quot;function&quot;},{&quot;constant&quot;:true,&quot;inputs&quot;:[{&quot;name&quot;:&quot;&quot;,&quot;type&quot;:&quot;bytes32&quot;}],&quot;name&quot;:&quot;votesReceived&quot;,&quot;outputs&quot;:[{&quot;name&quot;:&quot;&quot;,&quot;type&quot;:&quot;uint8&quot;}],&quot;payable&quot;:false,&quot;type&quot;:&quot;function&quot;},{&quot;constant&quot;:true,&quot;inputs&quot;:[{&quot;name&quot;:&quot;x&quot;,&quot;type&quot;:&quot;bytes32&quot;}],&quot;name&quot;:&quot;bytes32ToString&quot;,&quot;outputs&quot;:[{&quot;name&quot;:&quot;&quot;,&quot;type&quot;:&quot;string&quot;}],&quot;payable&quot;:false,&quot;type&quot;:&quot;function&quot;},{&quot;constant&quot;:true,&quot;inputs&quot;:[{&quot;name&quot;:&quot;&quot;,&quot;type&quot;:&quot;uint256&quot;}],&quot;name&quot;:&quot;candidateList&quot;,&quot;outputs&quot;:[{&quot;name&quot;:&quot;&quot;,&quot;type&quot;:&quot;bytes32&quot;}],&quot;payable&quot;:false,&quot;type&quot;:&quot;function&quot;},{&quot;constant&quot;:false,&quot;inputs&quot;:[{&quot;name&quot;:&quot;candidate&quot;,&quot;type&quot;:&quot;bytes32&quot;}],&quot;name&quot;:&quot;voteForCandidate&quot;,&quot;outputs&quot;:[],&quot;payable&quot;:false,&quot;type&quot;:&quot;function&quot;},{&quot;constant&quot;:true,&quot;inputs&quot;:[],&quot;name&quot;:&quot;contractOwner&quot;,&quot;outputs&quot;:[{&quot;name&quot;:&quot;&quot;,&quot;type&quot;:&quot;address&quot;}],&quot;payable&quot;:false,&quot;type&quot;:&quot;function&quot;},{&quot;inputs&quot;:[{&quot;name&quot;:&quot;candidateNames&quot;,&quot;type&quot;:&quot;bytes32[]&quot;}],&quot;payable&quot;:false,&quot;type&quot;:&quot;constructor&quot;}]&#39;)
+VotingContract = web3.eth.contract(abi);
+contractInstance = VotingContract.at(&#39;0x1eb79b83e6e8c9ca16355c5a817ad9fa456e1e03&#39;);
+candidates = {&quot;Rama&quot;: &quot;candidate-1&quot;, &quot;Nick&quot;: &quot;candidate-2&quot;, &quot;Jose&quot;: &quot;candidate-3&quot;}
+
+function voteForCandidate(candidate) {
+ candidateName = $(&quot;#candidate&quot;).val();
+ try {
+  contractInstance.voteForCandidate(candidateName, {from: web3.eth.accounts[0]}, function() {
+   let div_id = candidates[candidateName];
+   $(&quot;#&quot;+div_id).html(contractInstance.totalVotesFor.call(candidateName).toString());
+  });
+ } catch (err) {
+ }
+}
+
+$(document).ready(function() {
+ candidateNames = Object.keys(candidates);
+ for (var i = 0; i &lt; candidateNames.length; i++) {
+  let name = candidateNames[i];
+  let val = contractInstance.totalVotesFor.call(name).toString()
+  $(&quot;#&quot;+candidates[name]).html(val);
+ }
+});
+</code></pre><p>为了将页面运行起来，需要对JS代码进行一下调整：<br>节点的RPC API地址<br><code>web3 = new Web3(new Web3.providers.HttpProvider(&quot;http://localhost:8545&quot;));</code><br>HttpProvier()对象的构造函数参数是<code>web3js</code>库需要链接的以太坊节点RPC API的URL。</p>
 <p>当一个合约部署到区块链上时，将获得一个地址，例如<code>0x329f5c190380ebcf640a90d06eb1db2d68503a53</code>。 </p>
 <p>由于每次部署都会获得一个不同的地址，因此你需要指定它：<br><code>contractInstance = VotingContract.at(&#39;0x329f5c190380ebcf640a90d06eb1db2d68503a53&#39;)</code></p>
 <p>在第二个终端中输入以下命令来启动一个简单的Web服务器，以便我们可以在试验环境中的嵌入浏览器中访问页面：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~$ cd ~/repo/chapter1</span><br><span class="line">~/repo/chapter1$ python -m SimpleHTTPServer</span><br><span class="line"></span><br><span class="line">(python3使用这个，下同) python -m http.server 80</span><br></pre></td></tr></table></figure>
-<p>Python的<code>SimpleHTTPServer</code>模块将启动在8000端口的监听。<br>现在，在试验环境的嵌入浏览器中点击刷新按钮。如果一切顺利的话，你应该可以看到投票应用的页面了。 当你在文本框中输入候选人姓名，例如Rama，然后点击按钮后，应该会看到候选人Rama的得票数加 1 。</p>
+<pre><code>~$ cd ~/repo/chapter1
+~/repo/chapter1$ python -m SimpleHTTPServer
+
+(python3使用这个，下同) python -m http.server 80
+</code></pre><p>Python的<code>SimpleHTTPServer</code>模块将启动在8000端口的监听。<br>现在，在试验环境的嵌入浏览器中点击刷新按钮。如果一切顺利的话，你应该可以看到投票应用的页面了。 当你在文本框中输入候选人姓名，例如Rama，然后点击按钮后，应该会看到候选人Rama的得票数加 1 。</p>
 <h4 id="2-6"><a href="#2-6" class="headerlink" title="2.6"></a>2.6</h4><p>如果能看到页面，并能够正常投票，第一个基本demo已经能跑起来了。</p>
 <p>总结一下，下面是我们到目前为止已经完成的事情：</p>
 <ul>
@@ -617,63 +729,123 @@
 <p><code>Truffle</code>可以先了解下，和各种PHP,Python,JS框架异曲同工，能帮助开发者开发DAPP事半功倍,省去很多手工操作。</p>
 <p>首先还是安装<br><code>~$ npm install -g truffle</code></p>
 <p><code>Truffle</code>提供了众多的项目模版，可以快速搭建一个去中心化应用的骨架代码。下面的代码使用webpack项目模版来创建应用tfapp:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~$ mkdir -p ~/repo/tfapp</span><br><span class="line">~$ cd ~/repo/tfapp</span><br><span class="line">~/repo/tfapp$ truffle unbox webpack</span><br></pre></td></tr></table></figure>
-<p>初始化一个<code>Truffle</code>项目时，它会创建运行一个完整的DApp所需的文件和目录。 可以使用ls命令来查看生成的项目结构：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">~/repo/tfapp$ ls</span><br><span class="line">README.md       contracts       node_modules      test          webpack.config.js   truffle.js</span><br><span class="line">app          migrations       package.json</span><br><span class="line">~/repo/tfapp$ ls app/</span><br><span class="line">index.html javascripts stylesheets</span><br><span class="line">~/repo/tfapp$ ls contracts/</span><br><span class="line">ConvertLib.sol MetaCoin.sol Migrations.sol</span><br><span class="line">~/repo/tfapp$ ls migrations/</span><br><span class="line">1_initial_migration.js 2_deploy_contracts.js</span><br></pre></td></tr></table></figure>
-<p>前面的章节中主要自己编写了3个文件，分别是<code>Voting.sol</code>,<code>index.html</code>与<code>index.js</code>，现在对这几个文件分别进行处理，以便应用到Truffle生成的应用中。</p>
+<pre><code>~$ mkdir -p ~/repo/tfapp
+~$ cd ~/repo/tfapp
+~/repo/tfapp$ truffle unbox webpack
+</code></pre><p>初始化一个<code>Truffle</code>项目时，它会创建运行一个完整的DApp所需的文件和目录。 可以使用ls命令来查看生成的项目结构：</p>
+<pre><code>~/repo/tfapp$ ls
+README.md       contracts       node_modules      test          webpack.config.js   truffle.js
+app          migrations       package.json
+~/repo/tfapp$ ls app/
+index.html javascripts stylesheets
+~/repo/tfapp$ ls contracts/
+ConvertLib.sol MetaCoin.sol Migrations.sol
+~/repo/tfapp$ ls migrations/
+1_initial_migration.js 2_deploy_contracts.js
+</code></pre><p>前面的章节中主要自己编写了3个文件，分别是<code>Voting.sol</code>,<code>index.html</code>与<code>index.js</code>，现在对这几个文件分别进行处理，以便应用到Truffle生成的应用中。</p>
 <p><code>Voting.sol</code></p>
 <blockquote>
-<p>合约文件不需要修改，直接拷贝到 <code>contracts</code>目录即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~/repo/tfapp$ cp ../chapter1/Voting.sol contracts/</span><br><span class="line">~/repo/tfapp$ ls contracts/</span><br><span class="line">Migrations.sol Voting.sol</span><br></pre></td></tr></table></figure></p>
-</blockquote>
+<p>合约文件不需要修改，直接拷贝到 <code>contracts</code>目录即可：</p>
+<pre><code>~/repo/tfapp$ cp ../chapter1/Voting.sol contracts/
+~/repo/tfapp$ ls contracts/
+Migrations.sol Voting.sol
+</code></pre></blockquote>
 <p><code>index.html</code></p>
 <blockquote>
 <p>先将页面文件拷贝到<code>app</code>目录，覆盖Truffle生成的<code>index.html</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/repo/tfapp$ cp ../chapter1/index.html app/</span><br></pre></td></tr></table></figure>
+<pre><code>~/repo/tfapp$ cp ../chapter1/index.html app/
+</code></pre><p>由于<code>Truffle</code>的<code>webpack</code>模版在打包JS脚本时，默认使用<code>app.js</code>作为打包入口， 因此，我们将页面文件中对<code>index.js</code>的引用改为对<code>app.js</code>的引用：<br><code>&lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;</code></p>
 </blockquote>
-<p>由于<code>Truffle</code>的<code>webpack</code>模版在打包JS脚本时，默认使用<code>app.js</code>作为打包入口， 因此，我们将页面文件中对<code>index.js</code>的引用改为对<code>app.js</code>的引用：<br><code>&lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;</code></p>
 <p><code>app.js</code></p>
 <blockquote>
 <p>在<code>Truffle</code>下，我们需要重写与区块链交互的JS脚本。由于使用webpack打包，因此可以使用<code>ES2015</code>语法。</p>
 <p>当使用Truffle来编译和部署合约时，框架会将合约的应用接口定义（abi：Application Binary interface）以及部署地址保存到build/contracts目录中同名的json文件中 —— 我们不需要自己记部署地址了！ 例如，Voting.sol的部署信息对应与build/contracts/Voting.json文件。利用这个文件就可以创建投票合约对象：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import voting_artifacts from &apos;../../build/contracts/Voting.json&apos;</span><br><span class="line">var Voting = contract(voting_artifacts)</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>&gt;<br>合约对象的<code>deployed()</code>方法返回一个<code>Promise</code>，其解析值为该合约对象的部署实例代理（真正的实例在链上），利用这个代理可以执行合约的方法：<br>&gt;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Voting.deployed()</span><br><span class="line">  .then(instance =&gt; instance.voteForCandidate(&apos;Rama&apos;)) </span><br><span class="line">  .then(() =&gt; instance.totalVotesFor.call(&apos;Rama&apos;))</span><br><span class="line">  .then(votes =&gt; console.log(&apos;Rama got votes: &apos;, votes))</span><br></pre></td></tr></table></figure></p>
+<pre><code>import voting_artifacts from &#39;../../build/contracts/Voting.json&#39;
+var Voting = contract(voting_artifacts)
+</code></pre><p>合约对象的<code>deployed()</code>方法返回一个<code>Promise</code>，其解析值为该合约对象的部署实例代理（真正的实例在链上），利用这个代理可以执行合约的方法：</p>
+<pre><code>Voting.deployed()
+  .then(instance =&gt; instance.voteForCandidate(&#39;Rama&#39;)) 
+  .then(() =&gt; instance.totalVotesFor.call(&#39;Rama&#39;))
+  .then(votes =&gt; console.log(&#39;Rama got votes: &#39;, votes))
+</code></pre></blockquote>
 <p>可以根据git下来的结构目标查看对应的文件自行参考与替换。</p>
 <h4 id="3-2"><a href="#3-2" class="headerlink" title="3.2"></a>3.2</h4><p><code>迁移（migration）</code>目录的内容非常重要。Truffle使用该目录下的迁移脚本来管理应用合约的部署。 我们在之前的操作中，是通过在 node 控制台中调用合约对象的<code>new()</code>方法来将投票合约部署到区块链上。有了Truffle，就再也不需要这么做了。</p>
 <p>第一个迁移脚本<code>1_initial_migration.js</code>的作用是向区块链部署Migrations合约， 这个合约的作用是存储并跟踪已经部署的最新合约。每次运行迁移任务时，Truffle就会向区块链查询获取 已部署好的合约，然后部署新的合约。在部署完成后，这个脚本会更新Migrations合约中的<code>last_completed_migration</code>字段指向最新部署的合约。<br>可以简单地把Migrations合约当成是一个<code>数据库表</code>，字段<code>last_completed_migration</code>总是保持最新状态。</p>
 <p>将迁移脚本<code>2_deploy_contracts.js</code>的内容修改为以下内容，以便部署我们的投票合约Voting：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var Voting = artifacts.require(&quot;./Voting.sol&quot;);</span><br><span class="line">module.exports = function(deployer) &#123;</span><br><span class="line"> deployer.deploy(Voting, [&apos;Rama&apos;, &apos;Nick&apos;, &apos;Jose&apos;], &#123;gas: 290000&#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>从上面的代码可以看出，Truffle框架将向迁移脚本传入一个部署器对象（<code>deployer</code>），调用其<code>deploy()</code>方法即可实现指定合约的部署。</p>
+<pre><code>var Voting = artifacts.require(&quot;./Voting.sol&quot;);
+module.exports = function(deployer) {
+ deployer.deploy(Voting, [&#39;Rama&#39;, &#39;Nick&#39;, &#39;Jose&#39;], {gas: 290000});
+};
+</code></pre><p>从上面的代码可以看出，Truffle框架将向迁移脚本传入一个部署器对象（<code>deployer</code>），调用其<code>deploy()</code>方法即可实现指定合约的部署。</p>
 <p><code>deploy()</code>方法的第一个参数为要部署合约的编译对象，调用<code>artifacts.require()</code>即可直接将合约代码转换为合约编译对象，例如：<code>artifacts.require(&#39;./Voting.sol&#39;)</code> 。</p>
 <p>容易理解，Truffle的<code>artifacts</code>对象自动调用solidity编译器来编译合约代码文件并返回编译结果对象。</p>
 <p><code>deploy()</code>方法的最后一个参数是合约实例化选项对象，可以用来指定部署代码所需的油费 —— 别忘了部署合约也是交易，因此需要烧点油（<code>gas</code>）。gas 数量会随着你的合约大小而变化 —— 确切的说，部署一个合约所需的油费取决于编译生成的合约字节码，不同的字节码指令对应不同的开销，累加起来就可以估算出部署费用。</p>
 <p>对于投票合约而言，290000个油就足够了 —— 这个价格是我们为部署这个合约愿意承担的最大费用（<code>gasLimit</code>），最终的开支可能用不了这么多。当然，如果你的合约很复杂，有可能你愿意买单的这个上限还不够，那么 节点就会返回一个提示，告诉你部署失败，油资不足 —— <code>Out of gas</code></p>
 <p><code>deploy()</code>方法的第一个参数和最后一个参数之间，需要按合约构造函数的参数要求依次传入。例如，对于投票合约，我们只需传入一个候选人名单（数组）。</p>
 <p>Truffle在执行任务时，将读取当前目录下的配置文件<code>truffle.js</code>。通常我们在该配置文件中声明要连接的以太坊节点地址，例如<code>localhost:8545</code>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">require(&apos;babel-register&apos;)module.exports = &#123;</span><br><span class="line"> networks: &#123;</span><br><span class="line">  dev: &#123;</span><br><span class="line">   host: &apos;localhost&apos;,</span><br><span class="line">   port: 8545,</span><br><span class="line">   network_id: &apos;*&apos;,</span><br><span class="line">   gas: 470000</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>你应该会注意到gas选项。这是一个会应用到所有迁移任务的全局变量。当我们调用<code>deploy()</code>方法部署一个合约时，如果没有声明愿意承担的油费，那么Truffle就会采用这个值作为该合约的部署油资。</p>
+<pre><code>require(&#39;babel-register&#39;)module.exports = {
+ networks: {
+  dev: {
+   host: &#39;localhost&#39;,
+   port: 8545,
+   network_id: &#39;*&#39;,
+   gas: 470000
+  }
+ }
+}
+</code></pre><p>你应该会注意到gas选项。这是一个会应用到所有迁移任务的全局变量。当我们调用<code>deploy()</code>方法部署一个合约时，如果没有声明愿意承担的油费，那么Truffle就会采用这个值作为该合约的部署油资。</p>
 <p>另一个值得指出的是，Truffle支持将合约部署到多个区块链网络，例如开发网络、私有网络、测试网或公网。 在上面的配置文件中，我们仅定义了一个用于开发的网络dev —— 你知道它指向的是ganache模拟器，Truffle 在执行命令时将自动连接到这个网络。</p>
 <h4 id="3-3"><a href="#3-3" class="headerlink" title="3.3"></a>3.3</h4><p>在Truffle中执行<code>compile</code>命令来编译contracts下的所有合约：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~/repo/tfapp$ truffle compile</span><br><span class="line">Compiling Migrations.sol...</span><br><span class="line">Compiling Voting.sol...</span><br><span class="line">Writing artifacts to ./build/contracts</span><br></pre></td></tr></table></figure>
-<p>在Truffle中执行<code>migrate</code>命令将编译后的合约部署到链上：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">~/repo/tfapp$ truffle migrate</span><br><span class="line">Running migration: 1_initial_migration.js</span><br><span class="line">Deploying Migrations...Migrations: 0x3cee101c94f8a06d549334372181bc5a7b3a8bee</span><br><span class="line">Saving successful migration to network...</span><br><span class="line">Saving artifacts...</span><br><span class="line">Running migration: 2_deploy_contracts.js</span><br><span class="line">Deploying Voting...Voting: 0xd24a32f0ee12f5e9d233a2ebab5a53d4d4986203</span><br><span class="line">Saving successful migration to network...</span><br><span class="line">Saving artifacts...</span><br></pre></td></tr></table></figure>
-<p>以上如果有编译错误可以根据提示解决。</p>
+<pre><code>~/repo/tfapp$ truffle compile
+Compiling Migrations.sol...
+Compiling Voting.sol...
+Writing artifacts to ./build/contracts
+</code></pre><p>在Truffle中执行<code>migrate</code>命令将编译后的合约部署到链上：</p>
+<pre><code>~/repo/tfapp$ truffle migrate
+Running migration: 1_initial_migration.js
+Deploying Migrations...Migrations: 0x3cee101c94f8a06d549334372181bc5a7b3a8bee
+Saving successful migration to network...
+Saving artifacts...
+Running migration: 2_deploy_contracts.js
+Deploying Voting...Voting: 0xd24a32f0ee12f5e9d233a2ebab5a53d4d4986203
+Saving successful migration to network...
+Saving artifacts...
+</code></pre><p>以上如果有编译错误可以根据提示解决。</p>
 <p>如果由于油费不足而导致部署失败，可以尝试增加<code>migrations/2_deploy_contracts.js</code> 里面的 <code>gas</code> 值。比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deployer.deploy(Voting, [&apos;Rama&apos;, &apos;Nick&apos;, &apos;Jose&apos;], &#123;gas: 500000&#125;)</span><br></pre></td></tr></table></figure>
-<p>如果希望自选一个账户来部署合约，而不是使用默认的<code>accounts[0]</code>，可以在迁移脚本中使用from 选项指定，例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deployer.deploy(Voting, [&apos;Rama&apos;, &apos;Nick&apos;, &apos;Jose&apos;], &#123;gas: 500000,from:&apos;0x8cff691c888afe73ffa3965db39be96ba3b34e49&apos;&#125;)</span><br></pre></td></tr></table></figure>
-<p>也可以在 <code>truffle.js</code> 中指定默认的用来与区块链交互的账户地址：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line"> networks: &#123;</span><br><span class="line">  dev: &#123;</span><br><span class="line">   host: &apos;localhost&apos;,</span><br><span class="line">   port: 8545,</span><br><span class="line">   network_id: &apos;*&apos;,</span><br><span class="line">   gas: 470000,</span><br><span class="line">   from: &apos;0x8cff691c888afe73ffa3965db39be96ba3b34e49&apos;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="3-4"><a href="#3-4" class="headerlink" title="3.4"></a>3.4</h4><p>部署顺利的话，现在就可以通过控制台和网页与合约进行交互了。<br>使用<code>Truffle控制台</code><br>在第二个终端中输入<code>truffle console</code>命令进入控制台：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~/repo/tfapp$ truffle console</span><br><span class="line">truffle(development)&gt; Voting.deployed().then(function(contractInstance) &#123;contractInstance.voteForCandidate(&apos;Rama&apos;).then(function(v) &#123;console.log(v)&#125;)&#125;)</span><br><span class="line"></span><br><span class="line">&#123; blockHash: &apos;0x7229f668db0ac335cdd0c4c86e0394a35dd471a1095b8fafb52ebd7671433156&apos;,blockNumber: 469628,contractAddress: null,</span><br><span class="line">....</span><br><span class="line">....</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">truffle(default)&gt; Voting.deployed().then(function(contractInstance) &#123;contractInstance.totalVotesFor.call(&apos;Rama&apos;).then(function(v) &#123;console.log(v)&#125;)&#125;)</span><br><span class="line">&#123; [String: &apos;1&apos;] s: 1, e: 0, c: [ 1] &#125;</span><br></pre></td></tr></table></figure>
-<p>注意，truffle 的所有调用都会返回promise，这就是为什么每个响应都被包裹在 <code>then()</code>函数里的原因。</p>
+<pre><code>deployer.deploy(Voting, [&#39;Rama&#39;, &#39;Nick&#39;, &#39;Jose&#39;], {gas: 500000})
+</code></pre><p>如果希望自选一个账户来部署合约，而不是使用默认的<code>accounts[0]</code>，可以在迁移脚本中使用from 选项指定，例如：</p>
+<pre><code>deployer.deploy(Voting, [&#39;Rama&#39;, &#39;Nick&#39;, &#39;Jose&#39;], {gas: 500000,from:&#39;0x8cff691c888afe73ffa3965db39be96ba3b34e49&#39;})
+</code></pre><p>也可以在 <code>truffle.js</code> 中指定默认的用来与区块链交互的账户地址：</p>
+<pre><code>module.exports = {
+ networks: {
+  dev: {
+   host: &#39;localhost&#39;,
+   port: 8545,
+   network_id: &#39;*&#39;,
+   gas: 470000,
+   from: &#39;0x8cff691c888afe73ffa3965db39be96ba3b34e49&#39;
+  }
+ }
+}
+</code></pre><h4 id="3-4"><a href="#3-4" class="headerlink" title="3.4"></a>3.4</h4><p>部署顺利的话，现在就可以通过控制台和网页与合约进行交互了。<br>使用<code>Truffle控制台</code><br>在第二个终端中输入<code>truffle console</code>命令进入控制台：</p>
+<pre><code>~/repo/tfapp$ truffle console
+truffle(development)&gt; Voting.deployed().then(function(contractInstance) {contractInstance.voteForCandidate(&#39;Rama&#39;).then(function(v) {console.log(v)})})
+
+{ blockHash: &#39;0x7229f668db0ac335cdd0c4c86e0394a35dd471a1095b8fafb52ebd7671433156&#39;,blockNumber: 469628,contractAddress: null,
+....
+....
+</code></pre><pre><code>truffle(default)&gt; Voting.deployed().then(function(contractInstance) {contractInstance.totalVotesFor.call(&#39;Rama&#39;).then(function(v) {console.log(v)})})
+{ [String: &#39;1&#39;] s: 1, e: 0, c: [ 1] }
+</code></pre><p>注意，truffle 的所有调用都会返回promise，这就是为什么每个响应都被包裹在 <code>then()</code>函数里的原因。</p>
 <p>通过网页交互，首先使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/repo/tfapp$ webpack</span><br></pre></td></tr></table></figure>
-<p>在build目录下生成相应的文件，注意webpack的版本（这里推荐2.X），可以用npm进行调整，被这个坑坑了半天时间。</p>
+<pre><code>~/repo/tfapp$ webpack
+</code></pre><p>在build目录下生成相应的文件，注意webpack的版本（这里推荐2.X），可以用npm进行调整，被这个坑坑了半天时间。</p>
 <p>然后进入<code>build</code>目录，先建立网页资源文件的符号连接，然后启动web服务器：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~/repo/tfapp/build$ ln -s ~/repo/common/lib lib</span><br><span class="line">~/repo/tfapp/build$ ln -s ~/repo/common/fonts fonts</span><br><span class="line">~/repo/tfapp/build$ python -m SimpleHTTPServer</span><br><span class="line">（python3）python -m http.server 8000</span><br></pre></td></tr></table></figure>
-<p>现在，在浏览器中点击刷新按钮，没问题的话就能看到效果了。</p>
+<pre><code>~/repo/tfapp/build$ ln -s ~/repo/common/lib lib
+~/repo/tfapp/build$ ln -s ~/repo/common/fonts fonts
+~/repo/tfapp/build$ python -m SimpleHTTPServer
+（python3）python -m http.server 8000
+</code></pre><p>现在，在浏览器中点击刷新按钮，没问题的话就能看到效果了。</p>
 <h3 id="四-引入数字代币进行第三次迭代"><a href="#四-引入数字代币进行第三次迭代" class="headerlink" title="四.引入数字代币进行第三次迭代"></a>四.引入数字代币进行第三次迭代</h3><h4 id="4-1"><a href="#4-1" class="headerlink" title="4.1"></a>4.1</h4><p>接下来就是比较有意思又比较熟悉的Token了，在以太坊中，一个重要概念就是通证（token），也就是常说的加密数字币，或者代币。<br><img src="/img/013/20180406-08.png" alt="Alt text"><br>通证就是在以太坊上构建的数字资产，可以用它来表示现实世界里的东西，比如黄金，或者是自己的数字资产（就像货币一样）。通证实际上就是智能合约，并没有什么太多的神奇之处。</p>
 <ul>
 <li>黄金通证：银行可以有1千克的黄金储备，然后发行1千个通证。买100个黄金通证就等于买100克的黄金。</li>
@@ -707,56 +879,180 @@
 <p>接下来还需要添加一个方法来查询投票人的信息，以及他们分别给谁投了票、总共持有多少股票通证、 还有多少可用的通证余额等等。</p>
 <p>为了跟踪所有这些数据，我们需要使用几个mapping类型的字段，同时还需要引入新的数据类型 <code>struct（结构体）</code>来组织投票人信息。</p>
 <p>和原来一样，我们使用truffle的<code>webpack</code>项目模版来初始化一个新项目， 并从contracts目录下移除无用的合约文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~$ mkdir -p ~/repo/tkapp</span><br><span class="line">~$ cd ~/repo/tkapp</span><br><span class="line">~/repo/tkapp$ truffle unbox webpack</span><br><span class="line">~/repo/tkapp$ rm contracts/ConvertLib.sol contracts/MetaCoin.sol</span><br></pre></td></tr></table></figure>
-<h4 id="4-3"><a href="#4-3" class="headerlink" title="4.3"></a>4.3</h4><p>新的合约设计如下<br><img src="/img/013/20180406-10.png" alt="Alt text"></p>
+<pre><code>~$ mkdir -p ~/repo/tkapp
+~$ cd ~/repo/tkapp
+~/repo/tkapp$ truffle unbox webpack
+~/repo/tkapp$ rm contracts/ConvertLib.sol contracts/MetaCoin.sol
+</code></pre><h4 id="4-3"><a href="#4-3" class="headerlink" title="4.3"></a>4.3</h4><p>新的合约设计如下<br><img src="/img/013/20180406-10.png" alt="Alt text"></p>
 <p>之前的投票合约仅仅包含两个状态：数组<code>candidateList</code>保存候选人名单，字典<code>votesReceived</code>跟踪每个候选人获得的投票。</p>
 <p>在加权投票合约中，我们需要额外跟踪一些数据：</p>
 <ul>
 <li>投票人信息：solidity的<code>结构体（struct）</code>类型可以将相关数据组织在一起(类似于JAVA BEAN)。用结构体来存储投票人信息非常好。我们将使用一个struct来存储投票人的账户、已经购买的股票通证数量以及给每个候选人投票时所用的股票数量。例如：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct voter &#123;</span><br><span class="line">  address voterAddress; //投票人账户地址</span><br><span class="line">  uint tokensBought;    //投票人持有的股票通证总量</span><br><span class="line">  uint[] tokensUsedPerCandidate; //为每个候选人消耗的股票通证数量</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>struct voter {
+  address voterAddress; //投票人账户地址
+  uint tokensBought;    //投票人持有的股票通证总量
+  uint[] tokensUsedPerCandidate; //为每个候选人消耗的股票通证数量
+}
+</code></pre><ul>
 <li>投票人信息字典：使用一个mapping字典来保存所有的投票人信息，键为投票人账户地址，值为投票人信息。 这样给定一个投票人的账户地址，就可以很方面地提取他的相关信息。我们使用voterInfo来表示该字典。 例如：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mapping (address =&gt; voter) public voterInfo。</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>mapping (address =&gt; voter) public voterInfo。
+</code></pre><ul>
 <li>股票通证的相关信息：使用<code>totalTokens</code>来保存通证发行总量，<code>balanceTokens</code>保存通证余额，<code>tokenPrice</code>保存通证的价格。</li>
 </ul>
 <p>在部署合约时，除了指定候选人名单，我们还需要声明股票通证发行总量和股票单价。 因此在合约的构造函数中，需要补充声明这些参数。例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">contract Voting&#123;</span><br><span class="line">  function Voting(uint tokens, uint pricePerToken, bytes32[] candidateNames) public &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当股东调用<code>voteForCandidate()</code>方法投票给特定候选人时，还需要声明其支持力度 —— 用多少股票来支持 这个候选人。因此，我们需要为该方法添加额外的参数以便传入股票通证数量。例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">contract Voting&#123;</span><br><span class="line"> function voteForCandidate(bytes32 candidate, uint votesInTokens) public &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>任何人都可以调用<code>buy()</code>方法来购买公司发行的股票通证，从而成为公司的股东并获得投票权。 你应该已经注意到了该方法的<code>payable</code>修饰符。在Sodility合约中，只有声明为<code>payable</code>的方法， 才可以接收支付的货币（<code>msg.value值</code>）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">contract Voting&#123;</span><br><span class="line">  function buy() payable public returns (uint) &#123;</span><br><span class="line">    //使用msg.value来读取用户的支付金额，这要求方法必须具有payable声明</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>下面放出所有合约代码，也可以在git目录中查看</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^0.4.18; </span><br><span class="line"></span><br><span class="line">contract Voting &#123;</span><br><span class="line"></span><br><span class="line"> struct voter &#123;</span><br><span class="line">  address voterAddress;</span><br><span class="line">  uint tokensBought;</span><br><span class="line">  uint[] tokensUsedPerCandidate;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> mapping (address =&gt; voter) public voterInfo;</span><br><span class="line"></span><br><span class="line"> mapping (bytes32 =&gt; uint) public votesReceived;</span><br><span class="line"></span><br><span class="line"> bytes32[] public candidateList;</span><br><span class="line"></span><br><span class="line"> uint public totalTokens; </span><br><span class="line"> uint public balanceTokens;</span><br><span class="line"> uint public tokenPrice;</span><br><span class="line"></span><br><span class="line"> function Voting(uint tokens, uint pricePerToken, bytes32[] candidateNames) public &#123;</span><br><span class="line">  candidateList = candidateNames;</span><br><span class="line">  totalTokens = tokens;</span><br><span class="line">  balanceTokens = tokens;</span><br><span class="line">  tokenPrice = pricePerToken;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> function buy() payable public returns (uint) &#123;</span><br><span class="line">  uint tokensToBuy = msg.value / tokenPrice;</span><br><span class="line">  require(tokensToBuy &lt;= balanceTokens);</span><br><span class="line">  voterInfo[msg.sender].voterAddress = msg.sender;</span><br><span class="line">  voterInfo[msg.sender].tokensBought += tokensToBuy;</span><br><span class="line">  balanceTokens -= tokensToBuy;</span><br><span class="line">  return tokensToBuy;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> function totalVotesFor(bytes32 candidate) view public returns (uint) &#123;</span><br><span class="line">  return votesReceived[candidate];</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> function voteForCandidate(bytes32 candidate, uint votesInTokens) public &#123;</span><br><span class="line">  uint index = indexOfCandidate(candidate);</span><br><span class="line">  require(index != uint(-1));</span><br><span class="line"></span><br><span class="line">  if (voterInfo[msg.sender].tokensUsedPerCandidate.length == 0) &#123;</span><br><span class="line">   for(uint i = 0; i &lt; candidateList.length; i++) &#123;</span><br><span class="line">    voterInfo[msg.sender].tokensUsedPerCandidate.push(0);</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  uint availableTokens = voterInfo[msg.sender].tokensBought - totalTokensUsed(voterInfo[msg.sender].tokensUsedPerCandidate);</span><br><span class="line">  require (availableTokens &gt;= votesInTokens);</span><br><span class="line"></span><br><span class="line">  votesReceived[candidate] += votesInTokens;</span><br><span class="line">  voterInfo[msg.sender].tokensUsedPerCandidate[index] += votesInTokens;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> function totalTokensUsed(uint[] _tokensUsedPerCandidate) private pure returns (uint) &#123;</span><br><span class="line">  uint totalUsedTokens = 0;</span><br><span class="line">  for(uint i = 0; i &lt; _tokensUsedPerCandidate.length; i++) &#123;</span><br><span class="line">   totalUsedTokens += _tokensUsedPerCandidate[i];</span><br><span class="line">  &#125;</span><br><span class="line">  return totalUsedTokens;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> function indexOfCandidate(bytes32 candidate) view public returns (uint) &#123;</span><br><span class="line">  for(uint i = 0; i &lt; candidateList.length; i++) &#123;</span><br><span class="line">   if (candidateList[i] == candidate) &#123;</span><br><span class="line">    return i;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return uint(-1);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> function tokensSold() view public returns (uint) &#123;</span><br><span class="line">  return totalTokens - balanceTokens;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> function voterDetails(address user) view public returns (uint, uint[]) &#123;</span><br><span class="line">  return (voterInfo[user].tokensBought, voterInfo[user].tokensUsedPerCandidate);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> function transferTo(address account) public &#123;</span><br><span class="line">  account.transfer(this.balance);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> function allCandidates() view public returns (bytes32[]) &#123;</span><br><span class="line">  return candidateList;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="4-4"><a href="#4-4" class="headerlink" title="4.4"></a>4.4</h4><p>合约的<code>buy()</code>方法用于提供购买股票的接口。注意关键字<code>payable</code>，有了它买股票的人才可以付钱给你。 接收钱没有比这个再简单的了！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function buy() payable public returns (uint) &#123;</span><br><span class="line">  uint tokensToBuy = msg.value / tokenPrice;   //根据购买金额和通证单价，计算出购买量   </span><br><span class="line">  require(tokensToBuy &lt;= balanceTokens);       //继续执行合约需要确认合约的通证余额不小于购买量  </span><br><span class="line">  voterInfo[msg.sender].voterAddress = msg.sender;    //保存购买人地址</span><br><span class="line">  voterInfo[msg.sender].tokensBought += tokensToBuy;  //更新购买人持股数量</span><br><span class="line">  balanceTokens -= tokensToBuy;                //将售出的通证数量从合约的余额中剔除  </span><br><span class="line">  return tokensToBuy;                          //返回本次购买的通证数量</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当用户（或程序）调用合约的<code>buy()</code>方法时，需要在请求消息里利用<code>value</code>属性设置用于购买股票通证的以太币金额。例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">contract.buy(&#123;</span><br><span class="line">  value:web3.toWei(&apos;1&apos;,&apos;ether&apos;), //购买者支付的以太币金额</span><br><span class="line">  from:web3.eth.accounts[1]      //购买者账户地址</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>在合约的<code>payable</code>方法实现代码中使用<code>msg.value</code>来读取用户支付的以太币数额。 基于用户支付额和股票通证单价，就可以计算出购买数量，并将这些通证赋予购买人， 购买人的账户地址可以通过<code>msg.sender</code>获取。</p>
+<pre><code>contract Voting{
+  function Voting(uint tokens, uint pricePerToken, bytes32[] candidateNames) public {}
+}
+</code></pre><p>当股东调用<code>voteForCandidate()</code>方法投票给特定候选人时，还需要声明其支持力度 —— 用多少股票来支持 这个候选人。因此，我们需要为该方法添加额外的参数以便传入股票通证数量。例如：</p>
+<pre><code>contract Voting{
+ function voteForCandidate(bytes32 candidate, uint votesInTokens) public {}
+}
+</code></pre><p>任何人都可以调用<code>buy()</code>方法来购买公司发行的股票通证，从而成为公司的股东并获得投票权。 你应该已经注意到了该方法的<code>payable</code>修饰符。在Sodility合约中，只有声明为<code>payable</code>的方法， 才可以接收支付的货币（<code>msg.value值</code>）。</p>
+<pre><code>contract Voting{
+  function buy() payable public returns (uint) {
+    //使用msg.value来读取用户的支付金额，这要求方法必须具有payable声明
+  }
+}
+</code></pre><p>下面放出所有合约代码，也可以在git目录中查看</p>
+<pre><code>pragma solidity ^0.4.18; 
+
+contract Voting {
+
+ struct voter {
+  address voterAddress;
+  uint tokensBought;
+  uint[] tokensUsedPerCandidate;
+ }
+
+ mapping (address =&gt; voter) public voterInfo;
+
+ mapping (bytes32 =&gt; uint) public votesReceived;
+
+ bytes32[] public candidateList;
+
+ uint public totalTokens; 
+ uint public balanceTokens;
+ uint public tokenPrice;
+
+ function Voting(uint tokens, uint pricePerToken, bytes32[] candidateNames) public {
+  candidateList = candidateNames;
+  totalTokens = tokens;
+  balanceTokens = tokens;
+  tokenPrice = pricePerToken;
+ }
+
+ function buy() payable public returns (uint) {
+  uint tokensToBuy = msg.value / tokenPrice;
+  require(tokensToBuy &lt;= balanceTokens);
+  voterInfo[msg.sender].voterAddress = msg.sender;
+  voterInfo[msg.sender].tokensBought += tokensToBuy;
+  balanceTokens -= tokensToBuy;
+  return tokensToBuy;
+ }
+
+ function totalVotesFor(bytes32 candidate) view public returns (uint) {
+  return votesReceived[candidate];
+ }
+
+ function voteForCandidate(bytes32 candidate, uint votesInTokens) public {
+  uint index = indexOfCandidate(candidate);
+  require(index != uint(-1));
+
+  if (voterInfo[msg.sender].tokensUsedPerCandidate.length == 0) {
+   for(uint i = 0; i &lt; candidateList.length; i++) {
+    voterInfo[msg.sender].tokensUsedPerCandidate.push(0);
+   }
+  }
+
+  uint availableTokens = voterInfo[msg.sender].tokensBought - totalTokensUsed(voterInfo[msg.sender].tokensUsedPerCandidate);
+  require (availableTokens &gt;= votesInTokens);
+
+  votesReceived[candidate] += votesInTokens;
+  voterInfo[msg.sender].tokensUsedPerCandidate[index] += votesInTokens;
+ }
+
+ function totalTokensUsed(uint[] _tokensUsedPerCandidate) private pure returns (uint) {
+  uint totalUsedTokens = 0;
+  for(uint i = 0; i &lt; _tokensUsedPerCandidate.length; i++) {
+   totalUsedTokens += _tokensUsedPerCandidate[i];
+  }
+  return totalUsedTokens;
+ }
+
+ function indexOfCandidate(bytes32 candidate) view public returns (uint) {
+  for(uint i = 0; i &lt; candidateList.length; i++) {
+   if (candidateList[i] == candidate) {
+    return i;
+   }
+  }
+  return uint(-1);
+ }
+
+ function tokensSold() view public returns (uint) {
+  return totalTokens - balanceTokens;
+ }
+
+ function voterDetails(address user) view public returns (uint, uint[]) {
+  return (voterInfo[user].tokensBought, voterInfo[user].tokensUsedPerCandidate);
+ }
+
+ function transferTo(address account) public {
+  account.transfer(this.balance);
+ }
+
+ function allCandidates() view public returns (bytes32[]) {
+  return candidateList;
+ }
+}
+</code></pre><h4 id="4-4"><a href="#4-4" class="headerlink" title="4.4"></a>4.4</h4><p>合约的<code>buy()</code>方法用于提供购买股票的接口。注意关键字<code>payable</code>，有了它买股票的人才可以付钱给你。 接收钱没有比这个再简单的了！</p>
+<pre><code>function buy() payable public returns (uint) {
+  uint tokensToBuy = msg.value / tokenPrice;   //根据购买金额和通证单价，计算出购买量   
+  require(tokensToBuy &lt;= balanceTokens);       //继续执行合约需要确认合约的通证余额不小于购买量  
+  voterInfo[msg.sender].voterAddress = msg.sender;    //保存购买人地址
+  voterInfo[msg.sender].tokensBought += tokensToBuy;  //更新购买人持股数量
+  balanceTokens -= tokensToBuy;                //将售出的通证数量从合约的余额中剔除  
+  return tokensToBuy;                          //返回本次购买的通证数量
+}
+</code></pre><p>当用户（或程序）调用合约的<code>buy()</code>方法时，需要在请求消息里利用<code>value</code>属性设置用于购买股票通证的以太币金额。例如：</p>
+<pre><code>contract.buy({
+  value:web3.toWei(&#39;1&#39;,&#39;ether&#39;), //购买者支付的以太币金额
+  from:web3.eth.accounts[1]      //购买者账户地址
+})
+</code></pre><p>在合约的<code>payable</code>方法实现代码中使用<code>msg.value</code>来读取用户支付的以太币数额。 基于用户支付额和股票通证单价，就可以计算出购买数量，并将这些通证赋予购买人， 购买人的账户地址可以通过<code>msg.sender</code>获取。</p>
 <p>当然，也可以从truffle控制台调用<code>buy()</code>方法来购买股票通证：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truffle(development)&gt; Voting.deployed().then(function(contract) &#123;contract.buy(&#123;value: web3.toWei(&apos;1&apos;, &apos;ether&apos;), from: web3.eth.accounts[1]&#125;)&#125;)</span><br></pre></td></tr></table></figure>
-<p>如前所述，加权投票方法不仅要指定候选人名称，还要指定使用多少股票通证来支持该候选人。 我们分别用<code>candidate</code>和<code>votesInTokens</code>来表示这两个参数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function voteForCandidate(bytes32 candidate, uint votesInTokens) public &#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>在投票人调用<code>voteForCandidate()</code>方法投票时，我们不仅需要为指定的候选人增加其投票数，还需要跟踪投票人的相关信息，比如投票人是谁（即其账户地址），以及给每个候选人投了多少票。因此在该方法的开始部分，检查如果是该投票人第一次参与投票的话，首先初始化该投票人的<code>voterInfo</code>结构：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (voterInfo[msg.sender].tokensUsedPerCandidate.length == 0) &#123;</span><br><span class="line"> for(uint i = 0; i &lt; candidateList.length; i++) &#123; </span><br><span class="line">  voterInfo[msg.sender].tokensUsedPerCandidate.push(0);  //该投票人为每个候选人投入的通证数量初始化为0</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>接下来我们计算该投票人当前的有效持股数量 —— 从该投票人的持股数量中扣除其为所有投票人已经消耗的股票通证数量：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uint availableTokens = voterInfo[msg.sender].tokensBought -  totalTokensUsed(voterInfo[msg.sender].tokensUsedPerCandidate)</span><br></pre></td></tr></table></figure>
-<p>显然，在合约继续执行之前，需要满足条件 —— 投票人的有效持股数量不小于本次投票使用的股票通证数量：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">require (availableTokens &gt;= votesInTokens)</span><br></pre></td></tr></table></figure>
-<p>如果投票人依然持有足够数量的股票通证，我们就更新候选人获得的票数，同时更新投票人的通证使用记录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">votesReceived[candidate] += votesInTokens;</span><br><span class="line">voterInfo[msg.sender].tokensUsedPerCandidate[index] += votesInTokens;</span><br></pre></td></tr></table></figure>
-<p>当一个用户调用<code>buy()</code>方法发送以太来购买了合约发行的股票通证后，合约收到的资金去了哪里？</p>
+<pre><code>truffle(development)&gt; Voting.deployed().then(function(contract) {contract.buy({value: web3.toWei(&#39;1&#39;, &#39;ether&#39;), from: web3.eth.accounts[1]})})
+</code></pre><p>如前所述，加权投票方法不仅要指定候选人名称，还要指定使用多少股票通证来支持该候选人。 我们分别用<code>candidate</code>和<code>votesInTokens</code>来表示这两个参数：</p>
+<pre><code>function voteForCandidate(bytes32 candidate, uint votesInTokens) public {}
+</code></pre><p>在投票人调用<code>voteForCandidate()</code>方法投票时，我们不仅需要为指定的候选人增加其投票数，还需要跟踪投票人的相关信息，比如投票人是谁（即其账户地址），以及给每个候选人投了多少票。因此在该方法的开始部分，检查如果是该投票人第一次参与投票的话，首先初始化该投票人的<code>voterInfo</code>结构：</p>
+<pre><code>if (voterInfo[msg.sender].tokensUsedPerCandidate.length == 0) {
+ for(uint i = 0; i &lt; candidateList.length; i++) { 
+  voterInfo[msg.sender].tokensUsedPerCandidate.push(0);  //该投票人为每个候选人投入的通证数量初始化为0
+ }
+}
+</code></pre><p>接下来我们计算该投票人当前的有效持股数量 —— 从该投票人的持股数量中扣除其为所有投票人已经消耗的股票通证数量：</p>
+<pre><code>uint availableTokens = voterInfo[msg.sender].tokensBought -  totalTokensUsed(voterInfo[msg.sender].tokensUsedPerCandidate)
+</code></pre><p>显然，在合约继续执行之前，需要满足条件 —— 投票人的有效持股数量不小于本次投票使用的股票通证数量：</p>
+<pre><code>require (availableTokens &gt;= votesInTokens)
+</code></pre><p>如果投票人依然持有足够数量的股票通证，我们就更新候选人获得的票数，同时更新投票人的通证使用记录：</p>
+<pre><code>votesReceived[candidate] += votesInTokens;
+voterInfo[msg.sender].tokensUsedPerCandidate[index] += votesInTokens;
+</code></pre><p>当一个用户调用<code>buy()</code>方法发送以太来购买了合约发行的股票通证后，合约收到的资金去了哪里？</p>
 <p>所有收到的资金（以太）都在这个投票合约里。每个合约都有它自己的地址，因此也是一个账户。 在以太坊里，这种账户被称为<code>合约账户（Contract Account）</code>，而之前的人员账户，则被称为<code>外控账户 (External Controlled Account)</code>。<br>因此，合约的地址里存着这些销售收益。</p>
 <p>我们新增加的<code>transferTo()</code>方法，可以将合约里的资金转移到指定账户：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function transferTo(address account) public &#123;</span><br><span class="line">  account.transfer(this.balance);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注意！<code>transferTo()</code>方法的当前实现，并没有限制调用者，因此任何人都可以调用该方法从而转走投票合约账户里的资金！在生产系统中，你必须添加一些限制条件来避免上面的资金漏洞，例如，检查目标账户是否在一个白名单里。</p>
+<pre><code>function transferTo(address account) public {
+  account.transfer(this.balance);
+}
+</code></pre><p>注意！<code>transferTo()</code>方法的当前实现，并没有限制调用者，因此任何人都可以调用该方法从而转走投票合约账户里的资金！在生产系统中，你必须添加一些限制条件来避免上面的资金漏洞，例如，检查目标账户是否在一个白名单里。</p>
 <p>合约里面剩下的方法都是辅助性的<code>getter</code>方法，仅仅用来返回合约变量的值。</p>
 <p>注意<code>tokensSold()</code>等方法声明中的<code>constant</code>修饰符，这表明该方法是只读的，即方法的执行 并不会改变区块链的状态，因此执行这些交易不会耗费任何gas。</p>
 <h4 id="4-5"><a href="#4-5" class="headerlink" title="4.5"></a>4.5</h4><p>与之前类似，我们修改迁移脚本<code>2_deploy_contracts.js</code>来自动化投票合约的部署。 不过由于新的加权投票合约的构造函数声明了额外的参数，因此需要在迁移脚本中传入两个额外的参数 ：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var Voting = artifacts.require(&quot;./Voting.sol&quot;);</span><br><span class="line">module.exports = function(deployer) &#123;</span><br><span class="line"> deployer.deploy(Voting, 10000, web3.toWei(&apos;0.01&apos;, &apos;ether&apos;), [&apos;Rama&apos;, &apos;Nick&apos;, &apos;Jose&apos;]);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>在上面的代码中，我们部署的合约发行了10000个股票通证，单价为0.01以太。由于所有的价格需要以<code>Wei</code>为单位计价，所以我们需要用<code>toWei()</code>方法将Ether转换为Wei。</p>
+<pre><code>var Voting = artifacts.require(&quot;./Voting.sol&quot;);
+module.exports = function(deployer) {
+ deployer.deploy(Voting, 10000, web3.toWei(&#39;0.01&#39;, &#39;ether&#39;), [&#39;Rama&#39;, &#39;Nick&#39;, &#39;Jose&#39;]);
+};
+</code></pre><p>在上面的代码中，我们部署的合约发行了10000个股票通证，单价为0.01以太。由于所有的价格需要以<code>Wei</code>为单位计价，所以我们需要用<code>toWei()</code>方法将Ether转换为Wei。</p>
 <blockquote>
 <p>以太币面值</p>
 <p>Wei 是 Ether 的最小面值。1 Ether 等于 1000000000000000000 Wei —— 18个0。 </p>
@@ -775,47 +1071,62 @@
 </ul>
 </blockquote>
 <p>当然也可以在 truffle 控制台，执行 <code>web3.toWei(1, &#39;ether&#39;)</code> 来看一下ether（或其他面值）与 wei 之间 的转换关系。例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truffle(development)&gt; web3.toWei(1,&apos;ether&apos;)</span><br></pre></td></tr></table></figure>
-<p>现在可以编译合约并将其部署到区块链了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">~/repo/tkapp$ truffle compile</span><br><span class="line">Compiling Migrations.sol...</span><br><span class="line">Compiling Voting.sol...</span><br><span class="line">Writing artifacts to ./build/contracts</span><br><span class="line"></span><br><span class="line">~/repo/tkapp$ truffle migrate</span><br><span class="line">Running migration: 1_initial_migration.js</span><br><span class="line">Deploying Migrations...Migrations: 0x3cee101c94f8a06d549334372181bc5a7b3a8bee</span><br><span class="line">Saving successful migration to network...</span><br><span class="line">Saving artifacts...</span><br><span class="line">Running migration: 2_deploy_contracts.js</span><br><span class="line">Deploying Voting...Voting: 0xd24a32f0ee12f5e9d233a2ebab5a53d4d4986203</span><br><span class="line">Saving successful migration to network...</span><br><span class="line">Saving artifacts...</span><br></pre></td></tr></table></figure>
-<h4 id="4-6"><a href="#4-6" class="headerlink" title="4.6"></a>4.6</h4><p>成功地将合约部署到了<code>ganache</code>后，执行<code>truffle console</code>进入控制台，让我们和合约互动一下：</p>
+<pre><code>truffle(development)&gt; web3.toWei(1,&#39;ether&#39;)
+</code></pre><p>现在可以编译合约并将其部署到区块链了：</p>
+<pre><code>~/repo/tkapp$ truffle compile
+Compiling Migrations.sol...
+Compiling Voting.sol...
+Writing artifacts to ./build/contracts
+
+~/repo/tkapp$ truffle migrate
+Running migration: 1_initial_migration.js
+Deploying Migrations...Migrations: 0x3cee101c94f8a06d549334372181bc5a7b3a8bee
+Saving successful migration to network...
+Saving artifacts...
+Running migration: 2_deploy_contracts.js
+Deploying Voting...Voting: 0xd24a32f0ee12f5e9d233a2ebab5a53d4d4986203
+Saving successful migration to network...
+Saving artifacts...
+</code></pre><h4 id="4-6"><a href="#4-6" class="headerlink" title="4.6"></a>4.6</h4><p>成功地将合约部署到了<code>ganache</code>后，执行<code>truffle console</code>进入控制台，让我们和合约互动一下：</p>
 <ul>
 <li>一个候选人（比如 Nick）有多少投票？</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truffle(development)&gt; Voting.deployed().then(function(instance) &#123;instance.totalVotesFor.call(&apos;Nick&apos;).then(function(i) &#123;console.log(i)&#125;)&#125;)</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>truffle(development)&gt; Voting.deployed().then(function(instance) {instance.totalVotesFor.call(&#39;Nick&#39;).then(function(i) {console.log(i)})})
+</code></pre><ul>
 <li>一共初始化发行了多少通证？</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truffle(development)&gt; Voting.deployed().then(function(instance) &#123;console.log(instance.totalTokens().then(function(v) &#123;console.log(v)&#125;))&#125;)</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>truffle(development)&gt; Voting.deployed().then(function(instance) {console.log(instance.totalTokens().then(function(v) {console.log(v)}))})
+</code></pre><ul>
 <li>已经售出了多少通证？</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truffle(development)&gt; Voting.deployed().then(function(instance) &#123;console.log(instance.tokensSold().then(function(v) &#123;console.log(v)&#125;))&#125;)</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>truffle(development)&gt; Voting.deployed().then(function(instance) {console.log(instance.tokensSold().then(function(v) {console.log(v)}))})
+</code></pre><ul>
 <li>购买 100个通证</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truffle(development)&gt; Voting.deployed().then(function(instance) &#123;console.log(instance.buy(&#123;value: web3.toWei(&apos;1&apos;, &apos;ether&apos;)&#125;).then(function(v) &#123;console.log(v)&#125;))&#125;)</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>truffle(development)&gt; Voting.deployed().then(function(instance) {console.log(instance.buy({value: web3.toWei(&#39;1&#39;, &#39;ether&#39;)}).then(function(v) {console.log(v)}))})
+</code></pre><ul>
 <li>购买以后账户余额是多少？</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truffle(development)&gt; web3.eth.getBalance(web3.eth.accounts[0])</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>truffle(development)&gt; web3.eth.getBalance(web3.eth.accounts[0])
+</code></pre><ul>
 <li>已经售出了多少通证？</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Voting.deployed().then(function(instance) &#123;console.log(instance.tokensSold().then(function(v) &#123;console.log(v)&#125;))&#125;)</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>Voting.deployed().then(function(instance) {console.log(instance.tokensSold().then(function(v) {console.log(v)}))})
+</code></pre><ul>
 <li>给 Jose 投 25 个 通证，给 Rama 和 Nick 各投 10 个 通证。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">truffle(development)&gt; Voting.deployed().then(function(instance) &#123;console.log(instance.voteForCandidate(&apos;Jose&apos;, 25).then(function(v) &#123;console.log(v)&#125;))&#125;)</span><br><span class="line">truffle(development)&gt; Voting.deployed().then(function(instance) &#123;console.log(instance.voteForCandidate(&apos;Rama&apos;, 10).then(function(v) &#123;console.log(v)&#125;))&#125;)</span><br><span class="line">truffle(development)&gt; Voting.deployed().then(function(instance) &#123;console.log(instance.voteForCandidate(&apos;Nick&apos;, 10).then(function(v) &#123;console.log(v)&#125;))&#125;)</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>truffle(development)&gt; Voting.deployed().then(function(instance) {console.log(instance.voteForCandidate(&#39;Jose&#39;, 25).then(function(v) {console.log(v)}))})
+truffle(development)&gt; Voting.deployed().then(function(instance) {console.log(instance.voteForCandidate(&#39;Rama&#39;, 10).then(function(v) {console.log(v)}))})
+truffle(development)&gt; Voting.deployed().then(function(instance) {console.log(instance.voteForCandidate(&#39;Nick&#39;, 10).then(function(v) {console.log(v)}))})
+</code></pre><ul>
 <li>查询你所投账户的投票人信息（除非用了其他账户，否则你的账户默认是 web3.eth.accounts[0]）</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truffle(development)&gt; Voting.deployed().then(function(instance) &#123;console.log(instance.voterDetails(&apos;0x004ee719ff5b8220b14acb2eac69ab9a8221044b&apos;).then(function(v) &#123;console.log(v)&#125;))&#125;)</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>truffle(development)&gt; Voting.deployed().then(function(instance) {console.log(instance.voterDetails(&#39;0x004ee719ff5b8220b14acb2eac69ab9a8221044b&#39;).then(function(v) {console.log(v)}))})
+</code></pre><ul>
 <li>现在候选人Rama有多少投票？</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truffle(development)&gt; Voting.deployed().then(function(instance) &#123;instance.totalVotesFor.call(&apos;Rama&apos;).then(function(i) &#123;console.log(i)&#125;)&#125;)</span><br></pre></td></tr></table></figure>
-<h4 id="4-7"><a href="#4-7" class="headerlink" title="4.7"></a>4.7</h4><p>现在，已经了解新的投票合约可以如约工作。现在开始构建前端逻辑，以便用户能够通过网页浏览器与合约交互。<br><img src="/img/013/20180406-11.png" alt="Alt text"></p>
+<pre><code>truffle(development)&gt; Voting.deployed().then(function(instance) {instance.totalVotesFor.call(&#39;Rama&#39;).then(function(i) {console.log(i)})})
+</code></pre><h4 id="4-7"><a href="#4-7" class="headerlink" title="4.7"></a>4.7</h4><p>现在，已经了解新的投票合约可以如约工作。现在开始构建前端逻辑，以便用户能够通过网页浏览器与合约交互。<br><img src="/img/013/20180406-11.png" alt="Alt text"></p>
 <p>以下可以自行参照git上的代码</p>
 <ul>
 <li>HTML</li>
@@ -842,10 +1153,10 @@
 </ol>
 </blockquote>
 <p>和之前一样，执行以下命令进行构建：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/repo/tkapp$ webpack</span><br></pre></td></tr></table></figure>
-<p>然后进入build目录，启动轻量web服务器：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/repo/tkapp/build$ python -m SimpleHTTPServer</span><br></pre></td></tr></table></figure>
-<p>如果一切顺利，你可以看到网页，可以输入一个账户地址（投票人的地址），观察他们的投票行为和股票通证数量的变化。 并且可以购买更多的股票通证，为任意候选者投票并查看投票人信息。</p>
+<pre><code>~/repo/tkapp$ webpack
+</code></pre><p>然后进入build目录，启动轻量web服务器：</p>
+<pre><code>~/repo/tkapp/build$ python -m SimpleHTTPServer
+</code></pre><p>如果一切顺利，你可以看到网页，可以输入一个账户地址（投票人的地址），观察他们的投票行为和股票通证数量的变化。 并且可以购买更多的股票通证，为任意候选者投票并查看投票人信息。</p>
 <p>现在合约的实现方式，用户购买股票通证并用通证投票。但是他们投票的方式是向合约发送通证。如果他们必须在未来的 选举中投票怎么办？他们所有的通证都转移到了合约中！</p>
 <p>进一步改进合约的方式是，添加加入一个方法以便于用户能够在投票结束后拿回他们的通证。</p>
 <h3 id="五-总结"><a href="#五-总结" class="headerlink" title="五.总结"></a>五.总结</h3><p>到这里基本的教程介绍已经结束，虽说是入门级的DAPP开发，对于之前没有接触过的人来说，也是需要花点时间理顺和让代码跑起来的。投票系统这个案例可能会在很多入门教学中都会使用，所以如果需要跟人展示和交流的话，可能换一种场景会比较看上去高大上一点。如同开发手机APP一样，技术总是工具，真正产生价值的，更多是融入技术的思想。</p>

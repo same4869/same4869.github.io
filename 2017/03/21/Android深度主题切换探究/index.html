@@ -198,7 +198,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="17">
-<input type="hidden" id="yelog_site_word_count" value="57.4k">
+<input type="hidden" id="yelog_site_word_count" value="56.3k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -217,6 +217,8 @@
             <li><a target="_blank" href="https://ccflower.github.io/">ccflower的博客</a></li>
             
             <li><a target="_blank" href="http://todd2010.github.io/">todd2010的博客</a></li>
+            
+            <li><a target="_blank" href="https://yelog.org/">yelog的博客</a></li>
             
         </ul>
     </div>
@@ -471,7 +473,7 @@
     </div>
     <div class="article-meta">
         
-        <span>Count:5.4k</span>
+        <span>Count:5.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -490,7 +492,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-一个从零开始的demo"><span class="toc-text">1.一个从零开始的demo</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-主题应用的几把刀"><span class="toc-text">2.主题应用的几把刀</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-如何配置与使用主题"><span class="toc-text">3.如何配置与使用主题</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-一个从零开始的demo"><span class="toc-text">1.一个从零开始的demo</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-如何配置与使用主题"><span class="toc-text">3.如何配置与使用主题</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -519,53 +521,930 @@
 <li>最外层的<code>LinearLayout</code>叫<code>root_layout</code>。</li>
 <li>第一个<code>Button</code>的id是<code>skin_default_theme_btn</code>。</li>
 <li>第二个<code>Button</code>的id是<code>skin_new_theme_btn</code>。</li>
-<li>下面还有张图片，叫做<code>skin_other_img</code>。<br>页面相关的先介绍到这里，需要主要的是，这两个activity继承一个基类<code>BaseActivity</code>，这个基类主要是保证子类具有更换主题的能力，所以重点就在这里了，先贴出来溜溜：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> <span class="keyword">implements</span> <span class="title">ISkinUpate</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> List&lt;CustomValue&gt; customValues;</span><br><span class="line">	<span class="keyword">private</span> String baseLastThemeId;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>.onResume();</span><br><span class="line">		updateTheme();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> SkinPackageManager <span class="title">getSkinPackageManager</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> SkinPackageManager.getInstance(<span class="keyword">this</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> List&lt;CustomValue&gt; <span class="title">getSkinCustomValues</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> customValues;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">updateTheme</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (!applyTheme()) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (isThemeApplied()) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		SkinPackageManager skinManager = SkinPackageManager.getInstance(getApplicationContext());</span><br><span class="line">		baseLastThemeId = skinManager.getCurSkinTheme();</span><br><span class="line"></span><br><span class="line">		customValues = SkinApplyHandler.applySkin(<span class="keyword">this</span>, <span class="keyword">this</span>.getClass().getSimpleName(), getWindow().getDecorView());</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 主题是否已应用</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isThemeApplied</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		SkinPackageManager skinManager = SkinPackageManager.getInstance(getApplicationContext());</span><br><span class="line">		<span class="keyword">if</span> (skinManager.getCurSkinTheme().equals(baseLastThemeId)) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">applyTheme</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>下面还有张图片，叫做<code>skin_other_img</code>。<br>页面相关的先介绍到这里，需要主要的是，这两个activity继承一个基类<code>BaseActivity</code>，这个基类主要是保证子类具有更换主题的能力，所以重点就在这里了，先贴出来溜溜：<br>```java<br>public class BaseActivity extends Activity implements ISkinUpate {<br>  private List<customvalue> customValues;<br>  private String baseLastThemeId;</customvalue></p>
+<p>  public void onResume() {</p>
+<pre><code>  super.onResume();
+  updateTheme();
+</code></pre><p>  }</p>
+<p>  protected SkinPackageManager getSkinPackageManager() {</p>
+<pre><code>  return SkinPackageManager.getInstance(this);
+</code></pre><p>  }</p>
+<p>  public List<customvalue> getSkinCustomValues() {</customvalue></p>
+<pre><code>  return customValues;
+</code></pre><p>  }</p>
+<p>  @Override<br>  public boolean updateTheme() {</p>
+<pre><code>  if (!applyTheme()) {
+      return false;
+  }
+  if (isThemeApplied()) {
+      return false;
+  }
+  SkinPackageManager skinManager = SkinPackageManager.getInstance(getApplicationContext());
+  baseLastThemeId = skinManager.getCurSkinTheme();
+
+  customValues = SkinApplyHandler.applySkin(this, this.getClass().getSimpleName(), getWindow().getDecorView());
+  return true;
+</code></pre><p>  }</p>
+<p>  /**</p>
+<ul>
+<li>主题是否已应用</li>
+<li></li>
+<li><p>@return<br>*/<br>public boolean isThemeApplied() {<br> SkinPackageManager skinManager = SkinPackageManager.getInstance(getApplicationContext());<br> if (skinManager.getCurSkinTheme().equals(baseLastThemeId)) {</p>
+<pre><code> return true;
+</code></pre><p> }<br> return false;<br>}</p>
+<p>@Override<br>public boolean applyTheme() {<br> return true;<br>}</p>
 </li>
 </ul>
-<p>通过这个类我们可以比较容易看出核心所在，就这几个类没跑了，它们是<code>ISkinUpate</code>,<code>SkinPackageManager</code>和<code>SkinApplyHandler</code>,把这三个东东搞定了，这篇文章也就差不多了，那么撸起袖子，换一小节接着来吧。</p>
-<h4 id="2-主题应用的几把刀"><a href="#2-主题应用的几把刀" class="headerlink" title="2.主题应用的几把刀"></a>2.主题应用的几把刀</h4><p>一切还是从<code>BaseActivity</code>说起吧，从刚刚上面的代码我们可以看到在<code>onResume</code>里面调用了一个<code>updateTheme</code>方法，这是一个接口的重载方法，先看这个<code>ISkinUpate</code>吧：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ISkinUpate</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">boolean</span> <span class="title">updateTheme</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">abstract</span> <span class="keyword">boolean</span> <span class="title">applyTheme</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>第一个就是我们在基类实现的应用主题的核心方法，第二个是用来控制是否应用主题的。<br>回到<code>BaseActivity</code>里面来，看到<code>updateTheme</code>里面首先有两个判断，第一个当然就是说，如果不应用主题当然就不继续执行下去了，那么<code>isThemeApplied</code>方法是什么呢，看代码简单猜一下其实很容易看出来，就是应用主题的时候会看看需要应用的主题是不是就是当前主题，如果是就不需要继续应用了，性能能省则省对吧。<br>然后可以看看<code>SkinPackageManager</code>了，又是一个<code>manager</code>，套路已经很深了，所以它首先肯定是这样的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SkinPackageManager <span class="title">getInstance</span><span class="params">(Context mContext)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (mInstance == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="keyword">synchronized</span> (lock) &#123;</span><br><span class="line">			<span class="keyword">if</span> (mInstance == <span class="keyword">null</span>) &#123;</span><br><span class="line">				mInstance = <span class="keyword">new</span> SkinPackageManager(mContext);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> mInstance;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>接下来应该关注下它的构造方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="title">SkinPackageManager</span><span class="params">(Context mContext)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.mContext = mContext;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			File file = Environment.getExternalStorageDirectory();<span class="comment">//mContext.getFilesDir();</span></span><br><span class="line">			<span class="keyword">if</span> (file != <span class="keyword">null</span>) &#123;</span><br><span class="line">				file = <span class="keyword">new</span> File(file, SKIN_DIR);</span><br><span class="line">				<span class="keyword">if</span> (!file.exists()) &#123;</span><br><span class="line">					file.mkdirs();</span><br><span class="line">				&#125;</span><br><span class="line">				themeRootPath = file.getAbsolutePath();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
-<p>构造函数初始化了<code>themeRootPath</code>变量，这个变量就是指向主题APK的绝对路径。<br>然后我们看到<code>BaseActivity</code>里面的<code>updateTheme</code>首先是调用了<code>getCurSkinTheme</code>方法，那我们来看看：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getCurSkinTheme</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (curTheme == <span class="keyword">null</span>) &#123;</span><br><span class="line">			curTheme = SPSetting.getAppSkinTheme();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (curTheme == <span class="keyword">null</span>) &#123;</span><br><span class="line">			curTheme = DEFAULT_THEME;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> curTheme;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
-<p><code>SPSetting</code>就是<code>SharedPreferences</code>啦，在这里插播一下SP的设计封装。<br>看看<code>SPSetting</code>里面的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SPSetting</span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String SETTING = <span class="string">"setting"</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SKIN_THEME = <span class="string">"skin_theme"</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">saveAppSkinTheme</span><span class="params">(String theme)</span> </span>&#123;</span><br><span class="line">		PrefsMgr.putString(SETTING, SKIN_THEME, theme);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getAppSkinTheme</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> PrefsMgr.getString(SETTING, SKIN_THEME, <span class="keyword">null</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>很明显它是封装了具体业务的，然后使用了一个<code>PrefsMgr</code>的类，那来看看这个：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrefsMgr</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getInt</span><span class="params">(String tbl, String key, <span class="keyword">int</span> def)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (MyApplication.getInstance() == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> def;</span><br><span class="line">		&#125;</span><br><span class="line">		SharedPreferences prefs = MyApplication.getInstance().getWenbaSharedPreferences(tbl);</span><br><span class="line">		<span class="keyword">return</span> prefs.getInt(key, def);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">getLong</span><span class="params">(String tbl, String key, <span class="keyword">long</span> def)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (MyApplication.getInstance() == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> def;</span><br><span class="line">		&#125;</span><br><span class="line">		SharedPreferences prefs = MyApplication.getInstance().getWenbaSharedPreferences(tbl);</span><br><span class="line">		<span class="keyword">return</span> prefs.getLong(key, def);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getString</span><span class="params">(String tbl, String key, String def)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (MyApplication.getInstance() == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> def;</span><br><span class="line">		&#125;</span><br><span class="line">		SharedPreferences prefs = MyApplication.getInstance().getWenbaSharedPreferences(tbl);</span><br><span class="line">		<span class="keyword">return</span> prefs.getString(key, def);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">getBoolean</span><span class="params">(String tbl, String key, <span class="keyword">boolean</span> def)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (MyApplication.getInstance() == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> def;</span><br><span class="line">		&#125;</span><br><span class="line">		SharedPreferences prefs = MyApplication.getInstance().getWenbaSharedPreferences(tbl);</span><br><span class="line">		<span class="keyword">return</span> prefs.getBoolean(key, def);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">float</span> <span class="title">getFloat</span><span class="params">(String tbl, String key, <span class="keyword">float</span> def)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (MyApplication.getInstance() == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> def;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		SharedPreferences prefs = MyApplication.getInstance().getWenbaSharedPreferences(tbl);</span><br><span class="line">		<span class="keyword">return</span> prefs.getFloat(key, def);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">putInt</span><span class="params">(String tbl, String key, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">		SharedPreferences prefs = MyApplication.getInstance().getWenbaSharedPreferences(tbl);</span><br><span class="line">		SharedPreferences.Editor editor = prefs.edit();</span><br><span class="line">		editor.putInt(key, value);</span><br><span class="line">		editor.apply();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">putLong</span><span class="params">(String tbl, String key, <span class="keyword">long</span> value)</span> </span>&#123;</span><br><span class="line">		SharedPreferences prefs = MyApplication.getInstance().getWenbaSharedPreferences(tbl);</span><br><span class="line">		SharedPreferences.Editor editor = prefs.edit();</span><br><span class="line">		editor.putLong(key, value);</span><br><span class="line">		editor.apply();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">putString</span><span class="params">(String tbl, String key, String value)</span> </span>&#123;</span><br><span class="line">		SharedPreferences prefs = MyApplication.getInstance().getWenbaSharedPreferences(tbl);</span><br><span class="line">		SharedPreferences.Editor editor = prefs.edit();</span><br><span class="line">		editor.putString(key, value);</span><br><span class="line">		editor.apply();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">putBoolean</span><span class="params">(String tbl, String key, <span class="keyword">boolean</span> value)</span> </span>&#123;</span><br><span class="line">		SharedPreferences prefs = MyApplication.getInstance().getWenbaSharedPreferences(tbl);</span><br><span class="line">		SharedPreferences.Editor editor = prefs.edit();</span><br><span class="line">		editor.putBoolean(key, value);</span><br><span class="line">		editor.apply();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">putFloat</span><span class="params">(String tbl, String key, <span class="keyword">float</span> value)</span> </span>&#123;</span><br><span class="line">		SharedPreferences prefs = MyApplication.getInstance().getWenbaSharedPreferences(tbl);</span><br><span class="line">		SharedPreferences.Editor editor = prefs.edit();</span><br><span class="line">		editor.putFloat(key, value);</span><br><span class="line">		editor.apply();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>原来如此，<code>PrefsMgr</code>封装的才是真正的sp，然后<code>SPSetting</code>做了二次业务封装，以后有相关的sp需求就统一在<code>SPSetting</code>管理就行了，简单而实用吧。<br>最后补上在Application里面获得SP实例的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> SharedPreferences <span class="title">getWenbaSharedPreferences</span><span class="params">(String tbl)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> getSharedPreferences(tbl, Context.MODE_PRIVATE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>回到<code>BaseActivity</code>里的<code>updateTheme</code>，通过<code>getCurSkinTheme</code>方法取得当然的主题，在这之前会用<code>isThemeApplied</code>判断当前主题是否跟上一次主题一样的，如果是就不继续应用了。<br>所以真正的核心就是<code>customValues = SkinApplyHandler.applySkin(this, this.getClass().getSimpleName(), getWindow().getDecorView());</code>这句话没跑啦。直接上代码先：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;CustomValue&gt; <span class="title">applySkin</span><span class="params">(Context context, String skinConfigName, View rootView)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (sCommonConfig == <span class="keyword">null</span>) &#123;</span><br><span class="line">			initCommonConfig(context);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> SkinApply(context, skinConfigName, sCommonConfig, rootView).apply();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
-<p><code>sCommonConfig</code>是个标识为，如果为空就调用<code>initCommonConfig</code>方法，这个方法一会儿再看，先继续往下走到<code>return</code>的那个地方，<code>new</code>了一个名为<code>SkinApply</code>的类，并且调用了<code>apply</code>方法。<br>看来核心真心还隐藏得挺深的，层层剥开吧。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">SkinApply</span><span class="params">(Context context, String skinConfigName, ThemeConfig commConfig, View rootView)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.context = context;</span><br><span class="line">	<span class="keyword">this</span>.rootView = rootView;</span><br><span class="line">	<span class="keyword">this</span>.skinConfigName = skinConfigName;</span><br><span class="line">	<span class="keyword">this</span>.commConfig = commConfig;</span><br><span class="line">	<span class="keyword">this</span>.mSkinPackageManager = SkinPackageManager.getInstance(context);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>构造函数里面初始化了一些变量，当然后面是又用的，直接看看<code>apply</code>方法是干什么的就好。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;CustomValue&gt; <span class="title">apply</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		ThemeConfig thisConfig = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="comment">// get specific name</span></span><br><span class="line">			String fileName = <span class="string">"skin/config/"</span> + skinConfigName + <span class="string">".xml"</span>;</span><br><span class="line">			thisConfig = SkinApplyHandler.parseThemeAsset(context, fileName);</span><br><span class="line">			<span class="keyword">if</span> (thisConfig == <span class="keyword">null</span>) &#123;</span><br><span class="line">				Log.d(<span class="string">"skin"</span>, <span class="string">"no config skinConfigName = "</span> + skinConfigName);</span><br><span class="line">				<span class="comment">// apply common config</span></span><br><span class="line">				applyThemeConfig(commConfig);</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> (thisConfig.applyCommonAttrbiute) &#123;</span><br><span class="line">				applyThemeConfig(commConfig);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			applyThemeConfig(thisConfig);</span><br><span class="line"></span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			Log.w(<span class="string">"wenba"</span>, e);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> thisConfig.customValueList;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<p>}</p>
+<pre><code>通过这个类我们可以比较容易看出核心所在，就这几个类没跑了，它们是`ISkinUpate`,`SkinPackageManager`和`SkinApplyHandler`,把这三个东东搞定了，这篇文章也就差不多了，那么撸起袖子，换一小节接着来吧。
+
+
+#### 2.主题应用的几把刀
+一切还是从`BaseActivity`说起吧，从刚刚上面的代码我们可以看到在`onResume`里面调用了一个`updateTheme`方法，这是一个接口的重载方法，先看这个`ISkinUpate`吧：
+```java
+public interface ISkinUpate {
+    public abstract boolean updateTheme();
+
+    abstract boolean applyTheme();
+}
+</code></pre><p>第一个就是我们在基类实现的应用主题的核心方法，第二个是用来控制是否应用主题的。<br>回到<code>BaseActivity</code>里面来，看到<code>updateTheme</code>里面首先有两个判断，第一个当然就是说，如果不应用主题当然就不继续执行下去了，那么<code>isThemeApplied</code>方法是什么呢，看代码简单猜一下其实很容易看出来，就是应用主题的时候会看看需要应用的主题是不是就是当前主题，如果是就不需要继续应用了，性能能省则省对吧。<br>然后可以看看<code>SkinPackageManager</code>了，又是一个<code>manager</code>，套路已经很深了，所以它首先肯定是这样的：</p>
+<pre><code class="java">public static SkinPackageManager getInstance(Context mContext) {
+    if (mInstance == null) {
+        synchronized (lock) {
+            if (mInstance == null) {
+                mInstance = new SkinPackageManager(mContext);
+            }
+        }
+    }
+    return mInstance;
+}
+</code></pre>
+<p>接下来应该关注下它的构造方法：</p>
+<pre><code class="java">private SkinPackageManager(Context mContext) {
+        this.mContext = mContext;
+        try {
+            File file = Environment.getExternalStorageDirectory();//mContext.getFilesDir();
+            if (file != null) {
+                file = new File(file, SKIN_DIR);
+                if (!file.exists()) {
+                    file.mkdirs();
+                }
+                themeRootPath = file.getAbsolutePath();
+            }
+        } catch (Exception e) {
+
+        }
+    }
+</code></pre>
+<p>构造函数初始化了<code>themeRootPath</code>变量，这个变量就是指向主题APK的绝对路径。<br>然后我们看到<code>BaseActivity</code>里面的<code>updateTheme</code>首先是调用了<code>getCurSkinTheme</code>方法，那我们来看看：</p>
+<pre><code class="java">public String getCurSkinTheme() {
+        if (curTheme == null) {
+            curTheme = SPSetting.getAppSkinTheme();
+        }
+        if (curTheme == null) {
+            curTheme = DEFAULT_THEME;
+        }
+        return curTheme;
+    }
+</code></pre>
+<p><code>SPSetting</code>就是<code>SharedPreferences</code>啦，在这里插播一下SP的设计封装。<br>看看<code>SPSetting</code>里面的代码：</p>
+<pre><code class="java">public class SPSetting {
+    public static final String SETTING = &quot;setting&quot;;
+    private static final String SKIN_THEME = &quot;skin_theme&quot;;
+
+    public static void saveAppSkinTheme(String theme) {
+        PrefsMgr.putString(SETTING, SKIN_THEME, theme);
+    }
+
+    public static String getAppSkinTheme() {
+        return PrefsMgr.getString(SETTING, SKIN_THEME, null);
+    }
+}
+</code></pre>
+<p>很明显它是封装了具体业务的，然后使用了一个<code>PrefsMgr</code>的类，那来看看这个：</p>
+<pre><code class="java">public class PrefsMgr {
+    public static int getInt(String tbl, String key, int def) {
+        if (MyApplication.getInstance() == null) {
+            return def;
+        }
+        SharedPreferences prefs = MyApplication.getInstance().getWenbaSharedPreferences(tbl);
+        return prefs.getInt(key, def);
+    }
+
+    public static long getLong(String tbl, String key, long def) {
+        if (MyApplication.getInstance() == null) {
+            return def;
+        }
+        SharedPreferences prefs = MyApplication.getInstance().getWenbaSharedPreferences(tbl);
+        return prefs.getLong(key, def);
+    }
+
+    public static String getString(String tbl, String key, String def) {
+        if (MyApplication.getInstance() == null) {
+            return def;
+        }
+        SharedPreferences prefs = MyApplication.getInstance().getWenbaSharedPreferences(tbl);
+        return prefs.getString(key, def);
+    }
+
+    public static boolean getBoolean(String tbl, String key, boolean def) {
+        if (MyApplication.getInstance() == null) {
+            return def;
+        }
+        SharedPreferences prefs = MyApplication.getInstance().getWenbaSharedPreferences(tbl);
+        return prefs.getBoolean(key, def);
+    }
+
+    public static float getFloat(String tbl, String key, float def) {
+        if (MyApplication.getInstance() == null) {
+            return def;
+        }
+
+        SharedPreferences prefs = MyApplication.getInstance().getWenbaSharedPreferences(tbl);
+        return prefs.getFloat(key, def);
+    }
+
+    public static void putInt(String tbl, String key, int value) {
+        SharedPreferences prefs = MyApplication.getInstance().getWenbaSharedPreferences(tbl);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(key, value);
+        editor.apply();
+    }
+
+    public static void putLong(String tbl, String key, long value) {
+        SharedPreferences prefs = MyApplication.getInstance().getWenbaSharedPreferences(tbl);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putLong(key, value);
+        editor.apply();
+    }
+
+    public static void putString(String tbl, String key, String value) {
+        SharedPreferences prefs = MyApplication.getInstance().getWenbaSharedPreferences(tbl);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(key, value);
+        editor.apply();
+    }
+
+    public static void putBoolean(String tbl, String key, boolean value) {
+        SharedPreferences prefs = MyApplication.getInstance().getWenbaSharedPreferences(tbl);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean(key, value);
+        editor.apply();
+    }
+
+    public static void putFloat(String tbl, String key, float value) {
+        SharedPreferences prefs = MyApplication.getInstance().getWenbaSharedPreferences(tbl);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putFloat(key, value);
+        editor.apply();
+    }
+}
+</code></pre>
+<p>原来如此，<code>PrefsMgr</code>封装的才是真正的sp，然后<code>SPSetting</code>做了二次业务封装，以后有相关的sp需求就统一在<code>SPSetting</code>管理就行了，简单而实用吧。<br>最后补上在Application里面获得SP实例的代码：</p>
+<pre><code class="java">public SharedPreferences getWenbaSharedPreferences(String tbl) {
+    return getSharedPreferences(tbl, Context.MODE_PRIVATE);
+}
+</code></pre>
+<p>回到<code>BaseActivity</code>里的<code>updateTheme</code>，通过<code>getCurSkinTheme</code>方法取得当然的主题，在这之前会用<code>isThemeApplied</code>判断当前主题是否跟上一次主题一样的，如果是就不继续应用了。<br>所以真正的核心就是<code>customValues = SkinApplyHandler.applySkin(this, this.getClass().getSimpleName(), getWindow().getDecorView());</code>这句话没跑啦。直接上代码先：</p>
+<pre><code class="java">public static List&lt;CustomValue&gt; applySkin(Context context, String skinConfigName, View rootView) {
+        if (sCommonConfig == null) {
+            initCommonConfig(context);
+        }
+
+        return new SkinApply(context, skinConfigName, sCommonConfig, rootView).apply();
+    }
+</code></pre>
+<p><code>sCommonConfig</code>是个标识为，如果为空就调用<code>initCommonConfig</code>方法，这个方法一会儿再看，先继续往下走到<code>return</code>的那个地方，<code>new</code>了一个名为<code>SkinApply</code>的类，并且调用了<code>apply</code>方法。<br>看来核心真心还隐藏得挺深的，层层剥开吧。</p>
+<pre><code class="java">    public SkinApply(Context context, String skinConfigName, ThemeConfig commConfig, View rootView) {
+        this.context = context;
+        this.rootView = rootView;
+        this.skinConfigName = skinConfigName;
+        this.commConfig = commConfig;
+        this.mSkinPackageManager = SkinPackageManager.getInstance(context);
+    }
+</code></pre>
+<p>构造函数里面初始化了一些变量，当然后面是又用的，直接看看<code>apply</code>方法是干什么的就好。</p>
+<pre><code class="java">public List&lt;CustomValue&gt; apply() {
+        ThemeConfig thisConfig = null;
+        try {
+            // get specific name
+            String fileName = &quot;skin/config/&quot; + skinConfigName + &quot;.xml&quot;;
+            thisConfig = SkinApplyHandler.parseThemeAsset(context, fileName);
+            if (thisConfig == null) {
+                Log.d(&quot;skin&quot;, &quot;no config skinConfigName = &quot; + skinConfigName);
+                // apply common config
+                applyThemeConfig(commConfig);
+                return null;
+            }
+
+            if (thisConfig.applyCommonAttrbiute) {
+                applyThemeConfig(commConfig);
+            }
+
+            applyThemeConfig(thisConfig);
+
+        } catch (Exception e) {
+            Log.w(&quot;wenba&quot;, e);
+        }
+
+        return thisConfig.customValueList;
+    }
+</code></pre>
 <p>这里也有comm相关的字眼，那只能简单说一下了，<code>commConfig</code>也就是从刚刚外面传进来的，相当于是一个页面的公共配置，在这里配一下就相当于在每个使用主题的页面都使用这个主题配置了，和基类子类的概念差不多，基类的行为是所有子类公共的，子类的行为是自己所独有的。<br>所以现在来看<code>apply</code>的代码还是比较清晰了吧。</p>
 <ul>
 <li>首先在特定的文件目录下面去找特定名称的xml。</li>
-<li>然后<code>SkinApplyHandler.parseThemeAsset</code>获得自己特定的<code>config</code>，如果为空则只加载公共的主题配置，如果不为空则先加载公共的，在加载自己的。<br>这个<code>config</code>的类型是<code>ThemeConfig</code>，可以来看看了：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThemeConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String NODE_THEME_ROOT = <span class="string">"ThemeRoot"</span>;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String NODE_COLORS = <span class="string">"colors"</span>;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String NODE_DRAWABLES = <span class="string">"drawables"</span>;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String NODE_STRINGS = <span class="string">"strings"</span>;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String NODE_APPLY_COMMON_ATTRIBIUTE = <span class="string">"applyCommonAttrbiute"</span>;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String NODE_CONFIG_ITEM = <span class="string">"ConfigItem"</span>;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String NODE_METHOD_CALL = <span class="string">"MethodCall"</span>;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String NODE_CUSTOM_VALUE = <span class="string">"CustomValue"</span>;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String NODE_VALUE_DEF = <span class="string">"ValueDef"</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ATTR_VIEW_ID = <span class="string">"viewId"</span>;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ATTR_METHOD = <span class="string">"method"</span>;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ATTR_RES_NAME = <span class="string">"resName"</span>;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ATTR_SPECIAL_THEME = <span class="string">"specialTheme"</span>;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ATTR_NAME = <span class="string">"name"</span>;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ATTR_VALUE = <span class="string">"value"</span>;</span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ATTR_TYPE = <span class="string">"type"</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">public</span> <span class="keyword">boolean</span> applyCommonAttrbiute;</span><br><span class="line">		<span class="keyword">public</span> List&lt;ConfigItem&gt; colorList;</span><br><span class="line">		<span class="keyword">public</span> List&lt;ConfigItem&gt; drawableList;</span><br><span class="line">		<span class="keyword">public</span> List&lt;ConfigItem&gt; stringList;</span><br><span class="line">		<span class="keyword">public</span> List&lt;CustomValue&gt; customValueList;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<li><p>然后<code>SkinApplyHandler.parseThemeAsset</code>获得自己特定的<code>config</code>，如果为空则只加载公共的主题配置，如果不为空则先加载公共的，在加载自己的。<br>这个<code>config</code>的类型是<code>ThemeConfig</code>，可以来看看了：</p>
+<pre><code class="java">public static class ThemeConfig {
+
+      public static final String NODE_THEME_ROOT = &quot;ThemeRoot&quot;;
+      public static final String NODE_COLORS = &quot;colors&quot;;
+      public static final String NODE_DRAWABLES = &quot;drawables&quot;;
+      public static final String NODE_STRINGS = &quot;strings&quot;;
+      public static final String NODE_APPLY_COMMON_ATTRIBIUTE = &quot;applyCommonAttrbiute&quot;;
+      public static final String NODE_CONFIG_ITEM = &quot;ConfigItem&quot;;
+      public static final String NODE_METHOD_CALL = &quot;MethodCall&quot;;
+      public static final String NODE_CUSTOM_VALUE = &quot;CustomValue&quot;;
+      public static final String NODE_VALUE_DEF = &quot;ValueDef&quot;;
+
+      public static final String ATTR_VIEW_ID = &quot;viewId&quot;;
+      public static final String ATTR_METHOD = &quot;method&quot;;
+      public static final String ATTR_RES_NAME = &quot;resName&quot;;
+      public static final String ATTR_SPECIAL_THEME = &quot;specialTheme&quot;;
+      public static final String ATTR_NAME = &quot;name&quot;;
+      public static final String ATTR_VALUE = &quot;value&quot;;
+      public static final String ATTR_TYPE = &quot;type&quot;;
+
+      public boolean applyCommonAttrbiute;
+      public List&lt;ConfigItem&gt; colorList;
+      public List&lt;ConfigItem&gt; drawableList;
+      public List&lt;ConfigItem&gt; stringList;
+      public List&lt;CustomValue&gt; customValueList;
+  }
+</code></pre>
+<p>看上去很复杂对吧，那先不管吧，继续看上一步。<code>apply</code>方法里面现在有两个核心的方法<code>parseThemeAsset</code>和<code>applyThemeConfig</code>，先看第一个：</p>
+<pre><code class="java">/**
+   * 格式皮肤配置xml，转化为ThemeConfig Bean
+   * 
+   * @param name
+   * @return
+   */
+  public static ThemeConfig parseThemeAsset(Context context, String name) {
+      InputStream inputStream = null;
+      ThemeConfig themeConfig = null;
+      try {
+          inputStream = context.getResources().getAssets().open(name);
+          if (inputStream == null) {
+              return null;
+          }
+
+          XmlPullParser parser = Xml.newPullParser();
+          parser.setInput(inputStream, &quot;utf-8&quot;);
+
+          int event = -1;
+
+          while ((event = parser.next()) != XmlPullParser.END_DOCUMENT) {
+              if (event != XmlPullParser.START_TAG) {
+                  continue;
+              }
+
+              String nodeTag = parser.getName();
+
+              if (ThemeConfig.NODE_COLORS.equals(nodeTag)) {
+                  themeConfig.colorList = parseConfigGroup(parser);
+              } else if (ThemeConfig.NODE_DRAWABLES.equals(nodeTag)) {
+                  themeConfig.drawableList = parseConfigGroup(parser);
+              } else if (ThemeConfig.NODE_STRINGS.equals(nodeTag)) {
+                  themeConfig.stringList = parseConfigGroup(parser);
+              } else if (ThemeConfig.NODE_CUSTOM_VALUE.equals(nodeTag)) {
+                  themeConfig.customValueList = parseCustomValueGroup(parser);
+              } else if (ThemeConfig.NODE_APPLY_COMMON_ATTRIBIUTE.equals(nodeTag)) {
+                  String value = parser.getAttributeValue(null, &quot;value&quot;);
+                  if (value != null &amp;&amp; value.equalsIgnoreCase(&quot;true&quot;)) {
+                      themeConfig.applyCommonAttrbiute = true;
+                  } else {
+                      themeConfig.applyCommonAttrbiute = false;
+                  }
+              } else if (ThemeConfig.NODE_THEME_ROOT.equals(nodeTag)) {
+                  if (parser.getDepth() == 1) {
+                      themeConfig = new ThemeConfig();
+                  } else {
+                      throw new Exception(&quot;ThemeRoot was in wrong place&quot;);
+                  }
+              }
+          }
+          return themeConfig;
+      } catch (Exception e) {
+          Log.w(&quot;wenba&quot;, e);
+      } finally {
+          // close input stream
+          BaseStoreUtil.closeObject(inputStream);
+      }
+
+      return themeConfig;
+  }
+</code></pre>
+<p>现在知道为什么<code>ThemeConfig</code>为什么这么多了吧，前面的常量都是用来解析xml的，也只有最后面几个变量是后来有用的。里面主要通过两个方法来解析，一个一个看看：</p>
+<pre><code class="java">  /**
+   * 解析ConfigItem 节点，转化为ConfigItem集合
+   * 
+   * @param parser
+   * @return
+   */
+  private static List&lt;ConfigItem&gt; parseConfigGroup(XmlPullParser parser) {
+
+      if (parser == null || parser.getDepth() != 2) {
+          return null;
+      }
+
+      int event = -1;
+      int depth = parser.getDepth();
+      List&lt;ConfigItem&gt; itemList = new ArrayList&lt;ConfigItem&gt;();
+      ConfigItem configItem = null;
+      try {
+          while ((event = parser.next()) != XmlPullParser.END_TAG || (parser.getDepth() &gt; depth &amp;&amp; event != XmlPullParser.END_DOCUMENT)) {
+              if (event != XmlPullParser.START_TAG) {
+                  continue;
+              }
+
+              String nodeTag = parser.getName();
+              if (ThemeConfig.NODE_CONFIG_ITEM.equals(nodeTag)) {
+                  configItem = new ConfigItem();
+
+                  configItem.idName = parser.getAttributeValue(null, ThemeConfig.ATTR_VIEW_ID);
+
+                  if (parser.getAttributeCount() &gt;= 3) {
+                      MethodCall call = new MethodCall();
+                      call.methodName = parser.getAttributeValue(null, ThemeConfig.ATTR_METHOD);
+                      call.resName = parser.getAttributeValue(null, ThemeConfig.ATTR_RES_NAME);
+                      call.special = parser.getAttributeValue(null, ThemeConfig.ATTR_SPECIAL_THEME);
+
+                      configItem.addMethodCall(call);
+                  } else {
+                      // parse method group
+                      configItem.addMethodCall(parseMethodCalls(parser));
+                  }
+
+                  itemList.add(configItem);
+              }
+          }
+      } catch (Exception e) {
+          Log.w(&quot;wenba&quot;, e);
+      }
+
+      return itemList;
+  }
+</code></pre>
+<p>反射的过程就不再深究了，把对应的实体类也贴出来看看吧：</p>
+<pre><code class="java">public static class ConfigItem {
+      public String idName;
+      public List&lt;MethodCall&gt; methodCalls;
+
+      public ConfigItem() {
+          methodCalls = new ArrayList&lt;MethodCall&gt;();
+      }
+
+      public void addMethodCall(MethodCall call) {
+          methodCalls.add(call);
+      }
+
+      public void addMethodCall(List&lt;MethodCall&gt; calls) {
+          methodCalls.addAll(calls);
+      }
+  }
+
+  public static class MethodCall {
+      public String methodName;
+      public String resName;
+      public String special;
+  }
+</code></pre>
+<p>所以<code>parseConfigGroup</code>这个方法把xml配置的颜色，图片，文字都能解析出来，方法对应的JAVA对象中。<br>后面还有一个<code>customValueList</code>是什么呢，这个和上面几个不太一样，<strong>前几个属性在xml配置后在java代码里面就不需要怎么操作了，而<code>customValue</code>不一样，它不会具体应用到某一个view上面，而是运行时把反射出来颜色图片等返回到java中让开发者自己处理，这一点很重要，因为我们配置的xml都是针对页面的，有些没有页面的地方（例如adpter）就需要使用<code>customValue</code>来处理主题元素。</strong><br><code>customValue</code>是通过名为<code>parseCustomValueGroup</code>的方法解析的，来看看：</p>
+<pre><code class="java">private static List&lt;CustomValue&gt; parseCustomValueGroup(XmlPullParser parser) {
+
+      if (parser == null || parser.getDepth() != 2) {
+          return null;
+      }
+
+      int event = -1;
+      int depth = parser.getDepth();
+      List&lt;CustomValue&gt; itemList = new ArrayList&lt;CustomValue&gt;();
+      CustomValue configItem = null;
+      try {
+          while ((event = parser.next()) != XmlPullParser.END_TAG || (parser.getDepth() &gt; depth &amp;&amp; event != XmlPullParser.END_DOCUMENT)) {
+              if (event != XmlPullParser.START_TAG) {
+                  continue;
+              }
+
+              String nodeTag = parser.getName();
+              if (ThemeConfig.NODE_VALUE_DEF.equals(nodeTag)) {
+                  configItem = new CustomValue();
+
+                  if (parser.getAttributeCount() &gt;= 2) {
+                      configItem.name = parser.getAttributeValue(null, ThemeConfig.ATTR_NAME);
+                      configItem.value = parser.getAttributeValue(null, ThemeConfig.ATTR_VALUE);
+                      configItem.type = parser.getAttributeValue(null, ThemeConfig.ATTR_TYPE);
+                      configItem.special = parser.getAttributeValue(null, ThemeConfig.ATTR_SPECIAL_THEME);
+                  }
+
+                  itemList.add(configItem);
+              }
+          }
+      } catch (Exception e) {
+          Log.w(&quot;wenba&quot;, e);
+      }
+
+      return itemList;
+  }
+public static class CustomValue {
+      public String name;
+      public String value;
+      public String type;
+      public String special;
+  }
+</code></pre>
+<p>基本上也是大同小异啦。以上就是xml的解析了，当然只有解析肯定不够还有应用啦，回到<code>apply</code>方法里面，下面那个核心方法<code>applyThemeConfig</code>走起。</p>
+<pre><code class="java">/**
+   * 对所有类别的配置参数与对应的组件进行匹配
+   * 
+   * @param themeConfig
+   * @throws Exception
+   */
+  private void applyThemeConfig(ThemeConfig themeConfig) throws Exception {
+
+      if (themeConfig == null) {
+          return;
+      }
+
+      // colors
+      List&lt;ConfigItem&gt; colorArray = themeConfig.colorList;
+
+      if (colorArray != null &amp;&amp; colorArray.size() &gt; 0) {
+          try {
+              applyThemeColors(colorArray);
+          } catch (Exception e) {
+              Log.w(&quot;wenba&quot;, e);
+          }
+      }
+
+      // drawables
+      List&lt;ConfigItem&gt; drawableArray = themeConfig.drawableList;
+      if (drawableArray != null &amp;&amp; drawableArray.size() &gt; 0) {
+          try {
+              applyThemeDrawables(drawableArray);
+          } catch (Exception e) {
+              Log.w(&quot;wenba&quot;, e);
+          }
+      }
+
+      // strings
+      List&lt;ConfigItem&gt; stringArray = themeConfig.stringList;
+      if (stringArray != null &amp;&amp; stringArray.size() &gt; 0) {
+          try {
+              applyThemeStrings(stringArray);
+          } catch (Exception e) {
+              Log.w(&quot;wenba&quot;, e);
+          }
+      }
+  }
+</code></pre>
+<p>看上去简单清楚明了吧，把颜色图片字符串顺着应用一下就行了，当然怎么应用的，又要贴代码了：</p>
+<pre><code class="java">/**
+   * 对color配置参数进行组件与参数的匹配组合
+   * 
+   * @param colorArray
+   * @throws Exception
+   */
+  private void applyThemeColors(List&lt;ConfigItem&gt; colorArray) throws Exception {
+      applyConfigGroup(colorArray, new ApplyConfigListener() {
+
+          @Override
+          public void applyMethodCall(View view, MethodCall call) throws NoSuchMethodException,
+                  IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+
+              String methodName = call.methodName;
+              String resName = call.resName;
+              boolean isSpecial = false;
+              try {
+                  isSpecial = Boolean.parseBoolean(call.special);
+              } catch (Exception e) {
+                  Log.w(&quot;wenba&quot;, e);
+              }
+              int color = mSkinPackageManager.getThemeColor(resName, isSpecial);
+
+              Method method = view.getClass().getMethod(methodName, new Class[] { int.class });
+              if (method == null) {
+                  return;
+              }
+
+              method.setAccessible(true);
+              method.invoke(view, color);
+          }
+      });
+  }
+
+  /**
+   * 对drawable配置参数进行组件与参数的匹配组合
+   * 
+   * @param drawableArray
+   * @throws Exception
+   */
+  private void applyThemeDrawables(List&lt;ConfigItem&gt; drawableArray) throws Exception {
+      applyConfigGroup(drawableArray, new ApplyConfigListener() {
+
+          @Override
+          public void applyMethodCall(View view, MethodCall call) throws NoSuchMethodException,
+                  IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+
+              String methodName = call.methodName;
+              String resName = call.resName;
+              boolean isSpecial = false;
+              try {
+                  isSpecial = Boolean.parseBoolean(call.special);
+              } catch (Exception e) {
+                  Log.w(&quot;wenba&quot;, e);
+              }
+
+              Drawable drawable = mSkinPackageManager.getThemeDrawable(resName, isSpecial);
+              if (drawable == null) {
+                  return;
+              }
+              int paddingLeft = 0;
+              int paddingTop = 0;
+              int paddingRight = 0;
+              int paddingBottom = 0;
+
+              boolean needPaddingSet = drawable.getPadding(new Rect());
+
+              if (needPaddingSet) {
+                  paddingLeft = view.getPaddingLeft();
+                  paddingTop = view.getPaddingTop();
+                  paddingRight = view.getPaddingRight();
+                  paddingBottom = view.getPaddingBottom();
+
+                  if (paddingLeft == 0 &amp;&amp; paddingTop == 0 &amp;&amp; paddingRight == 0 &amp;&amp; paddingBottom == 0) {
+                      needPaddingSet = false;
+                  }
+              }
+
+              if (&quot;setBackgroundDrawable&quot;.equals(methodName)) {
+                  if (android.os.Build.VERSION.SDK_INT &gt;= 16) {
+                      methodName = &quot;setBackground&quot;;
+                  }
+              }
+
+              Method method = view.getClass().getMethod(methodName, new Class[] { Drawable.class });
+              if (method == null) {
+                  return;
+              }
+
+              method.setAccessible(true);
+              method.invoke(view, drawable);
+
+              if (needPaddingSet) {
+                  view.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
+              }
+
+          }
+      });
+  }
+
+  /**
+   * 对string配置参数进行组件与参数的匹配组合
+   * 
+   * @param stringArray
+   * @throws Exception
+   */
+  private void applyThemeStrings(List&lt;ConfigItem&gt; stringArray) throws Exception {
+      applyConfigGroup(stringArray, new ApplyConfigListener() {
+
+          @Override
+          public void applyMethodCall(View view, MethodCall call) throws NoSuchMethodException,
+                  IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+
+              String methodName = call.methodName;
+              String resName = call.resName;
+
+              String str = mSkinPackageManager.getThemeString(resName);
+              if (str == null) {
+                  return;
+              }
+
+              Method method = view.getClass().getMethod(methodName, new Class[] { CharSequence.class });
+              if (method == null) {
+                  return;
+              }
+
+              method.setAccessible(true);
+              method.invoke(view, str);
+
+          }
+      });
+  }
+</code></pre>
+<p>虽然这一块是整个代码结构的真正核心，但是好像看一下代码比一大堆废话来解释好很多，需要注意一下的是以上三个方法都调用了<code>applyConfigGroup</code></p>
+<pre><code class="java">private void applyConfigGroup(List&lt;ConfigItem&gt; configList, ApplyConfigListener listener) {
+      if (configList == null) {
+          return;
+      }
+
+      for (int i = 0; i &lt; configList.size(); i++) {
+          ConfigItem itemObject = configList.get(i);
+
+          String idName = itemObject.idName;
+
+          if (idName == null) {
+              continue;
+          }
+
+          int viewId = getViewId(idName);
+          if (viewId &lt;= 0) {
+              Log.d(&quot;skin&quot;, &quot;applyConfigGroup: no viewId found name = &quot; + idName + &quot; skinConfigName = &quot;
+                      + skinConfigName);
+              continue;
+          }
+
+          View view = rootView.findViewById(viewId);
+          if (view == null) {
+              Log.d(&quot;skin&quot;, &quot;applyConfigGroup: no view found viewId = &quot; + idName + &quot; skinConfigName = &quot;
+                      + skinConfigName);
+              continue;
+          }
+
+          for (MethodCall call : itemObject.methodCalls) {
+              try {
+                  listener.applyMethodCall(view, call);
+              } catch (NoSuchMethodException e) {
+                  Log.w(&quot;wenba&quot;, e);
+              } catch (IllegalAccessException e) {
+                  Log.w(&quot;wenba&quot;, e);
+              } catch (IllegalArgumentException e) {
+                  Log.w(&quot;wenba&quot;, e);
+              } catch (InvocationTargetException e) {
+                  Log.w(&quot;wenba&quot;, e);
+              } catch (Exception e) {
+                  Log.w(&quot;wenba&quot;, e);
+              }
+          }
+      }
+  }
+</code></pre>
+<p>注意这里还有个监听器<code>ApplyConfigListener</code>：</p>
+<pre><code class="java">  private static interface ApplyConfigListener {
+      public void applyMethodCall(View view, MethodCall call) throws NoSuchMethodException, IllegalAccessException,
+              IllegalArgumentException, InvocationTargetException;
+  }
+</code></pre>
+<p>上面三块代码一起看比较能看出整体结构来，最后补上<code>getViewId</code>的代码:</p>
+<pre><code class="java">  private int getViewId(String idName) {
+      return context.getResources().getIdentifier(idName, &quot;id&quot;, context.getPackageName());
+  }
+</code></pre>
+<p>到目前为止就已经把关于更新主题的基本流程分析完了，比较偏向于原理，接下来看看从应用层的使用方法。</p>
 </li>
 </ul>
-<p>看上去很复杂对吧，那先不管吧，继续看上一步。<code>apply</code>方法里面现在有两个核心的方法<code>parseThemeAsset</code>和<code>applyThemeConfig</code>，先看第一个：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 格式皮肤配置xml，转化为ThemeConfig Bean</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> name</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ThemeConfig <span class="title">parseThemeAsset</span><span class="params">(Context context, String name)</span> </span>&#123;</span><br><span class="line">		InputStream inputStream = <span class="keyword">null</span>;</span><br><span class="line">		ThemeConfig themeConfig = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			inputStream = context.getResources().getAssets().open(name);</span><br><span class="line">			<span class="keyword">if</span> (inputStream == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			XmlPullParser parser = Xml.newPullParser();</span><br><span class="line">			parser.setInput(inputStream, <span class="string">"utf-8"</span>);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">int</span> event = -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">while</span> ((event = parser.next()) != XmlPullParser.END_DOCUMENT) &#123;</span><br><span class="line">				<span class="keyword">if</span> (event != XmlPullParser.START_TAG) &#123;</span><br><span class="line">					<span class="keyword">continue</span>;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				String nodeTag = parser.getName();</span><br><span class="line"></span><br><span class="line">				<span class="keyword">if</span> (ThemeConfig.NODE_COLORS.equals(nodeTag)) &#123;</span><br><span class="line">					themeConfig.colorList = parseConfigGroup(parser);</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (ThemeConfig.NODE_DRAWABLES.equals(nodeTag)) &#123;</span><br><span class="line">					themeConfig.drawableList = parseConfigGroup(parser);</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (ThemeConfig.NODE_STRINGS.equals(nodeTag)) &#123;</span><br><span class="line">					themeConfig.stringList = parseConfigGroup(parser);</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (ThemeConfig.NODE_CUSTOM_VALUE.equals(nodeTag)) &#123;</span><br><span class="line">					themeConfig.customValueList = parseCustomValueGroup(parser);</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (ThemeConfig.NODE_APPLY_COMMON_ATTRIBIUTE.equals(nodeTag)) &#123;</span><br><span class="line">					String value = parser.getAttributeValue(<span class="keyword">null</span>, <span class="string">"value"</span>);</span><br><span class="line">					<span class="keyword">if</span> (value != <span class="keyword">null</span> &amp;&amp; value.equalsIgnoreCase(<span class="string">"true"</span>)) &#123;</span><br><span class="line">						themeConfig.applyCommonAttrbiute = <span class="keyword">true</span>;</span><br><span class="line">					&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">						themeConfig.applyCommonAttrbiute = <span class="keyword">false</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (ThemeConfig.NODE_THEME_ROOT.equals(nodeTag)) &#123;</span><br><span class="line">					<span class="keyword">if</span> (parser.getDepth() == <span class="number">1</span>) &#123;</span><br><span class="line">						themeConfig = <span class="keyword">new</span> ThemeConfig();</span><br><span class="line">					&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">						<span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">"ThemeRoot was in wrong place"</span>);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> themeConfig;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			Log.w(<span class="string">"wenba"</span>, e);</span><br><span class="line">		&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">			<span class="comment">// close input stream</span></span><br><span class="line">			BaseStoreUtil.closeObject(inputStream);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> themeConfig;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
-<p>现在知道为什么<code>ThemeConfig</code>为什么这么多了吧，前面的常量都是用来解析xml的，也只有最后面几个变量是后来有用的。里面主要通过两个方法来解析，一个一个看看：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 解析ConfigItem 节点，转化为ConfigItem集合</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> parser</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> List&lt;ConfigItem&gt; <span class="title">parseConfigGroup</span><span class="params">(XmlPullParser parser)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (parser == <span class="keyword">null</span> || parser.getDepth() != <span class="number">2</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> event = -<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> depth = parser.getDepth();</span><br><span class="line">	List&lt;ConfigItem&gt; itemList = <span class="keyword">new</span> ArrayList&lt;ConfigItem&gt;();</span><br><span class="line">	ConfigItem configItem = <span class="keyword">null</span>;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="keyword">while</span> ((event = parser.next()) != XmlPullParser.END_TAG || (parser.getDepth() &gt; depth &amp;&amp; event != XmlPullParser.END_DOCUMENT)) &#123;</span><br><span class="line">			<span class="keyword">if</span> (event != XmlPullParser.START_TAG) &#123;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			String nodeTag = parser.getName();</span><br><span class="line">			<span class="keyword">if</span> (ThemeConfig.NODE_CONFIG_ITEM.equals(nodeTag)) &#123;</span><br><span class="line">				configItem = <span class="keyword">new</span> ConfigItem();</span><br><span class="line"></span><br><span class="line">				configItem.idName = parser.getAttributeValue(<span class="keyword">null</span>, ThemeConfig.ATTR_VIEW_ID);</span><br><span class="line"></span><br><span class="line">				<span class="keyword">if</span> (parser.getAttributeCount() &gt;= <span class="number">3</span>) &#123;</span><br><span class="line">					MethodCall call = <span class="keyword">new</span> MethodCall();</span><br><span class="line">					call.methodName = parser.getAttributeValue(<span class="keyword">null</span>, ThemeConfig.ATTR_METHOD);</span><br><span class="line">					call.resName = parser.getAttributeValue(<span class="keyword">null</span>, ThemeConfig.ATTR_RES_NAME);</span><br><span class="line">					call.special = parser.getAttributeValue(<span class="keyword">null</span>, ThemeConfig.ATTR_SPECIAL_THEME);</span><br><span class="line"></span><br><span class="line">					configItem.addMethodCall(call);</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">					<span class="comment">// parse method group</span></span><br><span class="line">					configItem.addMethodCall(parseMethodCalls(parser));</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				itemList.add(configItem);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">		Log.w(<span class="string">"wenba"</span>, e);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> itemList;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>反射的过程就不再深究了，把对应的实体类也贴出来看看吧：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ConfigItem</span> </span>&#123;</span><br><span class="line">		<span class="keyword">public</span> String idName;</span><br><span class="line">		<span class="keyword">public</span> List&lt;MethodCall&gt; methodCalls;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="title">ConfigItem</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			methodCalls = <span class="keyword">new</span> ArrayList&lt;MethodCall&gt;();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addMethodCall</span><span class="params">(MethodCall call)</span> </span>&#123;</span><br><span class="line">			methodCalls.add(call);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addMethodCall</span><span class="params">(List&lt;MethodCall&gt; calls)</span> </span>&#123;</span><br><span class="line">			methodCalls.addAll(calls);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MethodCall</span> </span>&#123;</span><br><span class="line">		<span class="keyword">public</span> String methodName;</span><br><span class="line">		<span class="keyword">public</span> String resName;</span><br><span class="line">		<span class="keyword">public</span> String special;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
-<p>所以<code>parseConfigGroup</code>这个方法把xml配置的颜色，图片，文字都能解析出来，方法对应的JAVA对象中。<br>后面还有一个<code>customValueList</code>是什么呢，这个和上面几个不太一样，<strong>前几个属性在xml配置后在java代码里面就不需要怎么操作了，而<code>customValue</code>不一样，它不会具体应用到某一个view上面，而是运行时把反射出来颜色图片等返回到java中让开发者自己处理，这一点很重要，因为我们配置的xml都是针对页面的，有些没有页面的地方（例如adpter）就需要使用<code>customValue</code>来处理主题元素。</strong><br><code>customValue</code>是通过名为<code>parseCustomValueGroup</code>的方法解析的，来看看：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> List&lt;CustomValue&gt; <span class="title">parseCustomValueGroup</span><span class="params">(XmlPullParser parser)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (parser == <span class="keyword">null</span> || parser.getDepth() != <span class="number">2</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span> event = -<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">int</span> depth = parser.getDepth();</span><br><span class="line">		List&lt;CustomValue&gt; itemList = <span class="keyword">new</span> ArrayList&lt;CustomValue&gt;();</span><br><span class="line">		CustomValue configItem = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">while</span> ((event = parser.next()) != XmlPullParser.END_TAG || (parser.getDepth() &gt; depth &amp;&amp; event != XmlPullParser.END_DOCUMENT)) &#123;</span><br><span class="line">				<span class="keyword">if</span> (event != XmlPullParser.START_TAG) &#123;</span><br><span class="line">					<span class="keyword">continue</span>;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				String nodeTag = parser.getName();</span><br><span class="line">				<span class="keyword">if</span> (ThemeConfig.NODE_VALUE_DEF.equals(nodeTag)) &#123;</span><br><span class="line">					configItem = <span class="keyword">new</span> CustomValue();</span><br><span class="line"></span><br><span class="line">					<span class="keyword">if</span> (parser.getAttributeCount() &gt;= <span class="number">2</span>) &#123;</span><br><span class="line">						configItem.name = parser.getAttributeValue(<span class="keyword">null</span>, ThemeConfig.ATTR_NAME);</span><br><span class="line">						configItem.value = parser.getAttributeValue(<span class="keyword">null</span>, ThemeConfig.ATTR_VALUE);</span><br><span class="line">						configItem.type = parser.getAttributeValue(<span class="keyword">null</span>, ThemeConfig.ATTR_TYPE);</span><br><span class="line">						configItem.special = parser.getAttributeValue(<span class="keyword">null</span>, ThemeConfig.ATTR_SPECIAL_THEME);</span><br><span class="line">					&#125;</span><br><span class="line"></span><br><span class="line">					itemList.add(configItem);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			Log.w(<span class="string">"wenba"</span>, e);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> itemList;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomValue</span> </span>&#123;</span><br><span class="line">		<span class="keyword">public</span> String name;</span><br><span class="line">		<span class="keyword">public</span> String value;</span><br><span class="line">		<span class="keyword">public</span> String type;</span><br><span class="line">		<span class="keyword">public</span> String special;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
-<p>基本上也是大同小异啦。以上就是xml的解析了，当然只有解析肯定不够还有应用啦，回到<code>apply</code>方法里面，下面那个核心方法<code>applyThemeConfig</code>走起。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 对所有类别的配置参数与对应的组件进行匹配</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> themeConfig</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">applyThemeConfig</span><span class="params">(ThemeConfig themeConfig)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (themeConfig == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// colors</span></span><br><span class="line">		List&lt;ConfigItem&gt; colorArray = themeConfig.colorList;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (colorArray != <span class="keyword">null</span> &amp;&amp; colorArray.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				applyThemeColors(colorArray);</span><br><span class="line">			&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">				Log.w(<span class="string">"wenba"</span>, e);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// drawables</span></span><br><span class="line">		List&lt;ConfigItem&gt; drawableArray = themeConfig.drawableList;</span><br><span class="line">		<span class="keyword">if</span> (drawableArray != <span class="keyword">null</span> &amp;&amp; drawableArray.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				applyThemeDrawables(drawableArray);</span><br><span class="line">			&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">				Log.w(<span class="string">"wenba"</span>, e);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// strings</span></span><br><span class="line">		List&lt;ConfigItem&gt; stringArray = themeConfig.stringList;</span><br><span class="line">		<span class="keyword">if</span> (stringArray != <span class="keyword">null</span> &amp;&amp; stringArray.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				applyThemeStrings(stringArray);</span><br><span class="line">			&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">				Log.w(<span class="string">"wenba"</span>, e);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
-<p>看上去简单清楚明了吧，把颜色图片字符串顺着应用一下就行了，当然怎么应用的，又要贴代码了：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 对color配置参数进行组件与参数的匹配组合</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> colorArray</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">applyThemeColors</span><span class="params">(List&lt;ConfigItem&gt; colorArray)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		applyConfigGroup(colorArray, <span class="keyword">new</span> ApplyConfigListener() &#123;</span><br><span class="line"></span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">applyMethodCall</span><span class="params">(View view, MethodCall call)</span> <span class="keyword">throws</span> NoSuchMethodException,</span></span><br><span class="line"><span class="function">					IllegalAccessException, IllegalArgumentException, InvocationTargetException </span>&#123;</span><br><span class="line"></span><br><span class="line">				String methodName = call.methodName;</span><br><span class="line">				String resName = call.resName;</span><br><span class="line">				<span class="keyword">boolean</span> isSpecial = <span class="keyword">false</span>;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					isSpecial = Boolean.parseBoolean(call.special);</span><br><span class="line">				&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">					Log.w(<span class="string">"wenba"</span>, e);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">int</span> color = mSkinPackageManager.getThemeColor(resName, isSpecial);</span><br><span class="line"></span><br><span class="line">				Method method = view.getClass().getMethod(methodName, <span class="keyword">new</span> Class[] &#123; <span class="keyword">int</span><span class="class">.<span class="keyword">class</span> &#125;)</span>;</span><br><span class="line">				<span class="keyword">if</span> (method == <span class="keyword">null</span>) &#123;</span><br><span class="line">					<span class="keyword">return</span>;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				method.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">				method.invoke(view, color);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 对drawable配置参数进行组件与参数的匹配组合</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> drawableArray</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">applyThemeDrawables</span><span class="params">(List&lt;ConfigItem&gt; drawableArray)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		applyConfigGroup(drawableArray, <span class="keyword">new</span> ApplyConfigListener() &#123;</span><br><span class="line"></span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">applyMethodCall</span><span class="params">(View view, MethodCall call)</span> <span class="keyword">throws</span> NoSuchMethodException,</span></span><br><span class="line"><span class="function">					IllegalAccessException, IllegalArgumentException, InvocationTargetException </span>&#123;</span><br><span class="line"></span><br><span class="line">				String methodName = call.methodName;</span><br><span class="line">				String resName = call.resName;</span><br><span class="line">				<span class="keyword">boolean</span> isSpecial = <span class="keyword">false</span>;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					isSpecial = Boolean.parseBoolean(call.special);</span><br><span class="line">				&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">					Log.w(<span class="string">"wenba"</span>, e);</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				Drawable drawable = mSkinPackageManager.getThemeDrawable(resName, isSpecial);</span><br><span class="line">				<span class="keyword">if</span> (drawable == <span class="keyword">null</span>) &#123;</span><br><span class="line">					<span class="keyword">return</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">int</span> paddingLeft = <span class="number">0</span>;</span><br><span class="line">				<span class="keyword">int</span> paddingTop = <span class="number">0</span>;</span><br><span class="line">				<span class="keyword">int</span> paddingRight = <span class="number">0</span>;</span><br><span class="line">				<span class="keyword">int</span> paddingBottom = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">				<span class="keyword">boolean</span> needPaddingSet = drawable.getPadding(<span class="keyword">new</span> Rect());</span><br><span class="line"></span><br><span class="line">				<span class="keyword">if</span> (needPaddingSet) &#123;</span><br><span class="line">					paddingLeft = view.getPaddingLeft();</span><br><span class="line">					paddingTop = view.getPaddingTop();</span><br><span class="line">					paddingRight = view.getPaddingRight();</span><br><span class="line">					paddingBottom = view.getPaddingBottom();</span><br><span class="line"></span><br><span class="line">					<span class="keyword">if</span> (paddingLeft == <span class="number">0</span> &amp;&amp; paddingTop == <span class="number">0</span> &amp;&amp; paddingRight == <span class="number">0</span> &amp;&amp; paddingBottom == <span class="number">0</span>) &#123;</span><br><span class="line">						needPaddingSet = <span class="keyword">false</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				<span class="keyword">if</span> (<span class="string">"setBackgroundDrawable"</span>.equals(methodName)) &#123;</span><br><span class="line">					<span class="keyword">if</span> (android.os.Build.VERSION.SDK_INT &gt;= <span class="number">16</span>) &#123;</span><br><span class="line">						methodName = <span class="string">"setBackground"</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				Method method = view.getClass().getMethod(methodName, <span class="keyword">new</span> Class[] &#123; Drawable<span class="class">.<span class="keyword">class</span> &#125;)</span>;</span><br><span class="line">				<span class="keyword">if</span> (method == <span class="keyword">null</span>) &#123;</span><br><span class="line">					<span class="keyword">return</span>;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				method.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">				method.invoke(view, drawable);</span><br><span class="line"></span><br><span class="line">				<span class="keyword">if</span> (needPaddingSet) &#123;</span><br><span class="line">					view.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 对string配置参数进行组件与参数的匹配组合</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> stringArray</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">applyThemeStrings</span><span class="params">(List&lt;ConfigItem&gt; stringArray)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		applyConfigGroup(stringArray, <span class="keyword">new</span> ApplyConfigListener() &#123;</span><br><span class="line"></span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">applyMethodCall</span><span class="params">(View view, MethodCall call)</span> <span class="keyword">throws</span> NoSuchMethodException,</span></span><br><span class="line"><span class="function">					IllegalAccessException, IllegalArgumentException, InvocationTargetException </span>&#123;</span><br><span class="line"></span><br><span class="line">				String methodName = call.methodName;</span><br><span class="line">				String resName = call.resName;</span><br><span class="line"></span><br><span class="line">				String str = mSkinPackageManager.getThemeString(resName);</span><br><span class="line">				<span class="keyword">if</span> (str == <span class="keyword">null</span>) &#123;</span><br><span class="line">					<span class="keyword">return</span>;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				Method method = view.getClass().getMethod(methodName, <span class="keyword">new</span> Class[] &#123; CharSequence<span class="class">.<span class="keyword">class</span> &#125;)</span>;</span><br><span class="line">				<span class="keyword">if</span> (method == <span class="keyword">null</span>) &#123;</span><br><span class="line">					<span class="keyword">return</span>;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				method.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">				method.invoke(view, str);</span><br><span class="line"></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
-<p>虽然这一块是整个代码结构的真正核心，但是好像看一下代码比一大堆废话来解释好很多，需要注意一下的是以上三个方法都调用了<code>applyConfigGroup</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">applyConfigGroup</span><span class="params">(List&lt;ConfigItem&gt; configList, ApplyConfigListener listener)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (configList == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; configList.size(); i++) &#123;</span><br><span class="line">			ConfigItem itemObject = configList.get(i);</span><br><span class="line"></span><br><span class="line">			String idName = itemObject.idName;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> (idName == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">int</span> viewId = getViewId(idName);</span><br><span class="line">			<span class="keyword">if</span> (viewId &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">				Log.d(<span class="string">"skin"</span>, <span class="string">"applyConfigGroup: no viewId found name = "</span> + idName + <span class="string">" skinConfigName = "</span></span><br><span class="line">						+ skinConfigName);</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			View view = rootView.findViewById(viewId);</span><br><span class="line">			<span class="keyword">if</span> (view == <span class="keyword">null</span>) &#123;</span><br><span class="line">				Log.d(<span class="string">"skin"</span>, <span class="string">"applyConfigGroup: no view found viewId = "</span> + idName + <span class="string">" skinConfigName = "</span></span><br><span class="line">						+ skinConfigName);</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">for</span> (MethodCall call : itemObject.methodCalls) &#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					listener.applyMethodCall(view, call);</span><br><span class="line">				&#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</span><br><span class="line">					Log.w(<span class="string">"wenba"</span>, e);</span><br><span class="line">				&#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">					Log.w(<span class="string">"wenba"</span>, e);</span><br><span class="line">				&#125; <span class="keyword">catch</span> (IllegalArgumentException e) &#123;</span><br><span class="line">					Log.w(<span class="string">"wenba"</span>, e);</span><br><span class="line">				&#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</span><br><span class="line">					Log.w(<span class="string">"wenba"</span>, e);</span><br><span class="line">				&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">					Log.w(<span class="string">"wenba"</span>, e);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
-<p>注意这里还有个监听器<code>ApplyConfigListener</code>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">interface</span> <span class="title">ApplyConfigListener</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">applyMethodCall</span><span class="params">(View view, MethodCall call)</span> <span class="keyword">throws</span> NoSuchMethodException, IllegalAccessException,</span></span><br><span class="line"><span class="function">			IllegalArgumentException, InvocationTargetException</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>上面三块代码一起看比较能看出整体结构来，最后补上<code>getViewId</code>的代码:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getViewId</span><span class="params">(String idName)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> context.getResources().getIdentifier(idName, <span class="string">"id"</span>, context.getPackageName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>到目前为止就已经把关于更新主题的基本流程分析完了，比较偏向于原理，接下来看看从应用层的使用方法。</p>
-<h4 id="3-如何配置与使用主题"><a href="#3-如何配置与使用主题" class="headerlink" title="3.如何配置与使用主题"></a>3.如何配置与使用主题</h4><p>还记得最开始的那个<code>OtherActivity</code>的截图吗，点击“设置成新主题”会执行如下代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">SkinPackageManager.getInstance(getApplicationContext()).loadSkin(<span class="string">"SkinApple"</span>, <span class="keyword">new</span> LoadSkinCallBack() &#123;</span><br><span class="line"></span><br><span class="line">				<span class="meta">@Override</span></span><br><span class="line">				<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loadSkinSuccess</span><span class="params">()</span> </span>&#123;</span><br><span class="line">					Log.d(<span class="string">"kkkkkkkk"</span>, <span class="string">"loadSkinSuccess"</span>);</span><br><span class="line">					updateTheme();</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				<span class="meta">@Override</span></span><br><span class="line">				<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loadSkinFail</span><span class="params">()</span> </span>&#123;</span><br><span class="line">					Log.d(<span class="string">"kkkkkkkk"</span>, <span class="string">"loadSkinFail"</span>);</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">			&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>执行的是一个<code>loadSkin</code>方法，所以理所当然地看这个方法了：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 加载皮肤资源, 同步加载</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> dexPath</span></span><br><span class="line"><span class="comment">	 *            需要加载的皮肤资源</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> callback</span></span><br><span class="line"><span class="comment">	 *            回调接口</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loadSkin</span><span class="params">(String themeId, <span class="keyword">final</span> LoadSkinCallBack callback)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 当为默认皮肤时，加载本地资源</span></span><br><span class="line">		<span class="keyword">if</span> (DEFAULT_THEME.equals(themeId)) &#123;</span><br><span class="line">			resetDefaultSkin(callback);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		Resources resources = loadSkinById(themeId);</span><br><span class="line">		<span class="keyword">if</span> (resources != <span class="keyword">null</span>) &#123;</span><br><span class="line">			curTheme = themeId;</span><br><span class="line">			mResources = resources;</span><br><span class="line">			<span class="keyword">if</span> (callback != <span class="keyword">null</span>) &#123;</span><br><span class="line">				callback.loadSkinSuccess();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (callback != <span class="keyword">null</span>) &#123;</span><br><span class="line">				callback.loadSkinFail();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
-<p>如果<code>themeId</code>为默认的则执行<code>resetDefaultSkin</code>方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">resetDefaultSkin</span><span class="params">(LoadSkinCallBack callback)</span> </span>&#123;</span><br><span class="line">	Resources resources = mContext.getResources();</span><br><span class="line">	<span class="keyword">if</span> (resources != <span class="keyword">null</span>) &#123;</span><br><span class="line">		mResources = resources;</span><br><span class="line">		curTheme = DEFAULT_THEME;</span><br><span class="line">		SPSetting.saveAppSkinTheme(DEFAULT_THEME);</span><br><span class="line">		<span class="keyword">if</span> (callback != <span class="keyword">null</span>) &#123;</span><br><span class="line">			callback.loadSkinSuccess();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (callback != <span class="keyword">null</span>) &#123;</span><br><span class="line">			callback.loadSkinFail();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>其实主要就是拿对应的<code>resources</code>了，所以可以继续往下看，如果不是默认主题，那么会通过<code>themeId</code>来使用<code>loadSkinById</code>方法获得相应主题的<code>Resources</code>，是怎么获取到的呢，<code>themeId</code>又是什么鬼呢，继续看吧。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Resources <span class="title">loadSkinById</span><span class="params">(String themeId)</span> </span>&#123;</span><br><span class="line">		Resources resources = <span class="keyword">null</span>;</span><br><span class="line">		String dexPath = loadSkinPackagePath(themeId);</span><br><span class="line">		PackageInfo mInfo = getSkinPackageInfo(dexPath);</span><br><span class="line">		<span class="keyword">if</span> (mInfo == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> resources;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		AssetManager assetManager;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			assetManager = AssetManager<span class="class">.<span class="keyword">class</span>.<span class="title">newInstance</span>()</span>;</span><br><span class="line"></span><br><span class="line">			Method addAssetPath = assetManager.getClass().getMethod(<span class="string">"addAssetPath"</span>, String<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">			addAssetPath.invoke(assetManager, dexPath);</span><br><span class="line"></span><br><span class="line">			Resources superRes = mContext.getResources();</span><br><span class="line">			resources = <span class="keyword">new</span> Resources(assetManager, superRes.getDisplayMetrics(), superRes.getConfiguration());</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			Log.w(<span class="string">"wenba"</span>, e);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> resources;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
-<p>如果你看过之前插件的那篇文章一定知道了，这个简直是异曲同工啊有木有，大概意思就是通过反射<code>AssetManager</code>的这个<code>addAssetPath</code>方法，把主题APK的路径注入进去，这样的<code>assetManager</code>生成的<code>resources</code>就可以在这个指定的路径下面去找资源文件了，所以<code>loadSkinPackagePath</code>大概也能猜出来是干啥的了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 获得皮肤资源的绝对路径</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> apkName</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">loadSkinPackagePath</span><span class="params">(<span class="keyword">final</span> String skinId)</span> </span>&#123;</span><br><span class="line">		File dir = <span class="keyword">new</span> File(themeRootPath);</span><br><span class="line">		<span class="keyword">if</span> (!dir.exists()) &#123;</span><br><span class="line">			dir.mkdirs();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		File[] apkFiles = dir.listFiles(<span class="keyword">new</span> FileFilter() &#123;</span><br><span class="line"></span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">accept</span><span class="params">(File pathname)</span> </span>&#123;</span><br><span class="line">				<span class="keyword">if</span> (!pathname.isFile()) &#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				<span class="keyword">if</span> (!pathname.getName().startsWith(skinId)) &#123;</span><br><span class="line">					<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		<span class="comment">// load and delete old files if need</span></span><br><span class="line">		<span class="keyword">if</span> (apkFiles == <span class="keyword">null</span> || apkFiles.length == <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (apkFiles.length == <span class="number">1</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> apkFiles[<span class="number">0</span>].getName().matches(<span class="string">".*\\.apk"</span>) ? apkFiles[<span class="number">0</span>].getAbsolutePath() : <span class="keyword">null</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">int</span> version = parseApkVersion(apkFiles[<span class="number">0</span>].getName());</span><br><span class="line">			File target = apkFiles[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">			<span class="keyword">for</span> (File file : apkFiles) &#123;</span><br><span class="line">				<span class="keyword">int</span> flagVer = parseApkVersion(file.getName());</span><br><span class="line">				<span class="keyword">if</span> (flagVer &gt; version) &#123;</span><br><span class="line">					version = flagVer;</span><br><span class="line"></span><br><span class="line">					target.delete();</span><br><span class="line">					target = file;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">return</span> target.getAbsolutePath();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这个时候知道<code>themeId</code>是什么的吧，其实就是一个apk的前缀，通过这个前缀去找符合要求的apk，然后后面根据文件名判断找版本最高的返回：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">parseApkVersion</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		Pattern pattern = Pattern.compile(<span class="string">"-(\\d+)\\.apk"</span>);</span><br><span class="line">		Matcher matcher = pattern.matcher(name);</span><br><span class="line">		<span class="keyword">if</span> (matcher.find()) &#123;</span><br><span class="line">			String version = matcher.group(<span class="number">1</span>);</span><br><span class="line">			<span class="keyword">int</span> verInt = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				verInt = Integer.parseInt(version);</span><br><span class="line">			&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">				<span class="comment">// <span class="doctag">TODO:</span> handle exception</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> verInt;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
-<p>返回到<code>loadSkinById</code>方法，<code>dexPath</code>算是初始化完成了，后面还有个<code>getSkinPackageInfo</code>方法，如果这个方法返回为空的话，就直接返回一个空的<code>resources</code>，就是明摆着不让用了哎。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> PackageInfo <span class="title">getSkinPackageInfo</span><span class="params">(String dexPath)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (dexPath == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	String sign = AppInfoUtils.getApkSignature(mContext, dexPath);</span><br><span class="line">	String localSign = <span class="string">"A6:08:A8:28:1A:BF:55:AF:A4:72:9A:F4:F6:34:06:CF:16:EF:BB:A2"</span>;</span><br><span class="line">	<span class="keyword">if</span> (sign == <span class="keyword">null</span> || (localSign != <span class="keyword">null</span> &amp;&amp; localSign.equals(sign))) &#123;<span class="comment">// 对主题包进行签名认证</span></span><br><span class="line">		PackageManager mPm = mContext.getPackageManager();</span><br><span class="line">		PackageInfo mInfo = mPm.getPackageArchiveInfo(dexPath, <span class="number">0</span>);</span><br><span class="line">		<span class="keyword">return</span> mInfo;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>原来是签名认证，有点意思了吧，获得apk的签名和合法的签名文件进行比对，如果是同一个就认证通过，不是的话就返回空了，虽然这样写也并不是很安全，但是的确是一种提醒。这个在APP开发，插件化开发中都具有重要意义，属于安全环节中不可缺少的一步了，安全无小事，切记切记。<br>拿到了我们需要的<code>resources</code>，问题就迎刃而解了，先封装出去：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Resources <span class="title">getThemeResources</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (mResources == <span class="keyword">null</span>) &#123;</span><br><span class="line">		<span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (mResources == <span class="keyword">null</span>) &#123;</span><br><span class="line">				mResources = mContext.getResources();</span><br><span class="line">				curTheme = DEFAULT_THEME;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> mResources;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>再随便来看一个，比如是图片：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Drawable <span class="title">getThemeDrawable</span><span class="params">(String drawableName, <span class="keyword">boolean</span> isSpecial)</span> </span>&#123;</span><br><span class="line">		Resources resources = getThemeResources(isSpecial);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span> resId = getThemeResourceId(drawableName, <span class="string">"drawable"</span>, isSpecial);</span><br><span class="line">		<span class="keyword">if</span> (resId &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> resources.getDrawable(resId);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (OutOfMemoryError e) &#123;</span><br><span class="line">			Log.w(<span class="string">"wenba"</span>, e);</span><br><span class="line">			Log.e(<span class="string">"skin"</span>, <span class="string">"OutOfMemoryError: drawableName = "</span> + drawableName);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-如何配置与使用主题"><a href="#3-如何配置与使用主题" class="headerlink" title="3.如何配置与使用主题"></a>3.如何配置与使用主题</h4><p>还记得最开始的那个<code>OtherActivity</code>的截图吗，点击“设置成新主题”会执行如下代码：</p>
+<pre><code class="java">SkinPackageManager.getInstance(getApplicationContext()).loadSkin(&quot;SkinApple&quot;, new LoadSkinCallBack() {
+
+                @Override
+                public void loadSkinSuccess() {
+                    Log.d(&quot;kkkkkkkk&quot;, &quot;loadSkinSuccess&quot;);
+                    updateTheme();
+                }
+
+                @Override
+                public void loadSkinFail() {
+                    Log.d(&quot;kkkkkkkk&quot;, &quot;loadSkinFail&quot;);
+                }
+
+            });
+</code></pre>
+<p>执行的是一个<code>loadSkin</code>方法，所以理所当然地看这个方法了：</p>
+<pre><code class="java">/**
+     * 加载皮肤资源, 同步加载
+     * 
+     * @param dexPath
+     *            需要加载的皮肤资源
+     * @param callback
+     *            回调接口
+     */
+    public void loadSkin(String themeId, final LoadSkinCallBack callback) {
+
+        // 当为默认皮肤时，加载本地资源
+        if (DEFAULT_THEME.equals(themeId)) {
+            resetDefaultSkin(callback);
+            return;
+        }
+
+        Resources resources = loadSkinById(themeId);
+        if (resources != null) {
+            curTheme = themeId;
+            mResources = resources;
+            if (callback != null) {
+                callback.loadSkinSuccess();
+            }
+        } else {
+            if (callback != null) {
+                callback.loadSkinFail();
+            }
+        }
+
+    }
+</code></pre>
+<p>如果<code>themeId</code>为默认的则执行<code>resetDefaultSkin</code>方法</p>
+<pre><code class="java">    public void resetDefaultSkin(LoadSkinCallBack callback) {
+        Resources resources = mContext.getResources();
+        if (resources != null) {
+            mResources = resources;
+            curTheme = DEFAULT_THEME;
+            SPSetting.saveAppSkinTheme(DEFAULT_THEME);
+            if (callback != null) {
+                callback.loadSkinSuccess();
+            }
+        } else {
+            if (callback != null) {
+                callback.loadSkinFail();
+            }
+        }
+    }
+</code></pre>
+<p>其实主要就是拿对应的<code>resources</code>了，所以可以继续往下看，如果不是默认主题，那么会通过<code>themeId</code>来使用<code>loadSkinById</code>方法获得相应主题的<code>Resources</code>，是怎么获取到的呢，<code>themeId</code>又是什么鬼呢，继续看吧。</p>
+<pre><code class="java">private Resources loadSkinById(String themeId) {
+        Resources resources = null;
+        String dexPath = loadSkinPackagePath(themeId);
+        PackageInfo mInfo = getSkinPackageInfo(dexPath);
+        if (mInfo == null) {
+            return resources;
+        }
+
+        AssetManager assetManager;
+        try {
+            assetManager = AssetManager.class.newInstance();
+
+            Method addAssetPath = assetManager.getClass().getMethod(&quot;addAssetPath&quot;, String.class);
+            addAssetPath.invoke(assetManager, dexPath);
+
+            Resources superRes = mContext.getResources();
+            resources = new Resources(assetManager, superRes.getDisplayMetrics(), superRes.getConfiguration());
+        } catch (Exception e) {
+            Log.w(&quot;wenba&quot;, e);
+        }
+        return resources;
+    }
+</code></pre>
+<p>如果你看过之前插件的那篇文章一定知道了，这个简直是异曲同工啊有木有，大概意思就是通过反射<code>AssetManager</code>的这个<code>addAssetPath</code>方法，把主题APK的路径注入进去，这样的<code>assetManager</code>生成的<code>resources</code>就可以在这个指定的路径下面去找资源文件了，所以<code>loadSkinPackagePath</code>大概也能猜出来是干啥的了。</p>
+<pre><code class="java">/**
+     * 获得皮肤资源的绝对路径
+     * 
+     * @param apkName
+     * @return
+     */
+    public String loadSkinPackagePath(final String skinId) {
+        File dir = new File(themeRootPath);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        File[] apkFiles = dir.listFiles(new FileFilter() {
+
+            @Override
+            public boolean accept(File pathname) {
+                if (!pathname.isFile()) {
+                    return false;
+                }
+
+                if (!pathname.getName().startsWith(skinId)) {
+                    return false;
+                }
+
+                return true;
+            }
+        });
+
+        // load and delete old files if need
+        if (apkFiles == null || apkFiles.length == 0) {
+            return null;
+        }
+
+        if (apkFiles.length == 1) {
+            return apkFiles[0].getName().matches(&quot;.*\\.apk&quot;) ? apkFiles[0].getAbsolutePath() : null;
+        } else {
+            int version = parseApkVersion(apkFiles[0].getName());
+            File target = apkFiles[0];
+
+            for (File file : apkFiles) {
+                int flagVer = parseApkVersion(file.getName());
+                if (flagVer &gt; version) {
+                    version = flagVer;
+
+                    target.delete();
+                    target = file;
+                }
+            }
+
+            return target.getAbsolutePath();
+        }
+    }
+</code></pre>
+<p>这个时候知道<code>themeId</code>是什么的吧，其实就是一个apk的前缀，通过这个前缀去找符合要求的apk，然后后面根据文件名判断找版本最高的返回：</p>
+<pre><code class="java">private int parseApkVersion(String name) {
+        Pattern pattern = Pattern.compile(&quot;-(\\d+)\\.apk&quot;);
+        Matcher matcher = pattern.matcher(name);
+        if (matcher.find()) {
+            String version = matcher.group(1);
+            int verInt = 0;
+            try {
+                verInt = Integer.parseInt(version);
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
+            return verInt;
+        }
+        return 0;
+    }
+</code></pre>
+<p>返回到<code>loadSkinById</code>方法，<code>dexPath</code>算是初始化完成了，后面还有个<code>getSkinPackageInfo</code>方法，如果这个方法返回为空的话，就直接返回一个空的<code>resources</code>，就是明摆着不让用了哎。</p>
+<pre><code class="java">    private PackageInfo getSkinPackageInfo(String dexPath) {
+        if (dexPath == null) {
+            return null;
+        }
+        String sign = AppInfoUtils.getApkSignature(mContext, dexPath);
+        String localSign = &quot;A6:08:A8:28:1A:BF:55:AF:A4:72:9A:F4:F6:34:06:CF:16:EF:BB:A2&quot;;
+        if (sign == null || (localSign != null &amp;&amp; localSign.equals(sign))) {// 对主题包进行签名认证
+            PackageManager mPm = mContext.getPackageManager();
+            PackageInfo mInfo = mPm.getPackageArchiveInfo(dexPath, 0);
+            return mInfo;
+        }
+        return null;
+    }
+</code></pre>
+<p>原来是签名认证，有点意思了吧，获得apk的签名和合法的签名文件进行比对，如果是同一个就认证通过，不是的话就返回空了，虽然这样写也并不是很安全，但是的确是一种提醒。这个在APP开发，插件化开发中都具有重要意义，属于安全环节中不可缺少的一步了，安全无小事，切记切记。<br>拿到了我们需要的<code>resources</code>，问题就迎刃而解了，先封装出去：</p>
+<pre><code class="java">    public Resources getThemeResources() {
+        if (mResources == null) {
+            synchronized (this) {
+                if (mResources == null) {
+                    mResources = mContext.getResources();
+                    curTheme = DEFAULT_THEME;
+                }
+            }
+        }
+        return mResources;
+    }
+</code></pre>
+<p>再随便来看一个，比如是图片：</p>
+<pre><code class="java">public Drawable getThemeDrawable(String drawableName, boolean isSpecial) {
+        Resources resources = getThemeResources(isSpecial);
+
+        int resId = getThemeResourceId(drawableName, &quot;drawable&quot;, isSpecial);
+        if (resId &lt;= 0) {
+            return null;
+        }
+        try {
+            return resources.getDrawable(resId);
+        } catch (OutOfMemoryError e) {
+            Log.w(&quot;wenba&quot;, e);
+            Log.e(&quot;skin&quot;, &quot;OutOfMemoryError: drawableName = &quot; + drawableName);
+        }
+        return null;
+    }
+</code></pre>
 <p>然后就是各种反射调用设置方法了，到处原理性的介绍就到此为止了，原以为比起上两篇来说更简单，其实还是想多了，可能还是没有理太得太清，最好还是配合自己的想法和代码还原来看可能比较容易清楚。</p>
 <p>####4.使用实例补充<br>从以上几个小节基本上也能大概猜出个该怎么使用的，还有些重要的东西没说，在这里补充一下，结合最开始介绍页面和id的地方</p>
 <ul>
-<li>在assets–&gt;skin–&gt;config下面建立一个<code>SkinApplyMainActivity</code>，内容如下：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ThemeRoot</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">colors</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ConfigItem</span> <span class="attr">viewId</span>=<span class="string">"skin_text1"</span> <span class="attr">method</span>=<span class="string">"setBackgroundColor"</span> <span class="attr">resName</span>=<span class="string">"tab_background_stack"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ConfigItem</span> <span class="attr">viewId</span>=<span class="string">"next_page"</span> <span class="attr">method</span>=<span class="string">"setBackgroundColor"</span> <span class="attr">resName</span>=<span class="string">"theme"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ConfigItem</span> <span class="attr">viewId</span>=<span class="string">"next_page"</span> <span class="attr">method</span>=<span class="string">"setTextColor"</span> <span class="attr">resName</span>=<span class="string">"text_color"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">colors</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">drawables</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ConfigItem</span> <span class="attr">viewId</span>=<span class="string">"skin_root_layout"</span> <span class="attr">method</span>=<span class="string">"setBackgroundDrawable"</span> <span class="attr">resName</span>=<span class="string">"skin_main_bg"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">drawables</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">CustomValue</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ValueDef</span> <span class="attr">name</span>=<span class="string">"skin_digits"</span> <span class="attr">value</span>=<span class="string">"te_text_hint"</span> <span class="attr">type</span>=<span class="string">"color"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">CustomValue</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">ThemeRoot</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
+<li><p>在assets–&gt;skin–&gt;config下面建立一个<code>SkinApplyMainActivity</code>，内容如下：<br>```xml<br>&lt;?xml version=”1.0” encoding=”utf-8”?&gt;</p>
+<themeroot>
+
+  <colors><br>      <configitem viewid="skin_text1" method="setBackgroundColor" resname="tab_background_stack"><br>      <configitem viewid="next_page" method="setBackgroundColor" resname="theme"><br>      <configitem viewid="next_page" method="setTextColor" resname="text_color"><br>  </configitem></configitem></configitem></colors>
+
+  <drawables><br>      <configitem viewid="skin_root_layout" method="setBackgroundDrawable" resname="skin_main_bg"><br>  </configitem></drawables>
+
+  <customvalue><br>      <valuedef name="skin_digits" value="te_text_hint" type="color"><br>  </valuedef></customvalue>
+
+</themeroot></li>
 </ul>
-<p>建立<code>OtherActivity</code>，内容如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ThemeRoot</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">colors</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ConfigItem</span> <span class="attr">viewId</span>=<span class="string">"skin_default_theme_btn"</span> <span class="attr">method</span>=<span class="string">"setBackgroundColor"</span> <span class="attr">resName</span>=<span class="string">"theme"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ConfigItem</span> <span class="attr">viewId</span>=<span class="string">"skin_new_theme_btn"</span> <span class="attr">method</span>=<span class="string">"setTextColor"</span> <span class="attr">resName</span>=<span class="string">"theme"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">colors</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">drawables</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ConfigItem</span> <span class="attr">viewId</span>=<span class="string">"root_layout"</span> <span class="attr">method</span>=<span class="string">"setBackgroundDrawable"</span> <span class="attr">resName</span>=<span class="string">"skin_main_bg"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ConfigItem</span> <span class="attr">viewId</span>=<span class="string">"skin_other_img"</span> <span class="attr">method</span>=<span class="string">"setBackgroundDrawable"</span> <span class="attr">resName</span>=<span class="string">"skin_word_bg"</span>/&gt;</span> </span><br><span class="line">    <span class="tag">&lt;/<span class="name">drawables</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">CustomValue</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ValueDef</span> <span class="attr">name</span>=<span class="string">"skin_digits"</span> <span class="attr">value</span>=<span class="string">"te_text_hint"</span> <span class="attr">type</span>=<span class="string">"color"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">CustomValue</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">ThemeRoot</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<ul>
+<p></p>
+<pre><code>建立`OtherActivity`，内容如下：
+```xml
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;ThemeRoot&gt;
+
+    &lt;colors&gt;
+        &lt;ConfigItem viewId=&quot;skin_default_theme_btn&quot; method=&quot;setBackgroundColor&quot; resName=&quot;theme&quot;/&gt;
+        &lt;ConfigItem viewId=&quot;skin_new_theme_btn&quot; method=&quot;setTextColor&quot; resName=&quot;theme&quot;/&gt;
+    &lt;/colors&gt;
+
+    &lt;drawables&gt;
+        &lt;ConfigItem viewId=&quot;root_layout&quot; method=&quot;setBackgroundDrawable&quot; resName=&quot;skin_main_bg&quot;/&gt;
+        &lt;ConfigItem viewId=&quot;skin_other_img&quot; method=&quot;setBackgroundDrawable&quot; resName=&quot;skin_word_bg&quot;/&gt; 
+    &lt;/drawables&gt;
+
+    &lt;CustomValue&gt;
+        &lt;ValueDef name=&quot;skin_digits&quot; value=&quot;te_text_hint&quot; type=&quot;color&quot;/&gt;
+    &lt;/CustomValue&gt;
+
+&lt;/ThemeRoot&gt;
+</code></pre><ul>
 <li>最后来四张图说明一切：<br><img src="/img/002/20170328-6.png" alt="Alt text"><br><img src="/img/002/20170328-7.png" alt="Alt text"><br><img src="/img/002/20170328-8.png" alt="Alt text"><br><img src="/img/002/20170328-9.png" alt="Alt text"></li>
 </ul>
 

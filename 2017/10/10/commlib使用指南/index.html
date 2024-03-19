@@ -198,7 +198,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="17">
-<input type="hidden" id="yelog_site_word_count" value="57.4k">
+<input type="hidden" id="yelog_site_word_count" value="56.3k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -217,6 +217,8 @@
             <li><a target="_blank" href="https://ccflower.github.io/">ccflower的博客</a></li>
             
             <li><a target="_blank" href="http://todd2010.github.io/">todd2010的博客</a></li>
+            
+            <li><a target="_blank" href="https://yelog.org/">yelog的博客</a></li>
             
         </ul>
     </div>
@@ -471,7 +473,7 @@
     </div>
     <div class="article-meta">
         
-        <span>Count:904</span>
+        <span>Count:883</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -511,17 +513,68 @@
 </blockquote>
 <a id="more"></a>
 <h3 id="1-概况"><a href="#1-概况" class="headerlink" title="1.概况"></a>1.概况</h3><p>本项目属于开源项目，git地址：<a href="https://github.com/same4869/XwangCommLib" target="_blank" rel="noopener">https://github.com/same4869/XwangCommLib</a><br>然后这个项目已经上传上jcenter上面，所以任何项目想要使用里面的内容只需要在gradle里面添加<code>compile &#39;com.xwang:commlib:1.0.0&#39;</code>就行了，最后一个是版本号，最新的版本号请查看最新的git log。<br>此外如果自己想把自己封装的lib上传到jcenter请查看 <a href="https://gold.xitu.io/entry/58992a452f301e00697a17b9" target="_blank" rel="noopener">https://gold.xitu.io/entry/58992a452f301e00697a17b9</a> 这篇博文。</p>
-<h3 id="2-索引"><a href="#2-索引" class="headerlink" title="2.索引"></a>2.索引</h3><h4 id="2-1-CommCountDownTimer"><a href="#2-1-CommCountDownTimer" class="headerlink" title="2.1 CommCountDownTimer"></a>2.1 CommCountDownTimer</h4><p>和5.0以上的<code>CountDownTimer</code>源码完全一致，大概对比了一下，应该是解决低版本倒计时cancel可能出现的问题。<br>倒计时控件，使用方式大概如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">new CommCountDownTimer(30000, 1000) &#123;</span><br><span class="line"></span><br><span class="line">     public void onTick(long millisUntilFinished) &#123;</span><br><span class="line">         mTextField.setText(&quot;seconds remaining: &quot; + millisUntilFinished / 1000);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public void onFinish() &#123;</span><br><span class="line">         mTextField.setText(&quot;done!&quot;);</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;.start();</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-2-CommThreadPool"><a href="#2-2-CommThreadPool" class="headerlink" title="2.2 CommThreadPool"></a>2.2 CommThreadPool</h4><p>里面包含一个基于<code>newCachedThreadPool</code>的线程池，还包含一个<code>HandlerThread</code>和一个主线程的<code>Handler</code>。<br>暴露了3个方法出来<br><code>poolExecute(Runnable runnable)</code>，使用线程池，一般耗时方法采用这个方法使用线程池管理。<br><code>serialExecute(Runnable runnable)</code>，使用<code>HandlerThread</code>创建的固定线程。<br><code>runOnUiThread(Runnable runnable)</code>，主线程中运行。<br>使用大概如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">WenbaThreadPool.poolExecute(new Runnable() &#123;</span><br><span class="line"></span><br><span class="line">       @Override</span><br><span class="line">       public void run() &#123;</span><br><span class="line">         ...</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-3-SharedSetting"><a href="#2-3-SharedSetting" class="headerlink" title="2.3 SharedSetting"></a>2.3 SharedSetting</h4><p>这个组件主要解决多应用间存储共享的问题，使用<code>ContentProvider</code>来实现，封装后可以像使用SP一样存储和读取多应用间的共享数据。<br>使用方式如下</p>
-<h5 id="2-3-1"><a href="#2-3-1" class="headerlink" title="2.3.1"></a>2.3.1</h5><p>多应用中必须<code>有且仅</code>有一个应用（一般是主应用，其他应用使用的时候保证这个应用必须已经安装）在<code>AndroidManifest.xml</code>中声明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;provider</span><br><span class="line">      android:name=&quot;commlib.xun.com.commlib.sharedsetting.CommSharedSettingContentProvider&quot;</span><br><span class="line">      android:authorities=&quot;commlib.xun.com.commlib.sharedsetting.CommSharedSettingContentProvider&quot;</span><br><span class="line">      android:exported=&quot;true&quot;/&gt;</span><br></pre></td></tr></table></figure></p>
-<h5 id="2-3-2"><a href="#2-3-2" class="headerlink" title="2.3.2"></a>2.3.2</h5><p>在需要使用此功能的APP中建立<code>SharedSetting</code>类，里面跟封装的SP规则差不多<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class SharedSetting &#123;</span><br><span class="line">    private static final String TEST_OH = &quot;test_oh&quot;;</span><br><span class="line"></span><br><span class="line">    public static void setSavedPenAddress(String address) &#123;</span><br><span class="line">        CommSharedSettingOperator.save(SameMvpApplicationContext.application, TEST_OH, address, null);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static String getSavedPenAddress() &#123;</span><br><span class="line">        return CommSharedSettingOperator.queryValue(SameMvpApplicationContext.application, TEST_OH);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h5 id="2-3-3"><a href="#2-3-3" class="headerlink" title="2.3.3"></a>2.3.3</h5><p>存储使用如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SharedSetting.setSavedPenAddress(&quot;我来自SameMvpDemo&quot;);</span><br></pre></td></tr></table></figure></p>
-<p>读取使用如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SharedSetting.getSavedPenAddress()</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-4-CommMultiThreadAsyncTask"><a href="#2-4-CommMultiThreadAsyncTask" class="headerlink" title="2.4 CommMultiThreadAsyncTask"></a>2.4 CommMultiThreadAsyncTask</h4><p>继承自<code>AsyncTask</code>，用法也一致，其中暴露了<code>executeMultiThread</code>方法，会在API 11以上使用之前<code>CommThreadPool</code>里面所创建的线程池，然后也暴露出了<code>poolExecute</code>方法，和<code>CommThreadPool</code>的方法一致。<br>使用如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">new CommMultiThreadAsyncTask&lt;Void, Void, HomeWork&gt;() &#123;</span><br><span class="line"></span><br><span class="line">           protected void onPreExecute() &#123;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           @Override</span><br><span class="line">           protected HomeWork doInBackground(Void... params) &#123;</span><br><span class="line">          </span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           @Override</span><br><span class="line">           protected void onPostExecute(HomeWork result) &#123;</span><br><span class="line">         </span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">       &#125;.executeMultiThread();</span><br></pre></td></tr></table></figure></p>
-<p>当然也可以继承<code>CommMultiThreadAsyncTask</code>来进行进一步的封装。</p>
-<h4 id="2-5-CommWeakHandler"><a href="#2-5-CommWeakHandler" class="headerlink" title="2.5 CommWeakHandler"></a>2.5 CommWeakHandler</h4><p><code>CommWeakHandler</code>主要是用来解决日常中使用<code>handler</code>带来的内存泄露问题，用法跟普通的<code>handler</code>一样用就行了，主要要声明成全局和activity一个生命周期<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private WeakHandler mHandler = new WeakHandler();</span><br></pre></td></tr></table></figure></p>
-<p>了解原理请移步<br>git地址<a href="https://github.com/badoo/android-weak-handler" target="_blank" rel="noopener">https://github.com/badoo/android-weak-handler</a><br>在谷歌上搜索WeakHandler会用不少分析文章。</p>
+<h3 id="2-索引"><a href="#2-索引" class="headerlink" title="2.索引"></a>2.索引</h3><h4 id="2-1-CommCountDownTimer"><a href="#2-1-CommCountDownTimer" class="headerlink" title="2.1 CommCountDownTimer"></a>2.1 CommCountDownTimer</h4><p>和5.0以上的<code>CountDownTimer</code>源码完全一致，大概对比了一下，应该是解决低版本倒计时cancel可能出现的问题。<br>倒计时控件，使用方式大概如下</p>
+<pre><code> new CommCountDownTimer(30000, 1000) {
+
+      public void onTick(long millisUntilFinished) {
+          mTextField.setText(&quot;seconds remaining: &quot; + millisUntilFinished / 1000);
+      }
+
+      public void onFinish() {
+          mTextField.setText(&quot;done!&quot;);
+      }
+   }.start();
+</code></pre><h4 id="2-2-CommThreadPool"><a href="#2-2-CommThreadPool" class="headerlink" title="2.2 CommThreadPool"></a>2.2 CommThreadPool</h4><p>里面包含一个基于<code>newCachedThreadPool</code>的线程池，还包含一个<code>HandlerThread</code>和一个主线程的<code>Handler</code>。<br>暴露了3个方法出来<br><code>poolExecute(Runnable runnable)</code>，使用线程池，一般耗时方法采用这个方法使用线程池管理。<br><code>serialExecute(Runnable runnable)</code>，使用<code>HandlerThread</code>创建的固定线程。<br><code>runOnUiThread(Runnable runnable)</code>，主线程中运行。<br>使用大概如下</p>
+<pre><code>     WenbaThreadPool.poolExecute(new Runnable() {
+
+            @Override
+            public void run() {
+              ...
+            }
+        });
+</code></pre><h4 id="2-3-SharedSetting"><a href="#2-3-SharedSetting" class="headerlink" title="2.3 SharedSetting"></a>2.3 SharedSetting</h4><p>这个组件主要解决多应用间存储共享的问题，使用<code>ContentProvider</code>来实现，封装后可以像使用SP一样存储和读取多应用间的共享数据。<br>使用方式如下</p>
+<h5 id="2-3-1"><a href="#2-3-1" class="headerlink" title="2.3.1"></a>2.3.1</h5><p>多应用中必须<code>有且仅</code>有一个应用（一般是主应用，其他应用使用的时候保证这个应用必须已经安装）在<code>AndroidManifest.xml</code>中声明</p>
+<pre><code>      &lt;provider
+            android:name=&quot;commlib.xun.com.commlib.sharedsetting.CommSharedSettingContentProvider&quot;
+            android:authorities=&quot;commlib.xun.com.commlib.sharedsetting.CommSharedSettingContentProvider&quot;
+            android:exported=&quot;true&quot;/&gt;
+</code></pre><h5 id="2-3-2"><a href="#2-3-2" class="headerlink" title="2.3.2"></a>2.3.2</h5><p>在需要使用此功能的APP中建立<code>SharedSetting</code>类，里面跟封装的SP规则差不多</p>
+<pre><code>public class SharedSetting {
+    private static final String TEST_OH = &quot;test_oh&quot;;
+
+    public static void setSavedPenAddress(String address) {
+        CommSharedSettingOperator.save(SameMvpApplicationContext.application, TEST_OH, address, null);
+    }
+
+    public static String getSavedPenAddress() {
+        return CommSharedSettingOperator.queryValue(SameMvpApplicationContext.application, TEST_OH);
+    }
+}
+</code></pre><h5 id="2-3-3"><a href="#2-3-3" class="headerlink" title="2.3.3"></a>2.3.3</h5><p>存储使用如下</p>
+<pre><code>SharedSetting.setSavedPenAddress(&quot;我来自SameMvpDemo&quot;);
+</code></pre><p>读取使用如下</p>
+<pre><code>SharedSetting.getSavedPenAddress()
+</code></pre><h4 id="2-4-CommMultiThreadAsyncTask"><a href="#2-4-CommMultiThreadAsyncTask" class="headerlink" title="2.4 CommMultiThreadAsyncTask"></a>2.4 CommMultiThreadAsyncTask</h4><p>继承自<code>AsyncTask</code>，用法也一致，其中暴露了<code>executeMultiThread</code>方法，会在API 11以上使用之前<code>CommThreadPool</code>里面所创建的线程池，然后也暴露出了<code>poolExecute</code>方法，和<code>CommThreadPool</code>的方法一致。<br>使用如下</p>
+<pre><code> new CommMultiThreadAsyncTask&lt;Void, Void, HomeWork&gt;() {
+
+            protected void onPreExecute() {
+            }
+
+            @Override
+            protected HomeWork doInBackground(Void... params) {
+
+            }
+
+            @Override
+            protected void onPostExecute(HomeWork result) {
+
+            }
+
+        }.executeMultiThread();
+</code></pre><p>当然也可以继承<code>CommMultiThreadAsyncTask</code>来进行进一步的封装。</p>
+<h4 id="2-5-CommWeakHandler"><a href="#2-5-CommWeakHandler" class="headerlink" title="2.5 CommWeakHandler"></a>2.5 CommWeakHandler</h4><p><code>CommWeakHandler</code>主要是用来解决日常中使用<code>handler</code>带来的内存泄露问题，用法跟普通的<code>handler</code>一样用就行了，主要要声明成全局和activity一个生命周期</p>
+<pre><code>private WeakHandler mHandler = new WeakHandler();
+</code></pre><p>了解原理请移步<br>git地址<a href="https://github.com/badoo/android-weak-handler" target="_blank" rel="noopener">https://github.com/badoo/android-weak-handler</a><br>在谷歌上搜索WeakHandler会用不少分析文章。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至same4869@126.com </span>
