@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>Hexo博客重新起飞 | Same&#39;s Blog</title>
-  <meta name="keywords" content=" otherTec ">
-  <meta name="description" content="Hexo博客重新起飞 | Same&#39;s Blog">
+  <title>移动端跨平台方案，但是ArkUI-X | Same&#39;s Blog</title>
+  <meta name="keywords" content=" 鸿蒙 ">
+  <meta name="description" content="移动端跨平台方案，但是ArkUI-X | Same&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="施工中。。。。">
 <meta property="og:type" content="website">
@@ -481,9 +481,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-Hexo博客重新起飞" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-移动端跨平台方案，但是ArkUI-X" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Hexo博客重新起飞</h1>
+        <h1 class="article-title">移动端跨平台方案，但是ArkUI-X</h1>
     
     <div class="article-meta">
         
@@ -493,7 +493,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="其他技术">其他技术</a>
+            <a  data-rel="鸿蒙">鸿蒙</a>
             
         </span>
         
@@ -501,19 +501,19 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color4">otherTec</a>
+            <a class="color3">鸿蒙</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2024-03-18 15:24:50'>2018-02-19 00:00</time>
+            Created At : <time class="date" title='Updated At: 2024-03-19 17:40:52'>2024-03-19 00:00</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:259</span>
+        <span>Count:1.4k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -532,7 +532,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-安装node-js"><span class="toc-text">1.安装node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-安装hexo"><span class="toc-text">2.安装hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-远程克隆项目"><span class="toc-text">3.远程克隆项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-进入项目，安装HEXO"><span class="toc-text">4.进入项目，安装HEXO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-项目HEXO初始化-安装依赖"><span class="toc-text">5.项目HEXO初始化,安装依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-发布"><span class="toc-text">6.发布</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#思考"><span class="toc-text">思考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#官方答复"><span class="toc-text">官方答复</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#吐槽和后续挖坑"><span class="toc-text">吐槽和后续挖坑</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考与扩展"><span class="toc-text">参考与扩展</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -548,22 +548,46 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <script src="/assets/js/APlayer.min.js"> </script><blockquote>
-<p>开篇：好久没来这里倒腾了，意料之中地把hexo相关的东西忘了个精光，好在并没有浪费太多的时间，感觉还是有必要记录一下，以免浪费时间。<br>环境：MACOS,已经有git了</p>
-</blockquote>
-<a id="more"></a>
-<h3 id="1-安装node-js"><a href="#1-安装node-js" class="headerlink" title="1.安装node.js"></a>1.安装node.js</h3><pre><code>这个直接在网上搜一下官方就行了，或者点这里https://nodejs.org/en/download/
-</code></pre><h3 id="2-安装hexo"><a href="#2-安装hexo" class="headerlink" title="2.安装hexo"></a>2.安装hexo</h3><pre><code>sudo npm install hexo-cli -g
-</code></pre><h3 id="3-远程克隆项目"><a href="#3-远程克隆项目" class="headerlink" title="3.远程克隆项目"></a>3.远程克隆项目</h3><pre><code>eg: git clone https://github.com/ccflower/blogBackup.git
-</code></pre><h3 id="4-进入项目，安装HEXO"><a href="#4-进入项目，安装HEXO" class="headerlink" title="4.进入项目，安装HEXO"></a>4.进入项目，安装HEXO</h3><pre><code>npm install hexo --save
-</code></pre><h3 id="5-项目HEXO初始化-安装依赖"><a href="#5-项目HEXO初始化-安装依赖" class="headerlink" title="5.项目HEXO初始化,安装依赖"></a>5.项目HEXO初始化,安装依赖</h3><pre><code>hexo init   (这一步可能会有提示，需要用一个空目录init，然后再把所有东西考进去)
-npm install
-hexo s (这个就可以本地看了)
-</code></pre><h3 id="6-发布"><a href="#6-发布" class="headerlink" title="6.发布"></a>6.发布</h3><pre><code>hexo g
-hexo d
-</code></pre><blockquote>
-<p>参考文献：<br>1.<a href="http://ccflower.space/2017/06/01/hexoBlog" target="_blank" rel="noopener">http://ccflower.space/2017/06/01/hexoBlog</a><br>2.<a href="http://todd2010.github.io/2016/05/18/02-Hexo-GitHub/" target="_blank" rel="noopener">http://todd2010.github.io/2016/05/18/02-Hexo-GitHub/</a><br>3.<a href="http://ryane.top/2018/01/10/2018%EF%BC%8C%E4%BD%A0%E8%AF%A5%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E4%BA%86%EF%BC%81/" target="_blank" rel="noopener">http://ryane.top/2018/01/10/2018%EF%BC%8C%E4%BD%A0%E8%AF%A5%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E4%BA%86%EF%BC%81/</a></p>
-</blockquote>
+        <script src="/assets/js/APlayer.min.js"> </script><p><img src="/img/016/20240319-01.png" alt="Alt text"></p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p><img src="/img/016/20240319-02.png" alt="Alt text"></p>
+<p>跨平台主要是为了节省开发成本，在复杂度并不高，并没有那么追求极致性能（Maybe）的情况下是一个不错的选择。</p>
+<p>目前业界的跨平台技术也发展多年，H5页面，RN，Flutter，Weex，甚至是小程序，uniapp，都算是解决方案的一种。</p>
+<p>华为在今年的线下开发者学习交流会上提到了他们基于鸿蒙OS的跨平台方案–ArkUi-X，给了广大客户端开发者一个新的思路（ps:用不用无所谓，看一看不吃亏不上当）。</p>
+<p>&gt;<br>    举个栗子：<br>    公司A研发的APP原本提供Android和iOS平台，且都是原生开发，现在想要支持鸿蒙，那就重新从0到1做个鸿蒙版APP，然后需要重新分配人力，客户端两端变三端，后续维护与迭代也是各自独立，成本增加50%。</p>
+<pre><code>公司B研发的APP也是有Android和iOS版本，但是部分业务使用了跨平台技术，比如Flutter，工程使用混合开发，即a功能都是原生，各自开发，b功能是用Flutter写，写完通过libs或者submodule的方式引用到Android和iOS工程中。
+
+公司C研发的APP一开始就是跨平台方案，比如使用了纯Flutter或者uniapp，那就坐等框架级的解决方案。
+
+以上可以看出，APP增加鸿蒙端不仅仅是在从0到1的研发阶段，在后续迭代上也都有不同程度的成本增加，这一点在会议上也有人问过，答案是肯定的。
+</code></pre><h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>华为给了ArkUi-X跨平台方案，很容易提出这么一个疑问：<br><code>既然鸿蒙化开发是一定的，那么能不能做完鸿蒙版了，让其中绝大部分业务代码具有跨平台能力，后续各端需求迭代都用arkts进行开发？</code><br>也就是类似上面公司B，把Flutter变成ArkUi-X<br>个人感觉比较适合之前大多数或者全部业务都是通过原生开发的APP（H5除外）</p>
+<p><code>好处有几个</code>：<br>1.鸿蒙版板上钉钉的情况下，用arkts从0到1开发新的APP在所难免，迁移成跨平台的成本低。<br>2.如果之前团队内没有其他跨平台技术储备，也无需去入门，适配其他跨平台技术。<br>3.对现有工程改造度相对较低，且能享受到跨平台的优势，即端越多，节省成本越大。</p>
+<p>或者有更多。。</p>
+<p><code>当然也有劣势</code>：<br>1.目前整个生态还没有完全建立成型，网上资料少到想哭，建议抱团或者多加几个官方支持，不然遇到问题真的是一抹黑。<br>2.还没看得太懂国内厂商的战略布局，米OV有没有可能后来居上或者又来个3Q大战。</p>
+<p>或者还有更更多。。</p>
+<h3 id="官方答复"><a href="#官方答复" class="headerlink" title="官方答复"></a>官方答复</h3><p>接下来看看华为给出的一些官方点：</p>
+<ul>
+<li>ArkUI-X负载应用性能数据（仿微信），通过负载应用测试，性能表现持平竞品，部分优于竞品10%。<br>（给了一个数据对比图，涉及到冷热启动，平均和峰值内存，滑动时帧率等，暂时还不太好公布出来）</li>
+<li>Android平台最低支持API26+（8.0及以上），iOS最低版本为iOS10+</li>
+<li>支持arm64和arm32架构</li>
+<li>只支持Stage模型</li>
+<li>Next应用中跨平台模块的bundleName必须和Android，iOS包名一致</li>
+<li>部署跨平台模块时moduleName必须应用内唯一，不允许重名</li>
+<li>ArkUI-X提供的Bridge通信机制，要求拉起跨平台界面时才可以，不支持在原生界面直接和TS侧通信</li>
+<li>ArkUI-X框架支持鸿蒙原生应用hap，hsp类型包结构并遵循鸿蒙应用开发规范，其中hsp不可单独跨平台，必须有hap类型提供UIAbility</li>
+</ul>
+<p>&gt;<br>    然后是相关FAQ：<br>    问题1：我的鸿蒙原生应用是否可以整体跨平台？<br>    A：应用由组件、业务逻辑、调用系统API三部分组成，开发方式？ 其中95％UI组件已支持跨平台，TS业务代码运行方舟虚拟器支持跨平台，系统API当前已适配高频基础2000＋</p>
+<pre><code>问题2：ArkUI-X和ArkUI关系？是否存在独立的ArkUI-X
+开发方式？
+A：ArkUI-X完全复用ArkUI范式，二者开发态完全一致，
+仅编译态有区别，不存在独立的ArkUI—X开发方式
+
+
+问题3：是否可以先开发鸿蒙原生应用，然后再将其改
+造成跨平台？
+A：可以，将应用或部分模块标记为跨平台，之后针对ArkUI业务逻辑进行少量适配即可。
+</code></pre><h4 id="吐槽和后续挖坑"><a href="#吐槽和后续挖坑" class="headerlink" title="吐槽和后续挖坑"></a>吐槽和后续挖坑</h4><p>华为对于鸿蒙的推广力度很大的，单从线下的开发者会议就能看出来多么cai da qi cu，会议时ArkUI-X的架构师说已经有千万级的代码了，不过相比于api11的文档基本上每天都在更新，ArkUI-X的文档基本都在三个月前停止更新，导致在做demo的时候也遇到了不少问题，不得不去找华为的技术来支持。</p>
+<p>至于demo，和19年的时候做Flutter类似，无非就是页面，容器，bridge，组件化，依赖，lib化，看看有没有必要来个实现和踩坑笔记，一起学习成长。</p>
+<h4 id="参考与扩展"><a href="#参考与扩展" class="headerlink" title="参考与扩展"></a>参考与扩展</h4><p><a href="https://gitee.com/arkui-x/docs/blob/master/zh-cn/application-dev/README.md" target="_blank" rel="noopener">https://gitee.com/arkui-x/docs/blob/master/zh-cn/application-dev/README.md</a><br><a href="https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/releasenotes-overview-0000001602419138" target="_blank" rel="noopener">https://developer.huawei.com/consumer/cn/doc/harmonyos-releases/releasenotes-overview-0000001602419138</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至same4869@126.com </span>
