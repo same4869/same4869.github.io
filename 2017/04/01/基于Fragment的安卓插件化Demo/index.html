@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>基于Fragment的安卓插件化Demo | Same&#39;s Blog</title>
+  <meta name="keywords" content=" Android ">
+  <meta name="description" content="基于Fragment的安卓插件化Demo | Same&#39;s Blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="施工中。。。。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://same4869.github.io/about/index.html">
+<meta property="og:site_name" content="Same&#39;s Blog">
+<meta property="og:description" content="施工中。。。。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2024-03-18T08:05:23.996Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="about">
+<meta name="twitter:description" content="施工中。。。。">
+
+
+<link rel="icon" href="https://img0.baidu.com/it/u=2938741800,3443602320&fm=253&fmt=auto&app=138&f=JPEG?w=268&h=268">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0"></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.1.0"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="undefined">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true">
+  <input id="theme_highlight_on" value="true">
+  <input id="theme_code_copy" value="true">
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="https://img0.baidu.com/it/u=2938741800,3443602320&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=268&amp;h=268"/>
+</a>
+<div class="author">
+    <span>Same</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/same4869"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="jianshu"
+               href="http://www.jianshu.com/u/4165fccb3734"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-jianshu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+               href="mailto:same4869@126.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=119123059&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(18)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+    <li>
+        <div data-rel="Android">
+            
+            Android
+            <small>(11)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+        
+            
+    <li>
+        <div data-rel="鸿蒙">
+            
+            鸿蒙
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+        
+            
+    <li>
+        <div data-rel="其他技术">
+            
+            其他技术
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+        
+            
+    <li>
+        <div data-rel="个人随笔">
+            
+            个人随笔
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="18">
+<input type="hidden" id="yelog_site_word_count" value="57.7k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://ccflower.github.io/">ccflower的博客</a></li>
+            
+            <li><a target="_blank" href="http://todd2010.github.io/">todd2010的博客</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Android</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>blockchain</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>otherTec</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>个人随笔</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>鸿蒙</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 鸿蒙 "
+           href="/2024/03/19/移动端跨平台方案，但是ArkUI-X/"
+           data-tag="鸿蒙"
+           data-author="" >
+            <span class="post-title" title="移动端跨平台方案，但是ArkUI-X">移动端跨平台方案，但是ArkUI-X</span>
+            <span class="post-date" title="2024-03-19 00:00:00">2024/03/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2019/03/22/手撸Android-Nexus私有Maven仓库GOGOGO/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="手撸Android-Nexus私有Maven仓库GOGOGO">手撸Android-Nexus私有Maven仓库GOGOGO</span>
+            <span class="post-date" title="2019-03-22 00:00:00">2019/03/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 其他技术 "
+           href="/2018/07/08/EOS爬行记1/"
+           data-tag="blockchain"
+           data-author="" >
+            <span class="post-title" title="EOS爬行记（章一） --- EOS环境搭建与基本命令">EOS爬行记（章一） --- EOS环境搭建与基本命令</span>
+            <span class="post-date" title="2018-07-08 00:00:00">2018/07/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 其他技术 "
+           href="/2018/04/05/DAPP开发实战之投票系统/"
+           data-tag="blockchain"
+           data-author="" >
+            <span class="post-title" title="DAPP开发实战之投票系统">DAPP开发实战之投票系统</span>
+            <span class="post-date" title="2018-04-05 00:00:00">2018/04/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 其他技术 "
+           href="/2018/02/19/Hexo博客重新起飞/"
+           data-tag="otherTec"
+           data-author="" >
+            <span class="post-title" title="Hexo博客重新起飞">Hexo博客重新起飞</span>
+            <span class="post-date" title="2018-02-19 00:00:00">2018/02/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 个人随笔 "
+           href="/2017/12/25/东京女子图鉴/"
+           data-tag="个人随笔"
+           data-author="" >
+            <span class="post-title" title="《东京女子图鉴》碎碎念">《东京女子图鉴》碎碎念</span>
+            <span class="post-date" title="2017-12-25 00:00:00">2017/12/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/12/19/《APP技术封装与选择》总览/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《APP技术封装与选择》总览">《APP技术封装与选择》总览</span>
+            <span class="post-date" title="2017-12-19 00:00:00">2017/12/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 其他技术 "
+           href="/2017/10/19/《精通Python网络爬虫》读书笔记/"
+           data-tag="otherTec"
+           data-author="" >
+            <span class="post-title" title="《精通Python网络爬虫》读书笔记">《精通Python网络爬虫》读书笔记</span>
+            <span class="post-date" title="2017-10-19 00:00:00">2017/10/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/10/10/commlib使用指南/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="commlib使用指南">commlib使用指南</span>
+            <span class="post-date" title="2017-10-10 00:00:00">2017/10/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/08/21/APP研发录/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《APP研发录》读书笔记">《APP研发录》读书笔记</span>
+            <span class="post-date" title="2017-08-21 00:00:00">2017/08/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/08/08/《Android技能树探索》总览/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》总览">《Android技能树探索》总览</span>
+            <span class="post-date" title="2017-08-08 00:00:00">2017/08/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/07/19/《易读》APP分析/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《易读》APP分析">《易读》APP分析</span>
+            <span class="post-date" title="2017-07-19 00:00:00">2017/07/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/06/07/《Android技能树探索》基础篇---Broadcast/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》基础篇---Broadcast">《Android技能树探索》基础篇---Broadcast</span>
+            <span class="post-date" title="2017-06-07 00:00:00">2017/06/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/05/10/Android下载模块探究/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="Android下载模块探究">Android下载模块探究</span>
+            <span class="post-date" title="2017-05-10 00:00:00">2017/05/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/04/05/《Android技能树探索》基础篇---Service/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》基础篇---Service">《Android技能树探索》基础篇---Service</span>
+            <span class="post-date" title="2017-04-05 00:00:00">2017/04/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/04/01/基于Fragment的安卓插件化Demo/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="基于Fragment的安卓插件化Demo">基于Fragment的安卓插件化Demo</span>
+            <span class="post-date" title="2017-04-01 00:00:00">2017/04/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/03/21/Android深度主题切换探究/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="Android深度主题切换探究">Android深度主题切换探究</span>
+            <span class="post-date" title="2017-03-21 00:00:00">2017/03/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 个人随笔 "
+           href="/2017/02/11/精进/"
+           data-tag="个人随笔"
+           data-author="" >
+            <span class="post-title" title="《精进：如何成为一个很厉害的人》读书笔记">《精进：如何成为一个很厉害的人》读书笔记</span>
+            <span class="post-date" title="2017-02-11 00:00:00">2017/02/11</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-基于Fragment的安卓插件化Demo" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">基于Fragment的安卓插件化Demo</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="Android">Android</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">Android</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2024-03-18 15:24:57'>2017-04-01 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:3.4k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-工程总体结构"><span class="toc-text">1.工程总体结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-依赖关系"><span class="toc-text">2.依赖关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-从零开始"><span class="toc-text">3.从零开始</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><p><strong>说明:</strong>本篇文章主要以代码的形式还原结构，并非从原理的角度来阐述插件化，相关原理请自行谷歌。</p>
+<h4 id="1-工程总体结构"><a href="#1-工程总体结构" class="headerlink" title="1.工程总体结构"></a>1.工程总体结构</h4><p><img src="/img/001/20170227-1.jpg" alt="Alt text"></p>
+<ul>
+<li>app是主module，也就是唯一一个配置成<code>com.android.application</code>的module，里面是不需要插件化的主页面等。</li>
+<li>bbcomm是公共依赖库，里面放一些app或者其他插件都会用到的公共资源与控件。</li>
+<li>login是没有被插件化的模块，作为app的依赖库，本质上和app没什么区别。</li>
+<li>p_scanword是插件。</li>
+<li>pluginbase是插件框架。</li>
+</ul>
+<h4 id="2-依赖关系"><a href="#2-依赖关系" class="headerlink" title="2.依赖关系"></a>2.依赖关系</h4><ul>
+<li>app依赖bbcomm（如果需要使用公共控件）和login</li>
+<li>bbcomm依赖pluginbase</li>
+<li>login依赖bbcomm（如果需要使用公共控件）</li>
+<li>p_scanword依赖bbcomm（如果需要使用公共控件）</li>
+<li>pluginbase不依赖任何其他</li>
+</ul>
+<a id="more"></a>
+<h4 id="3-从零开始"><a href="#3-从零开始" class="headerlink" title="3.从零开始"></a>3.从零开始</h4><ol>
+<li>新建一个app的module，类型是application，正常新建一个activity，打造万能测试页面，如下图所示：<br><img src="/img/001/20170328-1.png" alt="Alt text"><br>稍微解释下这个页面的元素：</li>
+</ol>
+<ul>
+<li>第一个button是跳转到login里面的另一个activity的。</li>
+<li>第二个button加载插件，把插件的页面展示到下面那个蓝色的layout里面去。</li>
+<li>第三个button来自于bbcomm，同时插件里也使用了bbcomm里面的这个控件。</li>
+</ul>
+<p>一个button没什么好说的，代码如下</p>
+<pre><code class="java">Intent loginIntent = new Intent(MainActivity.this,LoginMainActivity.class);
+startActivity(loginIntent);
+</code></pre>
+<ol>
+<li><p>在pluginbase里面先定义一个<code>PluginInfo</code>的实体类，里面包含了插件的相关信息，如下：</p>
+<pre><code class="java">public class PluginInfo {
+ public String name;
+ public String libDir;
+ public ClassLoader loader;
+ public Resources resources;
+ public Resources.Theme theme;
+ public PluginBase pluginBase;
+ public Context context;
+}
+</code></pre>
+<p>其他基本都是基本类型或者安卓基本类型，那么<code>PluginBase</code>是什么东西呢？先看看PluginBase里面的代码</p>
+<pre><code class="java">public abstract class PluginBase {
+ public static final String PLUGIN_SCANWORD = &quot;p_scanword&quot;;
+
+ private static Context mContext;
+ private FragmentManager mFragmentManager;
+ private Context pluginContext;
+
+ public void attach(Context context, FragmentManager manager) {
+     mContext = context.getApplicationContext();
+     mFragmentManager = manager;
+
+     init();
+ }
+
+ public Context getHostContext() {
+     return mContext;
+ }
+
+ public Context getPluginContext(){
+     if(pluginContext != null){
+         return pluginContext;
+     }
+     pluginContext = PluginManager.getInstance(mContext).makePluginContext(getPluginName(), mContext);
+     return pluginContext;
+ }
+
+ protected FragmentManager getFragmentManager() {
+     return mFragmentManager;
+ }
+
+ protected FragmentTransaction getFragmentTransaction(){
+     FragmentManager fragmentManager = getFragmentManager();
+     return fragmentManager.beginTransaction();
+ }
+ public abstract String getPluginName();
+ public abstract void init();
+ public abstract void show(int containerId);
+ public abstract void hide();
+ public abstract void detach();
+}
+</code></pre>
+<p>可以看出来，<code>PluginBase</code>是一个虚类，里面声明了若干的虚函数，有一个attch的公共方法来接收宿主的<code>context</code>和<code>FragmentManager</code>，并且提供公共方法让外部使用这两个属性，此外还实现了一个<code>getPluginContext</code>的方法，这个方法可以获得插件的<code>context</code>，对于插件化具有重要的意义。<br>说到<code>getPluginContext</code>方法，可以看看里面的实现，其实主要就是<code>PluginManager.getInstance(mContext).makePluginContext(getPluginName(), mContext);</code>这句话没错吧。<br>然后就可以看看<code>PluginManager</code>是什么鬼了。</p>
+</li>
+<li><p>其实分123并没有啥卵用，只是为了稍微有点层次感不至于太累，好了继续吧。<br><code>PluginManager</code>既然是manager一般是单例的，所以首先是这样：</p>
+<pre><code class="java"> private PluginManager(Context context) {
+     this.appContext = context.getApplicationContext();
+ }
+
+ public static PluginManager getInstance(Context context) {
+     if (sInstance == null) {
+         synchronized (PluginManager.class) {
+             if (sInstance == null) {
+                 sInstance = new PluginManager(context);
+             }
+         }
+     }
+     return sInstance;
+ }
+</code></pre>
+<p>这个没啥好说的，接下来看看刚刚那个<code>makePluginContext</code>方法:</p>
+<pre><code class="java">public Context makePluginContext(final String name, final Context outerContext) {
+     if (isPluginTestMode) {
+         return outerContext;
+     }
+
+     Context context = mPluginMap.get(name).context;
+     if (context != null) {
+         return context;
+     }
+
+     context = new ContextWrapper(outerContext) {
+         @Override
+         public Resources getResources() {
+             return mPluginMap.get(name).resources;
+         }
+
+         @Override
+         public AssetManager getAssets() {
+             return mPluginMap.get(name).resources.getAssets();
+         }
+
+         @Override
+         public Resources.Theme getTheme() {
+             return mPluginMap.get(name).theme;
+         }
+
+         @Override
+         public Object getSystemService(String name) {
+             if (!Context.LAYOUT_INFLATER_SERVICE.equals(name)) {
+                 return super.getSystemService(name);
+             }
+
+             LayoutInflater inflater = (LayoutInflater) super.getApplicationContext()
+                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+             LayoutInflater proxyInflater = inflater.cloneInContext(this);
+
+             return proxyInflater;
+
+         }
+     };
+
+     return context;
+ }
+</code></pre>
+<p><code>isPluginTestMode</code>这里可以先不管，我们可以看到这个<code>context</code>其实是根据name在一个名为<code>mPluginMap</code>的容器里面取出来的，如果取出为空就new一个<code>ContextWrapper</code>重新创建，并在各个重写方法里面都使用<code>mPluginMap</code>的值，这里需要注意的是<code>getSystemService</code>方法的重写，这样就能保证在使用<code>LayoutInflater</code>的时候能够使用正确的<code>context</code>而不会出错。<br>接下来需要看看<code>mPluginMap</code>是什么了吧，里面的数据是怎么放进去的。首先看看声明：</p>
+<pre><code class="java">private final Map&lt;String, PluginInfo&gt; mPluginMap = new HashMap&lt;String, PluginInfo&gt;();
+</code></pre>
+<p>所以<code>mPluginMap</code>就是一个hashmap，key就是插件对应的name，而value就是插件对应的PluginInfo。来看看是怎么把数据塞进去的：</p>
+<pre><code class="java"> public PluginInfo getPluginInfo(String pluginName) {
+     if (mPluginMap.containsKey(pluginName)) {
+         return mPluginMap.get(pluginName);
+     }
+
+     String pluginPath = getPluginPath(pluginName);
+
+     PluginInfo pluginInfo = null;
+     try {
+         pluginInfo = loadPluginInfo(pluginName, pluginPath);
+     } catch (Exception e) {
+         e.printStackTrace();
+     }
+     if (pluginInfo != null) {
+         mPluginMap.put(pluginName, pluginInfo);
+     }
+     return pluginInfo;
+ }
+</code></pre>
+<p>这种东西其实就像玩RPG游戏一样，游戏刚开始可能主角只想完成一个单纯的任务A，而在完成A的途中发现需要完成B，完成B的途中又要完成C才行，以此类推，所以一个游戏的任务链是A-&gt;B-&gt;C-&gt;…..-&gt;C-&gt;B-A，吐槽而已，同理，从代码中看到了其实核心方法是<code>loadPluginInfo</code>，而它的参数又由<code>getPluginPath</code>提供，所以先看看<code>getPluginPath</code>的内部代码吧：</p>
+<pre><code class="java"> private String getPluginPath(String pluginName) {
+     File dir = new File(appContext.getFilesDir(), PLUGIN_DIR);
+     if (!dir.exists()) {
+         dir.mkdirs();
+     }
+
+     File saveFile = new File(dir, pluginName + &quot;.apk&quot;); // pluginA.apk
+     if (saveFile != null &amp;&amp; saveFile.exists() &amp;&amp; saveFile.isFile()) {
+         saveFile.setExecutable(true);
+         return saveFile.getAbsolutePath();
+     }
+     return null;
+ }
+</code></pre>
+<p>里面的appContext是在初始化单例的时候传入的宿主context，代码上面已经有了，来看下上面这个方法，我们从特定的目录中去取插件的apk，如果有则返回插件的路径，没有则返回空。好了，终于可以看<code>loadPluginInfo</code>方法了。</p>
+<pre><code class="java">private PluginInfo loadPluginInfo(String pluginName, String pluginPath)
+         throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+     String optDir = getPluginOptDir(pluginName);
+     String libDir = getPluginLibDir(pluginName);
+
+     DexClassLoader dexClassLoader = createDexClassLoader(pluginPath, optDir, libDir);
+     AssetManager assetManager = createAssetManager(pluginPath);
+     Resources resources = createResources(assetManager);
+
+     PluginInfo pluginInfo = new PluginInfo();
+
+     pluginInfo.libDir = libDir;
+     pluginInfo.loader = dexClassLoader;
+     pluginInfo.resources = resources;
+
+     Resources.Theme theme = resources.newTheme();
+     theme.setTo(appContext.getTheme());
+     pluginInfo.theme = theme;
+
+     Class cls = Class.forName(getPluginLauncherName(pluginName), true, dexClassLoader);
+     PluginBase pluginBase = (PluginBase) cls.newInstance();
+     pluginInfo.pluginBase = pluginBase;
+
+     return pluginInfo;
+ }
+</code></pre>
+<p>核心来了！！首先通过<code>getPluginOptDir</code>和<code>getPluginLibDir</code>这两个方法新建和指定下opt和dir的目录，代码如下：</p>
+<pre><code class="java">private String getPluginOptDir(String name) {
+     File dir = new File(appContext.getFilesDir(), &quot;/plugin/&quot; + name + &quot;/opt&quot;);
+     dir.mkdirs();
+     return dir.getAbsolutePath();
+ }
+
+ private String getPluginLibDir(String name) {
+     File dir = new File(appContext.getFilesDir(), &quot;/plugin/&quot; + name + &quot;/libs&quot;);
+     dir.mkdirs();
+     return dir.getAbsolutePath();
+ }
+</code></pre>
+<p>然后通过</p>
+<pre><code class="java"> private DexClassLoader createDexClassLoader(String pluginPath, String optDir, String libDir) {
+     return new DexClassLoader(pluginPath, optDir, libDir, appContext.getClassLoader());
+ }
+</code></pre>
+<p>这个方法把<code>pluginPath</code>，<code>optDir</code>，<code>libDir</code>注入到<code>dexClassLoader</code>中生成新的<code>classLoader</code>，这个<code>classLoader</code>就会在我们指定的目录下面去找dex文件加载，这便是插件化中java代码插件化的原理了。<br>除了Java代码，当然还有资源文件，看到这两行代码木有：</p>
+<pre><code class="java">     AssetManager assetManager = createAssetManager(pluginPath);
+     Resources resources = createResources(assetManager);
+</code></pre>
+<p>我们会构造一个resources出来，这个就是插件的resources的啦，那是怎么构造出来的呢，接着看：</p>
+<pre><code class="java">private AssetManager createAssetManager(String dexPath) {
+     try {
+         AssetManager assetManager = AssetManager.class.newInstance();
+         Method addAssetPath = assetManager.getClass().getMethod(&quot;addAssetPath&quot;, String.class);
+         addAssetPath.invoke(assetManager, dexPath);
+         return assetManager;
+     } catch (Exception e) {
+         e.printStackTrace();
+         return null;
+     }
+ }
+
+ private Resources createResources(AssetManager assetManager) {
+     Resources superRes = appContext.getResources();
+     Resources resources = new Resources(assetManager, superRes.getDisplayMetrics(), superRes.getConfiguration());
+     return resources;
+ }
+</code></pre>
+<p>第一个方法是通过反射把插件路径注入到<code>assetManager</code>中生成能够支持插件<code>assetManager</code>，然后用这个<code>assetManager</code>重新构造出一个<br><code>resources</code>。<br>好了，万事俱备了，可以构建<code>pluginInfo</code>了，翻上去看代码就懂了，然后会反射出一个<code>PluginBase</code>给<code>pluginInfo</code>的<code>PluginBase</code>赋值，看看是怎么反射出来的:</p>
+<pre><code class="java"> private String getPluginLauncherName(String pluginName) {
+     return new StringBuffer(&quot;com.example.xunwang.&quot;).append(pluginName).append(&quot;.LauncherPlugin&quot;).toString();
+ }
+</code></pre>
+<p>是不是代码不要太简单，其实拼的这个字符串是我们每一个插件的入口，所以在每一个插件的这个路径下必须要有这样一个入口，不然当然就反射不到啦，再就是<code>LauncherPlugin</code>必须是继承<code>PluginBase</code>的，这个不用多说吧。<br>到现在为止<code>PluginInfo</code>已经全部初始化完毕了，是不是都忘了最开始要干啥了。</p>
+</li>
+<li><p>经过上面的分析可能有点小晕了，还记得<code>getPluginPath</code>这个方法吗，不记得了翻回去看看，注意<code>File dir = new File(appContext.getFilesDir(), PLUGIN_DIR);</code>和<code>File saveFile = new File(dir, pluginName + &quot;.apk&quot;);</code>这两句话，其实这个路径是在getFilesDir()的PLUGIN_DIR文件夹下找pluginName.apk这个文件。<br>但是其实打包脚本是把插件的apk打包到app这个module的asset目录下的，那么就需要作一个拷贝操作了，也就是<code>PluginManager</code>的<code>loadPlugins</code>方法了：</p>
+<pre><code class="java">public void loadPlugins(String[] pluginNames) {
+     PluginLoader pluginLoader = new PluginLoader(appContext);
+     pluginLoader.setPluginLoaderListener(new PluginLoader.PluginLoaderListener() {
+
+         @Override
+         public void loadResult(String[][] results) {
+             Log.e(TAG &quot;loadPlugins finished&quot;);
+             if (results == null) {
+                 return;
+             }
+             for (int i = 0; i &lt; results.length; i++) {
+                 Log.e(TAG, results[i][0] + &quot;:&quot; + results[i][1]);
+             }
+         }
+     });
+     pluginLoader.execute(pluginNames);
+ }
+</code></pre>
+<p>执行了一个名叫<code>PluginLoader</code>的异步操作，里面有一个加载完成的回调，所谓的加载也就是把asset目录下插件的apk拷贝到getFilesDir()的PLUGIN_DIR目录下而已，不说了上代码：</p>
+<pre><code class="java">public class PluginLoader extends AsyncTask&lt;String, Void, String[][]&gt; {
+ public static final String PLUGIN_DIR = &quot;plugin&quot;;
+ private Context mContext;
+ private PluginLoaderListener pluginLoaderListener;
+
+ public interface PluginLoaderListener {
+     public void loadResult(String[][] result);
+ }
+
+ public void setPluginLoaderListener(PluginLoaderListener pluginLoaderListener) {
+     this.pluginLoaderListener = pluginLoaderListener;
+ }
+
+ public PluginLoader(Context context) {
+     this.mContext = context;
+ }
+
+ @Override
+ protected String[][] doInBackground(String... params) {
+     if (params == null || params.length == 0) {
+         return null;
+     }
+     String[][] results = new String[params.length][2];
+     for (int i = 0; i &lt; params.length; i++) {
+         String apkPath = null;
+         try {
+             apkPath = loadPlugin(params[i]);
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+         results[i][0] = params[i];
+         results[i][1] = apkPath;
+     }
+     return results;
+ }
+
+ private String loadPlugin(String plugName) throws Exception {
+     File dir = new File(mContext.getFilesDir(), PLUGIN_DIR);
+     dir.mkdirs();
+     File saveFile = new File(dir, plugName + &quot;.apk&quot;);
+     saveFile.setExecutable(true);
+     FileOutputStream outputStream = null;
+     InputStream inputStream = null;
+     try {
+         int count = 0;
+         byte[] buf = new byte[1024];
+         inputStream = mContext.getAssets().open(plugName + &quot;.apk&quot;);
+         outputStream = new FileOutputStream(saveFile);
+         while ((count = inputStream.read(buf)) &gt; 0) {
+             outputStream.write(buf, 0, count);
+         }
+     } finally {
+         inputStream.close();
+         outputStream.close();
+     }
+
+     Log.e(TAG, &quot;load pulgin write: &quot; + saveFile.length());
+     return saveFile.getAbsolutePath();
+ }
+
+ @Override
+ protected void onPostExecute(String[][] result) {
+     if (pluginLoaderListener != null) {
+         pluginLoaderListener.loadResult(result);
+     }
+ }
+}
+</code></pre>
+<p><code>loadPlugins</code>通常在Application的时候就做这个操作，把所有的插件名放到一个数组中就行了：</p>
+<pre><code class="java">private String[] plugins = { PluginBase.PLUGIN_SCANWORD };
+PluginManager.getInstance(getApplicationContext()).loadPlugins(plugins);
+</code></pre>
+</li>
+<li><p>到现在为止，又完成一大步了，我们来看看pluginbase这个module的文件<br><img src="/img/001/20170328-2.png" alt="Alt text"><br>后面四个文件上面基本上都了解完了，最后来看看PlugFragment吧。<br>```java<br>public abstract class PlugFragment extends Fragment {<br> private Context context;</p>
+<p> @Override<br> public void onCreate(Bundle savedInstanceState) {</p>
+<pre><code> super.onCreate(savedInstanceState);
+ context = PluginManager.getInstance(getActivity()).makePluginContext(getPluginName(), getActivity());
+</code></pre><p> }</p>
+<p> public Context getContext(){</p>
+<pre><code> return context;
+</code></pre><p> }</p>
+<p> protected abstract String getPluginName();</p>
+</li>
+</ol>
+<p>}</p>
+<pre><code>它是所有插件里面fragment的基类，封装了context为插件的context，里面的实现前面也详细了解过了，所以PluginBase这个module就是这些啦，接下来看看插件模块应该怎么写。
+
+6. 我们的插件名为`p_scanword`，这个名字必须和PluginBase类里面定义的插件名常量的名字是一样的，为什么呢，因为反射啊。而包名是`com.example.xunwang.scanword`,这个不用纠结了，如果后面有机会了解这个打包脚本再说吧。
+还记得前面说的每个插件的入口类吗，没错就是它`LauncherPlugin`。
+```java
+public class LauncherPlugin extends PluginBase {
+    public static int CONTAINER_ID;
+    private Fragment mFragment;
+
+    @Override
+    public String getPluginName() {
+        return PLUGIN_SCANWORD;
+    }
+
+    @Override
+    public void init() {
+        mFragment = new DefaultFragment();
+    }
+
+    @Override
+    public void show(int containerId) {
+        CONTAINER_ID = containerId;
+        FragmentTransaction ft = getFragmentTransaction();
+        ft.replace(containerId, mFragment);
+        ft.commitAllowingStateLoss();
+    }
+
+    @Override
+    public void hide() {
+        if(mFragment.getView() != null){
+            mFragment.getView().setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void detach() {
+        getFragmentTransaction().detach(mFragment).commit();
+    }
+}
+</code></pre><p>可能看到这个还不是特别清楚，那再看看我在点击第二个button的时候在onclick里面做了啥事（不记得第二个button是干什么的翻到最前吧）:</p>
+<pre><code class="java">PluginInfo pluginInfo = PluginManager.getInstance(getApplicationContext()).getPluginInfo(
+                    PluginBase.PLUGIN_SCANWORD);
+            Log.d(&quot;kkkkkkkk&quot;, &quot;pluginInfo --&gt; &quot; + pluginInfo);
+            PluginBase pluginBase = null;
+            if (pluginInfo != null) {
+                pluginBase = pluginInfo.pluginBase;
+            }
+            if (pluginBase == null) {
+                Toast.makeText(getApplicationContext(), &quot;plugin not loaded&quot;, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            pluginBase.attach(MiniXbjMainActivity.this, getSupportFragmentManager());
+            pluginBase.show(R.id.plugin_layout);
+</code></pre>
+<p>看到没有，第4段写了那么那么多，几乎整个<code>PluginManager</code>都是为了在构建<code>PluginInfo</code>这个东东，这个地方终于用了。<br>然后取出<code>PluginInfo</code>里面的<code>pluginBase</code>，是怎么生成的倒回去看吧，简而言之，就是通过<code>PluginBase.PLUGIN_SCANWORD</code>绕了好大一圈反射出了插件中的<code>LauncherPlugin</code>这个类，然后调了<code>LauncherPlugin</code>类的attach和show两个方法，attach之前我们说了其实是<code>PluginBase</code>的，相当于把宿主的<code>context</code>和<code>FragmentManager</code>传给插件，而show就是通过传进来的<code>FragmentManager</code>获得<code>FragmentTransaction</code>,然后使用replace实现显示插件页面的效果。<br>所以<code>LauncherPlugin</code>作为入口类一般是一个壳，生成的真正插件主页的fragment在它的init方法里获得，这里也就是<code>DefaultFragment</code>啦。<br>最后来看看<code>DefaultFragment</code>吧。</p>
+<pre><code class="java">public class DefaultFragment extends PlugFragment {
+    @Override
+    protected String getPluginName() {
+        return PluginBase.PLUGIN_SCANWORD;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
+            savedInstanceState) {
+        LayoutInflater factory = LayoutInflater.from(getContext());
+        ViewGroup viewGroup = (ViewGroup) factory.inflate(R.layout.pla_linear, container, false);
+        return viewGroup;
+    }
+}
+</code></pre>
+<p><code>LayoutInflater</code>的时候是不是传入的context不一样啦，其实也看不出来，其实它是plugFragment包装的那个插件context，因为pla_linear在插件的module里，不用插件的context绝逼是找不到的。<br><strong>再次强调插件开发的规则</strong>，宿主的资源使用宿主的context，插件的资源使用插件的context，公共组件的资源也使用宿主的context(因为在打包过程中，公共组件不打到插件中而是打到宿主中)，这个很重要，谁用谁知道。<br>到目前为止一个插件框架的基本雏形已经出来了，最后来看看bbcomm吧，我在项目里面添加了一个自定义view</p>
+<pre><code class="java">public class CommButtonView extends Button {
+    private Drawable bg;
+    private Paint paint;
+
+    public CommButtonView(Context context) {
+        super(context);
+        init(context);
+    }
+
+    public CommButtonView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init(context);
+    }
+
+    public CommButtonView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init(context);
+    }
+
+    private void init(Context context) {
+        bg = context.getApplicationContext().getResources().getDrawable(R.drawable.audio_play_bg);
+        paint = new Paint();
+        paint.setColor(Color.RED);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        canvas.drawBitmap(((BitmapDrawable)bg).getBitmap(), 0, 0 , paint);
+    }
+}
+</code></pre>
+<p><code>audio_play_bg</code>这张图片放到bbcomm的module里的，注意到context没有，一言不合就会crash哟。<br>宿主和插件由于都是依赖bbcomm的，所以都正常使用这个自定义控件就行了，最后上一张图吧。<br><img src="/img/001/20170328-3.png" alt="Alt text"></p>
+<p><strong>总结:</strong>以上写了一大堆，也只不过是插件化的最基本雏形而已，但同时也是基础，虽然基于fragment的插件化目前已不再主流，但再某些地方总是会有用武之地，后面还有很长的路要走，多多站在巨人和别人的肩膀上会走得更快。</p>
+<p>PS：本文仅作为学习之用，不提供代码，禁止转载，敬请谅解。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至same4869@126.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry"><span class="miit">
+                <img src="/img/gov.png" title="中华人民共和国工业和信息化部">
+                <a href="http://beian.miit.gov.cn/">沪ICP备2022003838号-2</a>
+        </span>
+    
+    ©2023-2024 Same
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

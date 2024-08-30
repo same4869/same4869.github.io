@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>手撸Android-Nexus私有Maven仓库GOGOGO | Same&#39;s Blog</title>
+  <meta name="keywords" content=" Android ">
+  <meta name="description" content="手撸Android-Nexus私有Maven仓库GOGOGO | Same&#39;s Blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="施工中。。。。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://same4869.github.io/about/index.html">
+<meta property="og:site_name" content="Same&#39;s Blog">
+<meta property="og:description" content="施工中。。。。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2024-03-18T08:05:23.996Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="about">
+<meta name="twitter:description" content="施工中。。。。">
+
+
+<link rel="icon" href="https://img0.baidu.com/it/u=2938741800,3443602320&fm=253&fmt=auto&app=138&f=JPEG?w=268&h=268">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0"></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.1.0"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="undefined">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true">
+  <input id="theme_highlight_on" value="true">
+  <input id="theme_code_copy" value="true">
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="https://img0.baidu.com/it/u=2938741800,3443602320&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=268&amp;h=268"/>
+</a>
+<div class="author">
+    <span>Same</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/same4869"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="jianshu"
+               href="http://www.jianshu.com/u/4165fccb3734"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-jianshu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+               href="mailto:same4869@126.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=119123059&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(18)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+    <li>
+        <div data-rel="Android">
+            
+            Android
+            <small>(11)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+        
+            
+    <li>
+        <div data-rel="鸿蒙">
+            
+            鸿蒙
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+        
+            
+    <li>
+        <div data-rel="其他技术">
+            
+            其他技术
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+        
+            
+    <li>
+        <div data-rel="个人随笔">
+            
+            个人随笔
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="18">
+<input type="hidden" id="yelog_site_word_count" value="57.7k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://ccflower.github.io/">ccflower的博客</a></li>
+            
+            <li><a target="_blank" href="http://todd2010.github.io/">todd2010的博客</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Android</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>blockchain</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>otherTec</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>个人随笔</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>鸿蒙</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 鸿蒙 "
+           href="/2024/03/19/移动端跨平台方案，但是ArkUI-X/"
+           data-tag="鸿蒙"
+           data-author="" >
+            <span class="post-title" title="移动端跨平台方案，但是ArkUI-X">移动端跨平台方案，但是ArkUI-X</span>
+            <span class="post-date" title="2024-03-19 00:00:00">2024/03/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2019/03/22/手撸Android-Nexus私有Maven仓库GOGOGO/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="手撸Android-Nexus私有Maven仓库GOGOGO">手撸Android-Nexus私有Maven仓库GOGOGO</span>
+            <span class="post-date" title="2019-03-22 00:00:00">2019/03/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 其他技术 "
+           href="/2018/07/08/EOS爬行记1/"
+           data-tag="blockchain"
+           data-author="" >
+            <span class="post-title" title="EOS爬行记（章一） --- EOS环境搭建与基本命令">EOS爬行记（章一） --- EOS环境搭建与基本命令</span>
+            <span class="post-date" title="2018-07-08 00:00:00">2018/07/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 其他技术 "
+           href="/2018/04/05/DAPP开发实战之投票系统/"
+           data-tag="blockchain"
+           data-author="" >
+            <span class="post-title" title="DAPP开发实战之投票系统">DAPP开发实战之投票系统</span>
+            <span class="post-date" title="2018-04-05 00:00:00">2018/04/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 其他技术 "
+           href="/2018/02/19/Hexo博客重新起飞/"
+           data-tag="otherTec"
+           data-author="" >
+            <span class="post-title" title="Hexo博客重新起飞">Hexo博客重新起飞</span>
+            <span class="post-date" title="2018-02-19 00:00:00">2018/02/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 个人随笔 "
+           href="/2017/12/25/东京女子图鉴/"
+           data-tag="个人随笔"
+           data-author="" >
+            <span class="post-title" title="《东京女子图鉴》碎碎念">《东京女子图鉴》碎碎念</span>
+            <span class="post-date" title="2017-12-25 00:00:00">2017/12/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/12/19/《APP技术封装与选择》总览/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《APP技术封装与选择》总览">《APP技术封装与选择》总览</span>
+            <span class="post-date" title="2017-12-19 00:00:00">2017/12/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 其他技术 "
+           href="/2017/10/19/《精通Python网络爬虫》读书笔记/"
+           data-tag="otherTec"
+           data-author="" >
+            <span class="post-title" title="《精通Python网络爬虫》读书笔记">《精通Python网络爬虫》读书笔记</span>
+            <span class="post-date" title="2017-10-19 00:00:00">2017/10/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/10/10/commlib使用指南/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="commlib使用指南">commlib使用指南</span>
+            <span class="post-date" title="2017-10-10 00:00:00">2017/10/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/08/21/APP研发录/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《APP研发录》读书笔记">《APP研发录》读书笔记</span>
+            <span class="post-date" title="2017-08-21 00:00:00">2017/08/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/08/08/《Android技能树探索》总览/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》总览">《Android技能树探索》总览</span>
+            <span class="post-date" title="2017-08-08 00:00:00">2017/08/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/07/19/《易读》APP分析/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《易读》APP分析">《易读》APP分析</span>
+            <span class="post-date" title="2017-07-19 00:00:00">2017/07/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/06/07/《Android技能树探索》基础篇---Broadcast/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》基础篇---Broadcast">《Android技能树探索》基础篇---Broadcast</span>
+            <span class="post-date" title="2017-06-07 00:00:00">2017/06/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/05/10/Android下载模块探究/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="Android下载模块探究">Android下载模块探究</span>
+            <span class="post-date" title="2017-05-10 00:00:00">2017/05/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/04/05/《Android技能树探索》基础篇---Service/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》基础篇---Service">《Android技能树探索》基础篇---Service</span>
+            <span class="post-date" title="2017-04-05 00:00:00">2017/04/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/04/01/基于Fragment的安卓插件化Demo/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="基于Fragment的安卓插件化Demo">基于Fragment的安卓插件化Demo</span>
+            <span class="post-date" title="2017-04-01 00:00:00">2017/04/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/03/21/Android深度主题切换探究/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="Android深度主题切换探究">Android深度主题切换探究</span>
+            <span class="post-date" title="2017-03-21 00:00:00">2017/03/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 个人随笔 "
+           href="/2017/02/11/精进/"
+           data-tag="个人随笔"
+           data-author="" >
+            <span class="post-title" title="《精进：如何成为一个很厉害的人》读书笔记">《精进：如何成为一个很厉害的人》读书笔记</span>
+            <span class="post-date" title="2017-02-11 00:00:00">2017/02/11</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-手撸Android-Nexus私有Maven仓库GOGOGO" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">手撸Android-Nexus私有Maven仓库GOGOGO</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="Android">Android</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">Android</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2024-03-18 15:24:07'>2019-03-22 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:2k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-远程仓库"><span class="toc-text">1.远程仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-准备搭建"><span class="toc-text">2.准备搭建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-初试牛刀"><span class="toc-text">3.初试牛刀</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Android工程上传到Nexus私库"><span class="toc-text">4.Android工程上传到Nexus私库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Android工程依赖Nexus相关包"><span class="toc-text">5.Android工程依赖Nexus相关包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-将nexus部署到远程服务器和迁移相关"><span class="toc-text">6.将nexus部署到远程服务器和迁移相关</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-总结"><span class="toc-text">7.总结</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote>
+<p>我们在做Android SDK的时候，总是以jar或者aar的方式让业务方依赖，在这条流水线建立起来的时候，手动去把依赖包丢给业务方显然不是正确的打开方式，而作为公司层面，上传到jcenter又会顾忌到安全的敏感问题，于是就有了私有maven仓库的出现，能够很好的解决以上问题，本文描述就是一个建立私有maven的过程，工具准备好了，总会有用到的时候。</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="1-远程仓库"><a href="#1-远程仓库" class="headerlink" title="1.远程仓库"></a>1.远程仓库</h4><p><img src="/img/015/20190322-01.jpg" alt="Alt text"></p>
+<p>一图胜千言，不过还是描述下，一般来说仓库分为本地的和远程的。</p>
+<p>本地的没啥好说的，本地硬盘的一个路径，或者放在libs文件夹下来手动集成，某种程度上都算。</p>
+<p>远程的又分为中央仓库和私库，中央仓库比较出名的是 <code>JCenter</code> 和 <code>Maven Centra</code>，全世界开源的库都可以往上面传，谁也都可以去依赖到。虽然开源是提倡的，但并适用于任何场景，比如公司的核心依赖库，在这种情况下，在公司的内网才能访问的服务器上部署Nexus私库的场景就应运而生了。</p>
+<h4 id="2-准备搭建"><a href="#2-准备搭建" class="headerlink" title="2.准备搭建"></a>2.准备搭建</h4><p>首先是需要JDK1.8以上的JAVA环境，这个自备一下。</p>
+<p>Nexus的2.X和3.X的版本感觉差了不少，本文使用的是最新的3.X的，下载官方网站是<code>https://www.sonatype.com/download-oss-sonatype</code>，可以根据自己的平台选择，这里使用的是MACOS环境，远程服务器测试是使用了阿里云的centos7.x。</p>
+<p><img src="/img/015/20190322-02.png" alt="Alt text"></p>
+<p>下载后解压大概目录如下图所示</p>
+<p><img src="/img/015/20190322-03.jpg" alt="Alt text"></p>
+<p>直接运行bin目录下面的nexus就行了，linux和macos的小伙伴直接运行</p>
+<p><code>./nexus run</code>就行了（貌似也可以用<code>./nexus start</code>和<code>./nexus stop</code>配套指令来开启和关闭）</p>
+<h4 id="3-初试牛刀"><a href="#3-初试牛刀" class="headerlink" title="3.初试牛刀"></a>3.初试牛刀</h4><p>顺利运行起来了的话就可以看效果了，默认的端口是8081，当然可以在对应的配置文件里面去修改默认端口号，如果是本地起的服务，可以直接在浏览器里输入<code>http://localhost:8081/</code>，效果如下</p>
+<p><img src="/img/015/20190322-04.jpg" alt="Alt text"></p>
+<blockquote>
+<p>这个服务运行起来大概需要几百兆的空闲内存，不然会跑不起来（第一次说需要400多M，第二次800多M）。</p>
+</blockquote>
+<p>默认是没登录的，Nexus 提供了一个完全访问权限的管理用户。 用户名是 <code>admin</code>，密码是<code>admin123</code>。</p>
+<p>左边切换到browser选项可以到仓库界面，如图</p>
+<p><img src="/img/015/20190322-05.jpg" alt="Alt text"></p>
+<p>注意 Type 列，展示了 Nexus 的仓库分类：</p>
+<ul>
+<li><p>proxy（远程代理仓库）<br>这种类型的仓库，可以设置一个远程仓库的链接。当用户向 proxy 类型仓库请求下载一个依赖构件时，就会先在自己的库里查找，如果找不到的话，就会从设置的远程仓库下载到自己的库里，然后返回给用户，相当于起到一个中转的作用。</p>
+<p>  例如 maven-central 用来存储从 Maven 中央仓库下载过的构件。</p>
+</li>
+<li><p>group （聚合仓库）<br>在 Maven 里没有这个概念，是 Nexus 特有的。目的是将多个仓库聚合，对用户暴露统一的地址，这样用户就不需要配置多个地址，只要统一配置 group 的地址就可以了。group 仓库的聚合成员可以在仓库设置中添加和移除。</p>
+<p>  例如 maven-public 是一个 group 类型的仓库，通过引用这个地址，可以访问组内成员仓库的所有构件。</p>
+<p>  <img src="/img/015/20190322-06.jpg" alt="Alt text"></p>
+</li>
+<li><p>hosted（宿主仓库）<br>我们自己的构件，上传的就是这样的仓库。目前 maven-releases 和 maven-snapshots 是 hosted 类型的仓库。我们可以上传到这两个仓库，也可以自己创建 hosted 仓库。</p>
+</li>
+</ul>
+<h4 id="4-Android工程上传到Nexus私库"><a href="#4-Android工程上传到Nexus私库" class="headerlink" title="4.Android工程上传到Nexus私库"></a>4.Android工程上传到Nexus私库</h4><p>现在本地的私库已经跑起来了，接下来开始配置Android工程,看看要怎么上传到私库了。</p>
+<p>首先我们来创建一个Android工程，是需要打包成aar上传到私服的，所以这个工程必须是<code>library</code>，也就是在<code>build.gradle</code>里配置成<code>apply plugin: &#39;com.android.library&#39;</code>。</p>
+<p>然后需要在这个library工程的模块内的gradle中配置一些task，为了方便可以单独抽一个文件出来，叫做<code>nexus.gradle</code>,放在根目录，内容如下：</p>
+<pre><code>apply plugin: &#39;maven&#39;
+version=LIB_VERSION
+def nexusRepositoryUrl = NEXUS_RELEASES
+if (!LIB_IS_RELEASE.toBoolean()){
+    version = &quot;${version}-SNAPSHOT&quot;
+    nexusRepositoryUrl = NEXUS_SNAPSHOTS
+}
+task sourcesJar(type: Jar) {
+    classifier = &#39;sources&#39;
+    from android.sourceSets.main.java.sourceFiles
+}
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.compile
+    options {
+        failOnError false
+        encoding &quot;UTF-8&quot;
+        charSet &#39;UTF-8&#39;
+        author true
+        version true
+        links &quot;http://docs.oracle.com/javase/7/docs/api&quot;
+    }
+}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = &#39;javadoc&#39;
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: &quot;$nexusRepositoryUrl&quot;) {
+                authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
+            }
+            pom.project {
+                name LIB_ARTIFACT
+                groupId LIB_GROUP
+                artifactId LIB_ARTIFACT
+                version version
+                packaging &#39;aar&#39;
+                description LIB_DES
+            }
+        }
+    }
+}
+</code></pre><p>然后在moudle中的gradle添加<code>apply from: &#39;../nexus.gradle&#39;</code>。</p>
+<p>可以看到，在<code>nexus.gradle</code>这个脚本中有一些常量，这些常量需要写在<br><code>gradle.properties</code>中，相当于配置的参数。</p>
+<pre><code>NEXUS_SNAPSHOTS=http://yourhost:8081/repository/maven-snapshots/
+NEXUS_RELEASES=http://yourhost:8081/repository/maven-releases/
+
+NEXUS_USERNAME=admin
+NEXUS_PASSWORD=admin123
+
+LIB_DES=hj web mch5web
+
+LIB_GROUP=com.xun.mch5web
+LIB_ARTIFACT=browser
+LIB_VERSION=1.0.5
+LIB_IS_RELEASE=false //如果是true就是release版本，如果是false就是snapshot版本，release版本不可版本覆盖，需管理员手动删除
+</code></pre><p>看变量名基本也能猜出每个变量的含义，这里也不在赘述了。</p>
+<p>准备工作就绪，可以安心专注于Android SDK的开发了，开发完了就需要上传，直接在项目目录控制台运行<code>./gradlew clean build upload</code>（其实upload就行，编译后上传）。</p>
+<p>还有种方法，Android Studio 中打开右侧的 Gradle 侧边栏，打开项目名,可以看到<code>uploadArchives</code>,这就是刚才创建的上传 Task,点击即可完成上传。</p>
+<p>以上，成功之后可以在Nexus仓库中看到上传的相关文件。</p>
+<p><img src="/img/015/20190322-07.jpg" alt="Alt text"></p>
+<h4 id="5-Android工程依赖Nexus相关包"><a href="#5-Android工程依赖Nexus相关包" class="headerlink" title="5.Android工程依赖Nexus相关包"></a>5.Android工程依赖Nexus相关包</h4><p>上传已经OK，如果有一个Android工程（Application）想依赖刚刚上传的library，应该这么玩。</p>
+<p>首先在<code>rootProject</code>的<code>build.gradle</code>中引用私库地址，我引用的是 <code>maven-public</code>聚合仓库的地址：</p>
+<pre><code>maven { url &#39;http://yourhost:8081/repository/maven-public/&#39; }
+</code></pre><p>引用该三方库的目标<code>Module</code>的<code>build.gradle</code>中添加此库的依赖：</p>
+<p><code>compile &#39;com.xun.mch5web:browser:1.0.5-SNAPSHOT&#39;</code></p>
+<p>snapshot版本是可以版本覆盖的，有时候依赖会有缓存，可以尝试使用以下命令清除缓存</p>
+<p><code>./gradlew build --refresh-dependencies</code></p>
+<h4 id="6-将nexus部署到远程服务器和迁移相关"><a href="#6-将nexus部署到远程服务器和迁移相关" class="headerlink" title="6.将nexus部署到远程服务器和迁移相关"></a>6.将nexus部署到远程服务器和迁移相关</h4><p>以上整个流程算是通了，不过在实际运用中，nexus肯定是需要部署在公司内网的物理或者虚拟机上的，下面用阿里云的云主机做一个模拟（系统是centos7.X）。</p>
+<p>JDK环境确认没问题之后，使用<code>wget 下载url</code>命令把nexus的压缩包</p>
+<p><img src="/img/015/20190322-08.jpg" alt="Alt text"></p>
+<p>上图下载了两个版本，使用的是3.15那个。</p>
+<p>然后根据前文按部就班，运行起来之后就是<code>远程主机ip+8081（默认）</code>的方式被外网访问（nexus运行之后可以<code>ps aux | grep &quot;nexus&quot;</code>看看进程是否存在，阿里云的主机需要在阿里云后台去开启对应的端口，这个非常坑，千万不要忘了）。</p>
+<p><img src="/img/015/20190322-09.jpg" alt="Alt text"></p>
+<p>至于用法也是一样的，就不多说了。</p>
+<p>再来简单说一下迁移的事情，前面我们可以看到，在nexus解压包中会解压出一个名叫<code>sonatype-work</code>的文件夹，平时备份好这个文件夹的所有文件就OK了，还原的时候可以直接进行替换。nexus2.X的方式可能有些不一样，暂时还没研究过。</p>
+<h4 id="7-总结"><a href="#7-总结" class="headerlink" title="7.总结"></a>7.总结</h4><p>内容以上，公司如果又横向团队，这个也算是必备的技术了，高效率总是一点一滴累积出来的，技术没有高尚与低贱，能提高生产力的，就是好的。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至same4869@126.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry"><span class="miit">
+                <img src="/img/gov.png" title="中华人民共和国工业和信息化部">
+                <a href="http://beian.miit.gov.cn/">沪ICP备2022003838号-2</a>
+        </span>
+    
+    ©2023-2024 Same
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

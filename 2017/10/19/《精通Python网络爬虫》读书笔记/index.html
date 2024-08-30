@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>《精通Python网络爬虫》读书笔记 | Same&#39;s Blog</title>
+  <meta name="keywords" content=" otherTec ">
+  <meta name="description" content="《精通Python网络爬虫》读书笔记 | Same&#39;s Blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="施工中。。。。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://same4869.github.io/about/index.html">
+<meta property="og:site_name" content="Same&#39;s Blog">
+<meta property="og:description" content="施工中。。。。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2024-03-18T08:05:23.996Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="about">
+<meta name="twitter:description" content="施工中。。。。">
+
+
+<link rel="icon" href="https://img0.baidu.com/it/u=2938741800,3443602320&fm=253&fmt=auto&app=138&f=JPEG?w=268&h=268">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0"></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.1.0"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="undefined">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true">
+  <input id="theme_highlight_on" value="true">
+  <input id="theme_code_copy" value="true">
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="https://img0.baidu.com/it/u=2938741800,3443602320&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=268&amp;h=268"/>
+</a>
+<div class="author">
+    <span>Same</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/same4869"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="jianshu"
+               href="http://www.jianshu.com/u/4165fccb3734"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-jianshu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+               href="mailto:same4869@126.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=119123059&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(18)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+    <li>
+        <div data-rel="Android">
+            
+            Android
+            <small>(11)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+        
+            
+    <li>
+        <div data-rel="鸿蒙">
+            
+            鸿蒙
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+        
+            
+    <li>
+        <div data-rel="其他技术">
+            
+            其他技术
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+        
+            
+    <li>
+        <div data-rel="个人随笔">
+            
+            个人随笔
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="18">
+<input type="hidden" id="yelog_site_word_count" value="57.7k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://ccflower.github.io/">ccflower的博客</a></li>
+            
+            <li><a target="_blank" href="http://todd2010.github.io/">todd2010的博客</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Android</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>blockchain</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>otherTec</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>个人随笔</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>鸿蒙</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 鸿蒙 "
+           href="/2024/03/19/移动端跨平台方案，但是ArkUI-X/"
+           data-tag="鸿蒙"
+           data-author="" >
+            <span class="post-title" title="移动端跨平台方案，但是ArkUI-X">移动端跨平台方案，但是ArkUI-X</span>
+            <span class="post-date" title="2024-03-19 00:00:00">2024/03/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2019/03/22/手撸Android-Nexus私有Maven仓库GOGOGO/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="手撸Android-Nexus私有Maven仓库GOGOGO">手撸Android-Nexus私有Maven仓库GOGOGO</span>
+            <span class="post-date" title="2019-03-22 00:00:00">2019/03/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 其他技术 "
+           href="/2018/07/08/EOS爬行记1/"
+           data-tag="blockchain"
+           data-author="" >
+            <span class="post-title" title="EOS爬行记（章一） --- EOS环境搭建与基本命令">EOS爬行记（章一） --- EOS环境搭建与基本命令</span>
+            <span class="post-date" title="2018-07-08 00:00:00">2018/07/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 其他技术 "
+           href="/2018/04/05/DAPP开发实战之投票系统/"
+           data-tag="blockchain"
+           data-author="" >
+            <span class="post-title" title="DAPP开发实战之投票系统">DAPP开发实战之投票系统</span>
+            <span class="post-date" title="2018-04-05 00:00:00">2018/04/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 其他技术 "
+           href="/2018/02/19/Hexo博客重新起飞/"
+           data-tag="otherTec"
+           data-author="" >
+            <span class="post-title" title="Hexo博客重新起飞">Hexo博客重新起飞</span>
+            <span class="post-date" title="2018-02-19 00:00:00">2018/02/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 个人随笔 "
+           href="/2017/12/25/东京女子图鉴/"
+           data-tag="个人随笔"
+           data-author="" >
+            <span class="post-title" title="《东京女子图鉴》碎碎念">《东京女子图鉴》碎碎念</span>
+            <span class="post-date" title="2017-12-25 00:00:00">2017/12/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/12/19/《APP技术封装与选择》总览/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《APP技术封装与选择》总览">《APP技术封装与选择》总览</span>
+            <span class="post-date" title="2017-12-19 00:00:00">2017/12/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 其他技术 "
+           href="/2017/10/19/《精通Python网络爬虫》读书笔记/"
+           data-tag="otherTec"
+           data-author="" >
+            <span class="post-title" title="《精通Python网络爬虫》读书笔记">《精通Python网络爬虫》读书笔记</span>
+            <span class="post-date" title="2017-10-19 00:00:00">2017/10/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/10/10/commlib使用指南/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="commlib使用指南">commlib使用指南</span>
+            <span class="post-date" title="2017-10-10 00:00:00">2017/10/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/08/21/APP研发录/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《APP研发录》读书笔记">《APP研发录》读书笔记</span>
+            <span class="post-date" title="2017-08-21 00:00:00">2017/08/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/08/08/《Android技能树探索》总览/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》总览">《Android技能树探索》总览</span>
+            <span class="post-date" title="2017-08-08 00:00:00">2017/08/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/07/19/《易读》APP分析/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《易读》APP分析">《易读》APP分析</span>
+            <span class="post-date" title="2017-07-19 00:00:00">2017/07/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/06/07/《Android技能树探索》基础篇---Broadcast/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》基础篇---Broadcast">《Android技能树探索》基础篇---Broadcast</span>
+            <span class="post-date" title="2017-06-07 00:00:00">2017/06/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/05/10/Android下载模块探究/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="Android下载模块探究">Android下载模块探究</span>
+            <span class="post-date" title="2017-05-10 00:00:00">2017/05/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/04/05/《Android技能树探索》基础篇---Service/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》基础篇---Service">《Android技能树探索》基础篇---Service</span>
+            <span class="post-date" title="2017-04-05 00:00:00">2017/04/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/04/01/基于Fragment的安卓插件化Demo/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="基于Fragment的安卓插件化Demo">基于Fragment的安卓插件化Demo</span>
+            <span class="post-date" title="2017-04-01 00:00:00">2017/04/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/03/21/Android深度主题切换探究/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="Android深度主题切换探究">Android深度主题切换探究</span>
+            <span class="post-date" title="2017-03-21 00:00:00">2017/03/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 个人随笔 "
+           href="/2017/02/11/精进/"
+           data-tag="个人随笔"
+           data-author="" >
+            <span class="post-title" title="《精进：如何成为一个很厉害的人》读书笔记">《精进：如何成为一个很厉害的人》读书笔记</span>
+            <span class="post-date" title="2017-02-11 00:00:00">2017/02/11</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-《精通Python网络爬虫》读书笔记" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">《精通Python网络爬虫》读书笔记</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="其他技术">其他技术</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">otherTec</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2024-03-18 15:24:37'>2017-10-19 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:2.7k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Urllib库与URLError异常处理"><span class="toc-text">1.Urllib库与URLError异常处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-正则表达式与cookie的使用"><span class="toc-text">2.正则表达式与cookie的使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-手写Python爬虫"><span class="toc-text">3.手写Python爬虫</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote>
+<p>虽然是JD打折的时候买的实体书，但是近300页的技术书最后基本能够看完还是感觉挺不容易的。本书还是比较合胃口的，有基础但不限于乏味的独立知识点，有框架介绍也有侧重点，而且从0开始实战什么的才是技术书读者的最爱。书可能看完了就丢在一边了，后面也很难再次翻起，这里记录一些point，也方便以后查阅。</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="1-Urllib库与URLError异常处理"><a href="#1-Urllib库与URLError异常处理" class="headerlink" title="1.Urllib库与URLError异常处理"></a>1.Urllib库与URLError异常处理</h4><p>1.1 爬取网页，基本指令<br>导入<br> <code>import urllib.request</code><br>爬取一个网页<br> <code>file = urllib.request.urlopen(&quot;http://www.baidu.com&quot;)</code><br>打印输出<br> <code>print(data)</code><br>读取内容<br> <code>file.read()</code> 读取所有内容，返回字符串<br> <code>file.readlines()</code> 读取所有内容，返回列表变量<br> <code>file.readline()</code> 读取一行内容<br>打开文件<br> <code>fhandle = open(path, &quot;wb&quot;)</code><br>写入文件<br> <code>fhandle .write(data)</code><br>关闭文件<br> <code>fhandle .close()</code><br>举个栗子</p>
+<pre><code>import urllib.request
+url = &quot;http://blog.csdn.net/chunqiuwei/article/details/74079916&quot;
+data = urllib.request.urlopen(url)
+fhandle = open(&quot;/Users/xunwang/Desktop/python/Demo1.2.html&quot;, &quot;wb&quot;)
+fhandle.write(data.read())
+fhandle.close()
+</code></pre><p>爬取网页直接写入文件<br> <code>urllib.request.urlretrieve(url, path)</code><br>清除urlretrieve产生的缓存<br> <code>urllib.request.urlcleanup()</code><br>返回相关信息<br> <code>file.info()</code><br>返回状态码<br> <code>file.getcode()</code><br>返回当前爬的url<br> <code>file.geturl()</code><br>文本编码<br> <code>urllib.request.quote()</code><br>文本解码<br> <code>urllib.request.unquote()</code></p>
+<p>1.2 浏览器模拟，Headers属性<br>有时候爬虫会返回403错误，这时候可以尝试在header中设置User-Agent来假装是浏览器。<br>方法1，使用build_opener()修改报头</p>
+<pre><code>import urllib.request
+url = &quot;http://blog.csdn.net/chunqiuwei/article/details/74079916&quot;
+headers = (&quot;User-Agent&quot;, &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36&quot;)
+opener = urllib.request.build_opener()
+opener.addheaders = [headers]
+data = opener.open(url).read()
+print(data)
+</code></pre><p>方法2，使用add_header()添加报头</p>
+<pre><code>import urllib.request
+url = &quot;http://blog.csdn.net/chunqiuwei/article/details/74079916&quot;
+req = urllib.request.Request(url)
+req.add_header(&quot;User-Agent&quot;, &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36&quot;)
+data = urllib.request.urlopen(req).read()
+print(data)
+</code></pre><p>1.3 超时设置</p>
+<pre><code>import urllib.request
+for i in range(1,100):
+    try:
+        file = urllib.request.urlopen(&quot;https://myst729.github.io&quot;, timeout = 1)
+        data = file.read()
+        print(len(data))
+    except Exception as e:
+        print(&quot;出现异常 --&gt; &quot; + str(e))
+</code></pre><p>1.4 HTTP协议请求</p>
+<p>1.4.1 GET请求</p>
+<pre><code>import urllib.request
+keywd = &quot;hello&quot;
+url = &quot;http://www.baidu.com/s?wd=&quot; + keywd
+req = urllib.request.Request(url)
+data = urllib.request.urlopen(req).read()
+print(data)
+</code></pre><p>如果出现中文的参数，那么使用<code>urllib.request.quote()</code>编码了再拼上去。</p>
+<p>1.4.2 POST请求</p>
+<pre><code>import urllib.request
+import urllib.parse
+url = &quot;http://www.iqianyue.com/mypost/&quot;
+postdata = urllib.parse.urlencode({
+    &quot;name&quot;:&quot;ceo@iqianyue.com&quot;,
+    &quot;pass&quot;:&quot;123456&quot;
+}).encode(&quot;utf-8&quot;)
+req = urllib.request.Request(url,postdata)
+req.add_header(&quot;User-Agent&quot;, &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36&quot;)
+data = urllib.request.urlopen(req).read()
+fhandle = open(&quot;/Users/xunwang/Desktop/python/Demo1.4.html&quot;, &quot;wb&quot;)
+fhandle.write(data)
+fhandle.close()
+</code></pre><p>1.5 代理服务器设置<br>使用作者提供的网址<code>http://yum.iqianyue.com/proxy</code>  去查询最新的代理IP</p>
+<pre><code>def use_proxy(proxy_addr, url):
+    import urllib.request
+    proxy = urllib.request.ProxyHandler({&#39;http&#39;:proxy_addr})
+    opener = urllib.request.build_opener(proxy, urllib.request.HTTPHandler)
+    # headers = (&quot;User-Agent&quot;, &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36&quot;)
+    # opener.addheaders = [headers]
+    urllib.request.install_opener(opener) #安装全局opener
+    data = urllib.request.urlopen(url).read().decode(&quot;utf-8&quot;)
+    return data
+proxy_addr = &quot;121.31.101.150:8123&quot;
+data = use_proxy(proxy_addr, &quot;http://www.baidu.com&quot;)
+print(len(data))
+</code></pre><p>1.6 异常处理URLError</p>
+<blockquote>
+<p>一般错误汇总<br>200 正常<br>301 重定向到新的url，永久<br>302 重定向到临时url，非永久<br>304 请求资源未更新<br>400 非法请求<br>401 请求未经授权<br>403 禁止访问<br>404 没找到页面<br>500 服务器内部错误<br>501 服务器不支持实现请求所需功能</p>
+</blockquote>
+<p>一般产生URLError原因可能为<br>1.连接不上服务器<br>2.远程URL不存在<br>3.无网络<br>4.触发了HTTPError(即上面错误码的那些)<br><code>一般先用子类处理，处理不了交给父类</code></p>
+<pre><code>import urllib.request
+import urllib.error
+try:
+    urllib.request.urlopen(&quot;http://www.baiduss.com&quot;)
+except urllib.error.HTTPError as e:
+    print(e.code)
+    print(e.reason)
+except urllib.error.URLError as e:
+    if hasattr(e, &quot;code&quot;):
+        print(e.code)
+    if hasattr(e, &quot;reason&quot;):
+        print(e.reason)
+</code></pre><h4 id="2-正则表达式与cookie的使用"><a href="#2-正则表达式与cookie的使用" class="headerlink" title="2.正则表达式与cookie的使用"></a>2.正则表达式与cookie的使用</h4><p>一般使用<code>re</code>模块实现python正则表达功能。</p>
+<p>2.1 原子</p>
+<p>2.1.1 普通字符作为原子<br>比如<code>数字，大小写字母，下划线等</code></p>
+<pre><code>import re
+pattern = &quot;yue&quot;
+string = &quot;http://yum.iqianyue.com&quot;
+result = re.search(pattern, string)
+print(result)
+</code></pre><p>运行结果</p>
+<pre><code>&lt;_sre.SRE_Match object; span=(16, 19), match=&#39;yue&#39;&gt;
+</code></pre><p>2.1.2 非打印字符作为原子<br>比如<code>\n，\t</code></p>
+<p>2.1.3 通用字符作为原子<br><code>\w</code> 匹配任意一个字母，数字或者下划线<br><code>\d</code> 匹配任意一个十进制数<br><code>\s</code> 匹配任意一个空白字符<br><code>以上的大写形式都是匹配对应的补集</code></p>
+<pre><code>import re
+pattern = &quot;\w\dpython\w&quot;
+string = &quot;abcdfphp345pythony_py&quot;
+result = re.search(pattern, string)
+print(result)
+</code></pre><p>2.1.4 原子表<br><code>[]中括号</code>括起来的里面的原子具有相同的地位，只要<code>有里面一个</code>能够匹配成功，就算匹配成功。<br><code>[^]</code>代表<code>除了括号里的原子外</code>其他均可以匹配</p>
+<pre><code>import re
+pattern1 = &quot;\w\dpython[xyz]\w&quot;
+pattern2 = &quot;\w\dpython[^xyz]\w&quot;
+pattern3 = &quot;\w\dpython[xyz]\W&quot;
+string = &quot;abcdfphp345pythony_py&quot;
+result1 = re.search(pattern1, string)
+result2 = re.search(pattern2, string)
+result3 = re.search(pattern3, string)
+print(result1)
+print(result2)
+print(result3)
+</code></pre><p>运行结果</p>
+<pre><code>&lt;_sre.SRE_Match object; span=(9, 19), match=&#39;45pythony_&#39;&gt;
+None
+None
+</code></pre><p>2.2 元字符</p>
+<p><code>.</code> 匹配除换行符外的任意字符</p>
+<pre><code>import re
+pattern1 = &quot;.python...&quot;
+string = &quot;abcdfphp345pythony_py&quot;
+result1 = re.search(pattern1, string)
+print(result1)
+</code></pre><p>运行结果</p>
+<pre><code>&lt;_sre.SRE_Match object; span=(10, 20), match=&#39;5pythony_p&#39;&gt;
+</code></pre><p><code>^</code> 匹配字符串的开始位置 </p>
+<pre><code>import re
+pattern1 = &quot;^abd&quot;
+pattern2 = &quot;^abc&quot;
+pattern3 = &quot;py$&quot;
+pattern4 = &quot;ay$&quot;
+string = &quot;abcdfphp345pythony_py&quot;
+result1 = re.search(pattern1, string)
+result2 = re.search(pattern2, string)
+result3 = re.search(pattern3, string)
+result4 = re.search(pattern4, string)
+print(result1)
+print(result2)
+print(result3)
+print(result4)
+</code></pre><p>运行结果</p>
+<pre><code>None
+&lt;_sre.SRE_Match object; span=(0, 3), match=&#39;abc&#39;&gt;
+&lt;_sre.SRE_Match object; span=(19, 21), match=&#39;py&#39;&gt;
+None
+</code></pre><p><code>$</code> 匹配字符串的结束位置</p>
+<p><code>*</code> 匹配0次，1次或多次前面的原子</p>
+<p><code>?</code> 匹配0次，1次前面的原子 </p>
+<p><code>+</code> 匹配1次，多次前面的原子</p>
+<p><code>{n}</code> 前面的原子恰好出现n次<br><code>{n,}</code> 前面的原子至少出现n次<br><code>{n,m}</code> 前面的原子至少出现n次，至多出现m次</p>
+<pre><code>import re
+pattern1 = &quot;py.*n&quot;
+pattern2 = &quot;cd{2}&quot;
+pattern3 = &quot;cd{3}&quot;
+pattern4 = &quot;cd{2,}&quot;
+string = &quot;abcddddfphp345pythony_py&quot;
+result1 = re.search(pattern1, string)
+result2 = re.search(pattern2, string)
+result3 = re.search(pattern3, string)
+result4 = re.search(pattern4, string)
+print(result1)
+print(result2)
+print(result3)
+print(result4)
+</code></pre><p>运行结果</p>
+<pre><code>&lt;_sre.SRE_Match object; span=(14, 20), match=&#39;python&#39;&gt;
+&lt;_sre.SRE_Match object; span=(2, 5), match=&#39;cdd&#39;&gt;
+&lt;_sre.SRE_Match object; span=(2, 6), match=&#39;cddd&#39;&gt;
+&lt;_sre.SRE_Match object; span=(2, 7), match=&#39;cdddd&#39;&gt;
+</code></pre><p><code>|</code> 模式选择符<br>选择符中的任意一边满足就行</p>
+<pre><code>import re
+pattern1 = &quot;python|php&quot;
+string = &quot;abcdddphpdfphp345pythony_py&quot;
+result1 = re.search(pattern1, string)
+print(result1)
+</code></pre><p>运行结果</p>
+<pre><code>&lt;_sre.SRE_Match object; span=(6, 9), match=&#39;php&#39;&gt;
+</code></pre><p><code>()</code> 模式单元符<br>()中的原子组成一个大原子</p>
+<pre><code>import re
+pattern1 = &quot;(cd){1,}&quot;
+pattern2 = &quot;cd{1,}&quot;
+string = &quot;abcdddphpdfphp345pythony_py&quot;
+result1 = re.search(pattern1, string)
+result2 = re.search(pattern2, string)
+print(result1)
+print(result2)
+</code></pre><p>运行结果</p>
+<pre><code>&lt;_sre.SRE_Match object; span=(2, 4), match=&#39;cd&#39;&gt;
+&lt;_sre.SRE_Match object; span=(2, 6), match=&#39;cddd&#39;&gt;
+</code></pre><p>2.3 模式修正</p>
+<p><code>I</code> 匹配时忽略大小写<br><code>M</code> 多行匹配<br><code>L</code> 做本地化识别匹配<br><code>U</code> 根据Unicode字符及解析字符<br><code>S</code> 让.匹配包括换行符，即用了该模式修正符后，”.”匹配就可以匹配任意字符了</p>
+<pre><code>import re
+pattern1 = &quot;python&quot;
+pattern2 = &quot;python&quot;
+string = &quot;abcdddphpdfphp345Pythony_py&quot;
+result1 = re.search(pattern1, string)
+result2 = re.search(pattern2, string, re.I)
+print(result1)
+print(result2)
+</code></pre><p>运行结果</p>
+<pre><code>None
+&lt;_sre.SRE_Match object; span=(17, 23), match=&#39;Python&#39;&gt;
+</code></pre><p>2.4 贪婪模式与懒惰模式<br><code>贪婪模式</code>就是尽可能多的匹配，<code>懒惰模式</code>就是尽可能少的匹配。</p>
+<pre><code>import re
+pattern1 = &quot;p.*y&quot;
+pattern2 = &quot;p.*?y&quot;
+string = &quot;abcdddphpdfphp345Pythony_py&quot;
+result1 = re.search(pattern1, string)
+result2 = re.search(pattern2, string)
+print(result1)
+print(result2)
+</code></pre><p>运行结果</p>
+<pre><code>&lt;_sre.SRE_Match object; span=(6, 27), match=&#39;phpdfphp345Pythony_py&#39;&gt;
+&lt;_sre.SRE_Match object; span=(6, 19), match=&#39;phpdfphp345Py&#39;&gt;
+</code></pre><p>2.5 正则表达式常见函数<br>2.5.1 re.match()和re.search()</p>
+<pre><code>import re
+string = &quot;hellomypythonhispythonourpythonend&quot;
+pattern = &quot;.python.&quot;
+result = re.match(pattern, string)
+result2 = re.search(pattern, string)
+print(result)
+print(result2)
+</code></pre><p>运行结果</p>
+<pre><code>None
+&lt;_sre.SRE_Match object; span=(6, 14), match=&#39;ypythonh&#39;&gt;
+</code></pre><p><code>match</code>函数是从源字符串的开头进行匹配，而<code>search</code>函数会在全文中进行匹配</p>
+<p>2.5.2 全局匹配函数<br>使用<code>re.complie()</code>预编译，再使用<code>ffindall()</code>找出全部结果</p>
+<pre><code>import re
+string = &quot;hellomypythonhispythonourpythonend&quot;
+pattern = re.compile(&quot;.python.&quot;)
+result = pattern.findall(string)
+# pattern = &quot;.python.&quot;
+# result = re.compile(pattern).findall()
+print(result)
+</code></pre><p>运行结果</p>
+<pre><code> [&#39;ypythonh&#39;, &#39;spythono&#39;, &#39;rpythone&#39;]
+</code></pre><p>2.5.3 re.sub()函数<br>使用正则来实现替换功能</p>
+<pre><code>import re
+string = &quot;hellomypythonhispythonourpythonend&quot;
+pattern = &quot;.python.&quot;
+result1 = re.sub(pattern, &quot;php&quot;, string) #全部替换
+result2 = re.sub(pattern, &quot;php&quot;, string, 2) #替换两次
+print(result1)
+print(result2)
+</code></pre><p>运行结果</p>
+<pre><code>hellomphpiphpuphpnd
+hellomphpiphpurpythonend
+</code></pre><p>2.6 cookie<br>2.6.1<br>维持会话状态的常用方式一般为两种，<code>cookie</code>和<code>session</code>。<br>如果是<code>cookie</code>，登录后会把会话信息保存在客户端，重新访问时会从本地cookie中读取对应的会话信息，从而判断目前的会话状态。<br>如果是<code>session</code>，会话信息保存在服务端，服务端会给客户端发一个<code>sessionId</code>，这个信息保存在cookie中（如果本地禁用cookie，可能保存在其他地方）。重新访问时，根本本地信息发送至服务端检索出对应的会话状态。</p>
+<p>2.6.2<br>进行cookie处理的一种常用思路如下：<br>1.导入Cookie处理模块http.cookiejar<br>2.使用http.cookjar.CookJar()创建CookieJar对象。<br>3.使用HTTPCookieProcessor创建cookie处理器，并以其为参数构建opener对象。<br>4.创建全局默认的opener对象。</p>
+<pre><code>import urllib.request
+import urllib.parse
+import http.cookiejar
+#这个地址是在network中监控的真实提交表单的地址
+url = &quot;http://bbs.chinaunix.net/member.php?mod=logging&amp;action=login&amp;loginsubmit=yes&amp;loginhash=LApSM&quot;
+postdata = urllib.parse.urlencode({
+    &quot;username&quot;:&quot;same4869&quot;,
+    &quot;password&quot;:&quot;58129553&quot;
+}).encode(&#39;utf-8&#39;)
+req = urllib.request.Request(url, postdata)
+req.add_header(&quot;User-Agent&quot;, &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36&quot;)
+#使用http.cookiejar.CookieJar()创建CookieJar对象
+cjar = http.cookiejar.CookieJar()
+#使用HTTPCookieProcessor创建cookie处理器，并以其为参数构造opener
+opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cjar))
+#安装为全局opener
+urllib.request.install_opener(opener)
+file = opener.open(req)
+data = file.read()
+file = open(&quot;/Users/xunwang/Desktop/python/Demo1.5.html&quot;, &quot;wb&quot;)
+file.write(data)
+file.close()
+url2 = &quot;http://bbs.chinaunix.net/forum.php&quot;
+data2 = urllib.request.urlopen(url2).read()
+fhandle = open(&quot;/Users/xunwang/Desktop/python/Demo1.5.1.html&quot;, &quot;wb&quot;)
+fhandle.write(data2)
+fhandle.close()
+</code></pre><h4 id="3-手写Python爬虫"><a href="#3-手写Python爬虫" class="headerlink" title="3.手写Python爬虫"></a>3.手写Python爬虫</h4>
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至same4869@126.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry"><span class="miit">
+                <img src="/img/gov.png" title="中华人民共和国工业和信息化部">
+                <a href="http://beian.miit.gov.cn/">沪ICP备2022003838号-2</a>
+        </span>
+    
+    ©2023-2024 Same
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

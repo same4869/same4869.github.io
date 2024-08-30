@@ -1,0 +1,2012 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Android下载模块探究 | Same&#39;s Blog</title>
+  <meta name="keywords" content=" Android ">
+  <meta name="description" content="Android下载模块探究 | Same&#39;s Blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="施工中。。。。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://same4869.github.io/about/index.html">
+<meta property="og:site_name" content="Same&#39;s Blog">
+<meta property="og:description" content="施工中。。。。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2024-03-18T08:05:23.996Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="about">
+<meta name="twitter:description" content="施工中。。。。">
+
+
+<link rel="icon" href="https://img0.baidu.com/it/u=2938741800,3443602320&fm=253&fmt=auto&app=138&f=JPEG?w=268&h=268">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0"></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.1.0"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="undefined">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true">
+  <input id="theme_highlight_on" value="true">
+  <input id="theme_code_copy" value="true">
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="https://img0.baidu.com/it/u=2938741800,3443602320&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=268&amp;h=268"/>
+</a>
+<div class="author">
+    <span>Same</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/same4869"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="jianshu"
+               href="http://www.jianshu.com/u/4165fccb3734"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-jianshu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+               href="mailto:same4869@126.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=119123059&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(18)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+    <li>
+        <div data-rel="Android">
+            
+            Android
+            <small>(11)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+        
+            
+    <li>
+        <div data-rel="鸿蒙">
+            
+            鸿蒙
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+        
+            
+    <li>
+        <div data-rel="其他技术">
+            
+            其他技术
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+        
+            
+    <li>
+        <div data-rel="个人随笔">
+            
+            个人随笔
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                undefined
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="18">
+<input type="hidden" id="yelog_site_word_count" value="57.7k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="https://ccflower.github.io/">ccflower的博客</a></li>
+            
+            <li><a target="_blank" href="http://todd2010.github.io/">todd2010的博客</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Android</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>blockchain</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>otherTec</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>个人随笔</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>鸿蒙</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 鸿蒙 "
+           href="/2024/03/19/移动端跨平台方案，但是ArkUI-X/"
+           data-tag="鸿蒙"
+           data-author="" >
+            <span class="post-title" title="移动端跨平台方案，但是ArkUI-X">移动端跨平台方案，但是ArkUI-X</span>
+            <span class="post-date" title="2024-03-19 00:00:00">2024/03/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2019/03/22/手撸Android-Nexus私有Maven仓库GOGOGO/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="手撸Android-Nexus私有Maven仓库GOGOGO">手撸Android-Nexus私有Maven仓库GOGOGO</span>
+            <span class="post-date" title="2019-03-22 00:00:00">2019/03/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 其他技术 "
+           href="/2018/07/08/EOS爬行记1/"
+           data-tag="blockchain"
+           data-author="" >
+            <span class="post-title" title="EOS爬行记（章一） --- EOS环境搭建与基本命令">EOS爬行记（章一） --- EOS环境搭建与基本命令</span>
+            <span class="post-date" title="2018-07-08 00:00:00">2018/07/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 其他技术 "
+           href="/2018/04/05/DAPP开发实战之投票系统/"
+           data-tag="blockchain"
+           data-author="" >
+            <span class="post-title" title="DAPP开发实战之投票系统">DAPP开发实战之投票系统</span>
+            <span class="post-date" title="2018-04-05 00:00:00">2018/04/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 其他技术 "
+           href="/2018/02/19/Hexo博客重新起飞/"
+           data-tag="otherTec"
+           data-author="" >
+            <span class="post-title" title="Hexo博客重新起飞">Hexo博客重新起飞</span>
+            <span class="post-date" title="2018-02-19 00:00:00">2018/02/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 个人随笔 "
+           href="/2017/12/25/东京女子图鉴/"
+           data-tag="个人随笔"
+           data-author="" >
+            <span class="post-title" title="《东京女子图鉴》碎碎念">《东京女子图鉴》碎碎念</span>
+            <span class="post-date" title="2017-12-25 00:00:00">2017/12/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/12/19/《APP技术封装与选择》总览/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《APP技术封装与选择》总览">《APP技术封装与选择》总览</span>
+            <span class="post-date" title="2017-12-19 00:00:00">2017/12/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 其他技术 "
+           href="/2017/10/19/《精通Python网络爬虫》读书笔记/"
+           data-tag="otherTec"
+           data-author="" >
+            <span class="post-title" title="《精通Python网络爬虫》读书笔记">《精通Python网络爬虫》读书笔记</span>
+            <span class="post-date" title="2017-10-19 00:00:00">2017/10/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/10/10/commlib使用指南/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="commlib使用指南">commlib使用指南</span>
+            <span class="post-date" title="2017-10-10 00:00:00">2017/10/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/08/21/APP研发录/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《APP研发录》读书笔记">《APP研发录》读书笔记</span>
+            <span class="post-date" title="2017-08-21 00:00:00">2017/08/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/08/08/《Android技能树探索》总览/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》总览">《Android技能树探索》总览</span>
+            <span class="post-date" title="2017-08-08 00:00:00">2017/08/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/07/19/《易读》APP分析/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《易读》APP分析">《易读》APP分析</span>
+            <span class="post-date" title="2017-07-19 00:00:00">2017/07/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/06/07/《Android技能树探索》基础篇---Broadcast/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》基础篇---Broadcast">《Android技能树探索》基础篇---Broadcast</span>
+            <span class="post-date" title="2017-06-07 00:00:00">2017/06/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/05/10/Android下载模块探究/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="Android下载模块探究">Android下载模块探究</span>
+            <span class="post-date" title="2017-05-10 00:00:00">2017/05/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/04/05/《Android技能树探索》基础篇---Service/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="《Android技能树探索》基础篇---Service">《Android技能树探索》基础篇---Service</span>
+            <span class="post-date" title="2017-04-05 00:00:00">2017/04/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/04/01/基于Fragment的安卓插件化Demo/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="基于Fragment的安卓插件化Demo">基于Fragment的安卓插件化Demo</span>
+            <span class="post-date" title="2017-04-01 00:00:00">2017/04/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 Android "
+           href="/2017/03/21/Android深度主题切换探究/"
+           data-tag="Android"
+           data-author="" >
+            <span class="post-title" title="Android深度主题切换探究">Android深度主题切换探究</span>
+            <span class="post-date" title="2017-03-21 00:00:00">2017/03/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 个人随笔 "
+           href="/2017/02/11/精进/"
+           data-tag="个人随笔"
+           data-author="" >
+            <span class="post-title" title="《精进：如何成为一个很厉害的人》读书笔记">《精进：如何成为一个很厉害的人》读书笔记</span>
+            <span class="post-date" title="2017-02-11 00:00:00">2017/02/11</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-Android下载模块探究" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Android下载模块探究</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="Android">Android</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">Android</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2024-03-18 15:23:47'>2017-05-10 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:7k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-从上至下"><span class="toc-text">1.从上至下</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-DownLoader初探"><span class="toc-text">2.DownLoader初探</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-ConnectionWrapperManager真面目"><span class="toc-text">3.ConnectionWrapperManager真面目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-DownLoader续"><span class="toc-text">4.DownLoader续</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-数据库"><span class="toc-text">5.数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-总结"><span class="toc-text">6.总结</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><p><strong>开篇：</strong>APP中的下载模块，其实也算一个网络访问的模块，但又和一般的后台接口之类网络请求不太一样。而且到目前为止，类似okhttp,volley之类的接口请求框架非常丰富，下载模块总会让开发者去花更多心思去完善流程。<br>现在没有网络请求的APP已经少得可怜了，相比之下下载显得不是那么必须，但是在一个相对成熟的APP中，不管是数据库，还是下载都是必不可缺的，说多了都是废话，还是进入正题好了。<br><strong>PS：</strong>本文依旧以实现功能为导向，不对具体原理做深入解释，相关请自己百度谷歌一下。</p>
+<h4 id="1-从上至下"><a href="#1-从上至下" class="headerlink" title="1.从上至下"></a>1.从上至下</h4><p>从原理开始分析总觉得很容易让人迷惑，不妨从应用的层面上来分解这个问题（后面遇到坑再填好了），先来看看Demo的界面：<br><img src="/img/003/20170328-10.png" alt="Alt text"><br>界面不要太简单有木有。</p>
+<a id="more"></a>
+<p><strong>功能是这样的，这个APP一启动起来在onCreate里面就会下载一个文件，当然是在后台log打进度日志啦，点击暂停就暂停下载，点击继续续传下载，当然如果完全退出APP甚至是重启手机也是可以断点续传的。点击开始下载2并不会影响上一个下载。</strong><br>好了可以开始看代码了：</p>
+<pre><code class="java">        String appUrl = &quot;http://music.baidu.com/cms/BaiduMusic-pcwebdownload.apk&quot;;
+        String downloadPath = Environment.getExternalStorageDirectory() + &quot;/BaiduMusic-pcwebdownload.apk&quot;;
+        upgradeTaskId = DownLoadManager.getInstance(getApplicationContext()).addTask(null, appUrl, downloadPath, true, this);
+        Log.d(&quot;kkkkkkkk&quot;, &quot;initData upgradeTaskId --&gt; &quot; + upgradeTaskId);
+</code></pre>
+<p>以上代码是在<code>onCreate</code>里面做的，也就是说页面启动的时候就添加了一个下载任务，在这里的逻辑也就是开始下载了。<br>看到了那个醒目的<code>DownLoadManager</code>了吗，里面有很多东西，不妨来慢慢分解它：</p>
+<pre><code class="java">    private DownLoadManager(Context context) {
+        mContext = context;
+        mPool = new ThreadPoolExecutor(CORE_POOL_SIZE, MAXIUM_POOL_SIZE, KEEP_LIVE_TIME, TimeUnit.SECONDS, new ArrayBlockingQueue&lt;Runnable&gt;(QUEUE_SIZE));
+    }
+
+    public static DownLoadManager getInstance(Context context) {
+        if (mInstance == null) {
+            synchronized (DownLoadManager.class) {
+                if (mInstance == null) {
+                    mInstance = new DownLoadManager(context);
+                }
+            }
+        }
+        return mInstance;
+    }
+</code></pre>
+<p>作为一个manager，单例是基本素养，就不多说了，来看构造函数里面的几个东东。<br><code>context</code>主要用到了3个地方，1是创建数据库，2是https获得证书，3是注册广播。什么？为啥有数据库？没有数据库怎么牛逼地断点续传呢·····先剧透到这里，接着看<code>mPool</code>，这个是一个线程池，每一个下载相当于从这个线程池里捞出线程来执行下载任务，里面这几个参数<br><code>private static final int CORE_POOL_SIZE = 5;
+    private static final int MAXIUM_POOL_SIZE = 10;
+    private static final int KEEP_LIVE_TIME = 30;
+    private static final int QUEUE_SIZE = 2000;</code><br>先看看就行了。<br>首先来看看<code>addTask</code>的实现</p>
+<pre><code class="java">public String addTask(String uid, String url, String path, boolean isSupportBreakpoint, DownLoadCallBack callBack) {
+        Log.d(TAG, &quot;url=&quot; + url);
+        Log.d(TAG, &quot;path=&quot; + path);
+        String taskId = getTaskId(uid, url, path);
+
+        Log.d(TAG, &quot;taskId=&quot; + taskId);
+
+        DownLoader downLoader = findTask(uid, taskId, true);
+        if (downLoader == null) {
+            String fileName = path.substring(path.lastIndexOf(&quot;/&quot;) + 1);
+            String filePath = path.substring(0, path.lastIndexOf(&quot;/&quot;));
+
+            Log.d(TAG, &quot;fileName=&quot; + fileName);
+            Log.d(TAG, &quot;filePath=&quot; + filePath);
+
+            DownLoadBean info = new DownLoadBean();
+            if (TextUtils.isEmpty(uid)) {
+                uid = &quot;12345&quot;;// UserManager.getCurUserId();
+            }
+
+            info.setUserID(uid);
+            info.setTaskID(taskId);
+            info.setFilePath(filePath);
+            info.setFileName(fileName);
+            info.setIsSupportBreakpoint(isSupportBreakpoint);
+            info.setUrl(url);
+
+            downLoader = new DownLoader(mContext, info, mPool, true);
+            mDownLoaderList.put(taskId, downLoader);
+        } else {
+            if (!mDownLoaderList.containsKey(taskId)) {
+                mDownLoaderList.put(taskId, downLoader);
+            }
+        }
+        registReceiver();
+        downLoader.setDownLoadCallBack(callBack);
+
+        if (!downLoader.isDownLoading()) {
+            downLoader.start();
+        }
+
+        return taskId;
+    }
+</code></pre>
+<p>从基本的流程来捋一遍吧，首先是把<code>uid, url, path</code>这三个参数通过<code>getTaskId</code>方法生成一个<code>taskId</code>,其实就是拼起来md5了一下：</p>
+<pre><code class="java">    private String getTaskId(String uid, String url, String path) {
+        return StringUtil.md5(uid + url + path);
+    }
+</code></pre>
+<p>加密算法如下，不解释啦：</p>
+<pre><code class="java">    public static String md5(String s) {
+        char hexDigits[] = { &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39; };
+        try {
+            byte[] strTemp = s.getBytes();
+            // 使用MD5创建MessageDigest对象
+            MessageDigest mdTemp = MessageDigest.getInstance(&quot;MD5&quot;);
+            mdTemp.update(strTemp);
+            byte[] md = mdTemp.digest();
+            int j = md.length;
+            char str[] = new char[j * 2];
+            int k = 0;
+            for (int i = 0; i &lt; j; i++) {
+                byte b = md[i];
+                // 将每个数(int)b进行双字节加密
+                str[k++] = hexDigits[b &gt;&gt; 4 &amp; 0xf];
+                str[k++] = hexDigits[b &amp; 0xf];
+            }
+            return new String(str);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+</code></pre>
+<p>然后回去通过<code>findTask</code>去找数据库中是否有对应<code>DownLoader</code>，如果有的话直接把它放到<code>mDownLoaderList</code>中然后调用<code>DownLoader</code>的<code>start</code>方法，如果没有我们继续看。<br>这里有个实体类<code>DownLoadBean</code>来存放下载的相关信息，有必要来先看看里面的字段：</p>
+<pre><code class="java">    private String userID;
+    private String taskID;
+    private String url;
+    private String filePath;
+    private String fileName;
+    private long fileSize;
+    private long downloadSize;
+    private boolean isSupportBreakpoint;
+</code></pre>
+<p>从名字上基本可以望文生义了，不需要太多解释吧。刚刚说到如果<code>findTask</code>的<code>DownLoader</code>是空的，证明是第一次下载这个任务，那么需要重新构造下载相关信息。从代码上可以看出来除了<code>fileSize</code>和<code>downloadSize</code>没法构造其他的都可以直接塞进去了，最后通过<code>downLoader = new DownLoader(mContext, info, mPool, true);</code>来生成一个新的<code>DownLoader</code>，然后后面就跟从数据库中找到一样操作了。无非就是加入到一个list中去方便管理，和开启下载任务。当然还有一个<code>registReceiver</code>方法，先看看吧，顺便把反注册也贴上来了：</p>
+<pre><code class="java">private void registReceiver() {
+        if (mNetStateBroadCastReceiver == null) {
+            mNetStateBroadCastReceiver = new NetStateReceiver();
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+            mContext.registerReceiver(mNetStateBroadCastReceiver, filter);
+        }
+    }
+private void unRegistReceiver() {
+        if (mDownLoaderList.isEmpty() &amp;&amp; mNetStateBroadCastReceiver != null) {
+            mContext.unregisterReceiver(mNetStateBroadCastReceiver);
+            mNetStateBroadCastReceiver = null;
+        }
+    }
+</code></pre>
+<p>注册了一个监听网络状态变化的广播监听器：</p>
+<pre><code class="java">public class NetStateReceiver extends BroadcastReceiver {
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+        if (networkInfo != null) {
+            if (networkInfo.isAvailable()) {
+                if (networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+                    DownLoadManager.getInstance(context).startAllTask();
+                } else {
+                    DownLoadManager.getInstance(context).stopAllTask();
+                }
+            } else {
+                DownLoadManager.getInstance(context).stopAllTask();
+            }
+        } else {
+            DownLoadManager.getInstance(context).stopAllTask();
+        }
+    }
+}
+</code></pre>
+<p>大概意思就是在wifi环境下所有任务自动下载，非wifi环境和断网下自动停止，真是好人性化好贴心好不做作，跟外面那些妖艳贱货完全不一样，当然这个根据自己的业务自己去处理这种逻辑才是王道呢科科。<br>广播监听器里面方法有<code>startAllTask</code>和<code>stopAllTask</code>，看看里面都干了些什么：</p>
+<pre><code class="java">public void startAllTask() {
+        Set&lt;Entry&lt;String, DownLoader&gt;&gt; set = mDownLoaderList.entrySet();
+        Iterator&lt;Entry&lt;String, DownLoader&gt;&gt; iterator = set.iterator();
+        while (iterator.hasNext()) {
+            Entry&lt;String, DownLoader&gt; entry = iterator.next();
+            DownLoader downLoader = entry.getValue();
+            if (downLoader != null &amp;&amp; !downLoader.isDownLoading()) {
+                downLoader.start();
+            }
+        }
+    }
+
+    public void stopAllTask() {
+        Set&lt;Entry&lt;String, DownLoader&gt;&gt; set = mDownLoaderList.entrySet();
+        Iterator&lt;Entry&lt;String, DownLoader&gt;&gt; iterator = set.iterator();
+        while (iterator.hasNext()) {
+            Entry&lt;String, DownLoader&gt; entry = iterator.next();
+            DownLoader downLoader = entry.getValue();
+            if (downLoader != null &amp;&amp; downLoader.isDownLoading()) {
+                downLoader.stop();
+            }
+        }
+        unRegistReceiver();
+    }
+</code></pre>
+<p>知道刚刚为什么要把<code>DownLoader</code>都塞到<code>mDownLoaderList</code>里面去了吧，好了马上要进入下一步了，分析到现在很明显了，所有的下载核心都封装在一个<code>DownLoader</code>类中，每一个下载都对应一个<code>DownLoader</code>，它们被装在一个<code>mDownLoaderList</code>的容器里方便管理。</p>
+<h4 id="2-DownLoader初探"><a href="#2-DownLoader初探" class="headerlink" title="2.DownLoader初探"></a>2.DownLoader初探</h4><p>刚刚我们看到，新建一个新的下载任务会用<code>downLoader = new DownLoader(mContext, info, mPool, true);</code>来创建一个新的<code>DownLoader</code>，那么从构造函数开始吧：</p>
+<pre><code class="java">    public DownLoader(Context context, DownLoadBean sqlFileInfo, ThreadPoolExecutor pool, boolean isNewTask) {
+        mContext = context;
+        mSQLDownLoadInfo = sqlFileInfo;
+        mPool = pool;
+        mIsSupportBreakpoint = sqlFileInfo.isSupportBreakpoint();
+        mUrl = mSQLDownLoadInfo.getUrl();
+        mFileSize = mSQLDownLoadInfo.getFileSize();
+        mDownLoadSize = mSQLDownLoadInfo.getDownloadSize();
+        mFilePath = mSQLDownLoadInfo.getFilePath();
+        mFileName = mSQLDownLoadInfo.getFileName();
+        mHelper = DownloadTaskDBHelper.getInstance(context);
+        if (isNewTask) {
+            mHelper.save(sqlFileInfo);
+        }
+    }
+</code></pre>
+<p>用参数初始化了一堆变量，反正就放那里没错啦，然后创建了一个<code>DownloadTaskDBHelper</code>实例，我们先把<code>mHelper</code>当黑盒好了，后面再专门看看这个数据库是怎么设计与实现的。<br>既然构造函数没有什么，那么看看<code>start</code>方法吧：</p>
+<pre><code class="java">    public void start() {
+        if (mDownLoadTask == null) {
+            mDownLoadTask = new DownLoadTask();
+        }
+        mPool.execute(mDownLoadTask);
+        ondownload = true;
+        mHandler.sendEmptyMessage(TASK_START);
+    }
+</code></pre>
+<p>先看最后一句话，是一个handler的消息，其实用来回调的：</p>
+<pre><code class="java">private Handler mHandler = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (mDownLoadCallBack != null) {
+                if (msg.what == TASK_START) { // 开始下载
+                    mDownLoadCallBack.onStart(getTaskID());
+                } else if (msg.what == TASK_STOP) { // 停止下载
+                    mDownLoadCallBack.onStop(mFileSize, mDownLoadSize, getTaskID());
+                    if (mDownLoadSize == 0) {
+                        mDownLoadCallBack = null;
+                    }
+                } else if (msg.what == TASK_PROGESS) { // 改变进程
+                    mDownLoadCallBack.onLoading(mFileSize, mDownLoadSize);
+                } else if (msg.what == TASK_ERROR) { // 下载出错
+                    String error_msg = msg.getData().getString(ERROR_KEY);
+                    mDownLoadCallBack.onFailure(error_msg);
+                } else if (msg.what == TASK_SUCCESS) { // 下载完成
+                    mDownLoadCallBack.onSuccess(mFilePath + File.separator + mFileName, getTaskID());
+                    mDownLoadCallBack = null;
+                }
+            }
+        }
+    };
+</code></pre>
+<p>再来看看接口的定义：</p>
+<pre><code class="java">public interface DownLoadCallBack {
+    void onStart(String taskID);
+    void onLoading(long total, long current);
+    void onSuccess(String path, String taskID);
+    void onFailure(String msg);
+    void onStop(long total, long current, String taskID);
+}
+</code></pre>
+<p>这些回调主要是让使用着知道下载状态，虽然必须但没啥好说的，现在把代码贴出来主要是后面看到相关代码懵逼。<br>好了我们现在回到<code>start</code>方法，新建了一个<code>DownLoadTask</code>并且使用线程池来执行了它，<code>DownLoadTask</code>是一个runnable，也就是下载的具体实现了，来来来接着看。<br><code>DownLoadTask</code>里面的run方法就只有一个download方法，看来这是下载的全部东东了，先贴出来分析下：</p>
+<pre><code class="java">private void downLoad() {
+            if (mDownLoadSize == mFileSize &amp;&amp; mFileSize &gt; 0) {// 如果下好的文件大小与文件本身大小一样，则默认已经下载完成，不再下载
+                ondownload = false;
+                mHandler.sendEmptyMessage(TASK_PROGESS);
+                mDownLoadTask = null;
+                return;
+            }
+            ConnectionWrapperManager manager = null;
+            InputStream inputStream = null;
+            try {
+                manager = new ConnectionWrapperManager(mContext, mUrl);
+                manager.setRequestMethod(DownLoadManager.RequsteMethod.GET);
+                manager.setConnectTimeout(CONNECT_TIME_OUT);
+                manager.setReadTimeout(READ_TIME_OUT);
+                if (mDownLoadSize &lt; 1) {// 第一次下载，初始化
+                    openConnention(manager);
+                } else {
+                    if (new File(mFilePath + File.separator + mFileName + &quot;.tmp&quot;).exists()) {
+                        mLocalFile = new RandomAccessFile(mFilePath + File.separator + mFileName + &quot;.tmp&quot;, &quot;rwd&quot;);
+                        mLocalFile.seek(mDownLoadSize);
+                        manager.setRequestProperty(&quot;Range&quot;, &quot;bytes=&quot; + mDownLoadSize + &quot;-&quot;);
+                    } else {
+                        mFileSize = 0;
+                        mDownLoadSize = 0;
+                        openConnention(manager);
+                        saveDownloadInfo();
+                    }
+                }
+                inputStream = manager.getInputStream();
+                byte[] buffer = new byte[1024 * 4];
+                int length = -1;
+                if (inputStream != null) {
+                    while ((length = inputStream.read(buffer)) != -1 &amp;&amp; isdownloading) {
+                        mLocalFile.write(buffer, 0, length);
+                        mDownLoadSize += length;
+                        mSafeDownLoadSize = mDownLoadSize;
+                        mHandler.sendEmptyMessage(TASK_PROGESS);
+                    }
+                }
+                // 下载完了
+                if (mDownLoadSize == mFileSize) {
+                    boolean renameResult = renameFile();
+                    if (renameResult) {
+                        mHandler.sendEmptyMessage(TASK_SUCCESS); // 转移文件成功
+                    } else {
+                        new File(mFilePath + File.separator + mFileName + &quot;.tmp&quot;).delete();
+                        Message msg = Message.obtain();
+                        msg.what = TASK_ERROR;
+                        Bundle bundle = new Bundle();
+                        bundle.putString(ERROR_KEY, &quot;转移文件失败&quot;);
+                        msg.setData(bundle);
+                        mHandler.sendEmptyMessage(TASK_ERROR);// 转移文件失败
+                    }
+                    // 清除数据库任务
+                    mHelper.deleteDownLoadInfo(mSQLDownLoadInfo.getUserID(), getTaskID());
+                    mDownLoadTask = null;
+                    mDownLoadCallBack = null;
+                    ondownload = false;
+                    mDownLoadSize = 0;
+                    mSafeDownLoadSize = 0;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                if (isdownloading) {
+                    if (mIsSupportBreakpoint) {
+                        try {
+                            if (mLocalFile != null) {
+                                long length = mLocalFile.length();
+                                if (length &gt; 0) {
+                                    saveDownloadInfo();
+                                }
+                            }
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                    ondownload = false;
+                    mPool.remove(mDownLoadTask);
+                    mDownLoadTask.stopDownLoad();
+                    mDownLoadTask = null;
+                    Message msg = Message.obtain();
+                    msg.what = TASK_ERROR;
+                    Bundle bundle = new Bundle();
+                    bundle.putString(ERROR_KEY, e.getMessage());
+                    msg.setData(bundle);
+                    mHandler.sendMessage(msg);
+                }
+            } finally {
+                if (manager != null) {
+                    manager.disconnect();
+                }
+                if (inputStream != null) {
+                    try {
+                        inputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (mLocalFile != null) {
+                    try {
+                        mLocalFile.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+</code></pre>
+<p>代码看上去也没那么多是不是，其实也没那么简单，带着一步一坑的想法慢慢看吧。<br>刚开始的一个判断没什么，然后声明了<code>ConnectionWrapperManager</code>，这又是个什么鬼，看看后面的一些逻辑，发现原来所有下载操作都是它来完成，真是层层代理呢，关于<code>ConnectionWrapperManager</code>还是专门拧一个小节会比较有层次感吧。</p>
+<h4 id="3-ConnectionWrapperManager真面目"><a href="#3-ConnectionWrapperManager真面目" class="headerlink" title="3.ConnectionWrapperManager真面目"></a>3.ConnectionWrapperManager真面目</h4><p>首先看看包结构可能够容易只管了解一点：<br><img src="/img/003/20170328-11.png" alt="Alt text"><br><code>UrlConnectionWrapper</code>是一个接口，封装了<code>HttpsURLConnection</code>和<code>HttpURLConnection</code>的各个方法：</p>
+<pre><code class="java">public interface UrlConnectionWrapper {
+    void setRequestMethod(DownLoadManager.RequsteMethod method);
+
+    int getResponseCode();
+
+    void setDoOutPut(boolean newValue);
+
+    InputStream getInputStream();
+
+    void setConnectTimeout(int timeout);
+
+    void setReadTimeout(int timeout);
+
+    void setRequestProperty(String range, String s);
+
+    void disconnect();
+
+    long getFileSize();
+}
+</code></pre>
+<p>所以这个其实就是一个适配器模式，<code>ConnectionWrapperManager</code>是一个适配器，它会根据URL来选择使用<code>HttpUrlConnectionWrapper</code>还是<code>HttpsUrlConnectionWrapper</code>里的相应方法，从而达到支持http和https，而<code>HttpUrlConnectionWrapper</code>和<code>HttpsUrlConnectionWrapper</code>里面当然就是调用<code>HttpURLConnection</code>和<code>HttpsURLConnection</code>的方法啦，这里只贴出<code>HttpUrlConnectionWrapper</code>的代码，<code>HttpsUrlConnectionWrapper</code>里面有一些ssl和证书等的相关处理，有兴趣的自己百度吧，不然感觉真心是越扯越远有点收不回来了。</p>
+<pre><code class="java">public class HttpUrlConnectionWrapper implements UrlConnectionWrapper{
+    private HttpURLConnection mHttpURLConnection;
+    public HttpUrlConnectionWrapper(HttpURLConnection connection) {
+        mHttpURLConnection = connection;
+    }
+
+    @Override
+    public void setRequestMethod(DownLoadManager.RequsteMethod method) {
+        try {
+            if(method == DownLoadManager.RequsteMethod.GET){
+                mHttpURLConnection.setRequestMethod(&quot;GET&quot;);
+            } else {
+                mHttpURLConnection.setRequestMethod(&quot;POST&quot;);
+            }
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public int getResponseCode() {
+        try {
+            return mHttpURLConnection.getResponseCode();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    @Override
+    public void setDoOutPut(boolean newValue) {
+        mHttpURLConnection.setDoOutput(newValue);
+    }
+
+    @Override
+    public InputStream getInputStream() {
+        try {
+            return mHttpURLConnection.getInputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public void setConnectTimeout(int timeout) {
+        mHttpURLConnection.setConnectTimeout(timeout);
+    }
+
+    @Override
+    public void setReadTimeout(int timeout) {
+        mHttpURLConnection.setReadTimeout(timeout);
+    }
+
+    @Override
+    public void setRequestProperty(String range, String s) {
+        mHttpURLConnection.setRequestProperty(range, s);
+    }
+
+    @Override
+    public void disconnect() {
+        mHttpURLConnection.disconnect();
+    }
+
+    @Override
+    public long getFileSize() {
+        return mHttpURLConnection.getContentLength();
+    }
+}
+</code></pre>
+<p>简单清楚明白吧，再来看看封装成<code>ConnectionWrapperManager</code>的代码：</p>
+<pre><code class="java">public class ConnectionWrapperManager implements UrlConnectionWrapper{
+    private UrlConnectionWrapper mWrapper;
+    public ConnectionWrapperManager(Context context, String murl) {
+        try {
+            URL url = new URL(murl);
+            if (murl.startsWith(&quot;https&quot;)){
+                HttpsURLConnection conn = (HttpsURLConnection)url.openConnection();
+                mWrapper = new HttpsUrlConnectionWrapper&lt;MyX509TrustManager, X509KeyManager, HostnameVerifier&gt;(conn, new MyX509TrustManager(context), null, null);
+            } else if(murl.startsWith(&quot;http&quot;)){
+                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                mWrapper = new HttpUrlConnectionWrapper(conn);
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setRequestMethod(DownLoadManager.RequsteMethod method) {
+        mWrapper.setRequestMethod(method);
+    }
+
+    @Override
+    public int getResponseCode() {
+        return mWrapper.getResponseCode();
+    }
+
+    @Override
+    public void setDoOutPut(boolean newValue) {
+        mWrapper.setDoOutPut(newValue);
+    }
+
+    @Override
+    public InputStream getInputStream() {
+        return mWrapper.getInputStream();
+    }
+
+    @Override
+    public void setConnectTimeout(int timeout) {
+        mWrapper.setConnectTimeout(timeout);
+    }
+
+    @Override
+    public void setReadTimeout(int timeout) {
+        mWrapper.setReadTimeout(timeout);
+    }
+
+    @Override
+    public void setRequestProperty(String range, String s) {
+        mWrapper.setRequestProperty(range, s);
+    }
+
+    @Override
+    public void disconnect() {
+        mWrapper.disconnect();
+    }
+
+    @Override
+    public long getFileSize() {
+        return mWrapper.getFileSize();
+    }
+}
+</code></pre>
+<p>到这里我们可以明确了，<code>ConnectionWrapperManager</code>都是假象，其实在<code>Downloader</code>中操作<code>ConnectionWrapperManager</code>，其实是在操作<code>HttpURLConnection</code>和<code>HttpsURLConnection</code>啦。</p>
+<h4 id="4-DownLoader续"><a href="#4-DownLoader续" class="headerlink" title="4.DownLoader续"></a>4.DownLoader续</h4><p>欢迎回来，现在我们继续看<code>download</code>方法里的内容了。<br>先通过<code>url</code>来<code>openConnection</code>生成对应的<code>URLConnection</code>，然后设置get还是post，超时等，这些都是套路。<br>当<code>mDownLoadSize</code>小于0的时候，就相当于是第一次下次并进行初始化执行<code>openConnention</code>方法。<code>mDownLoadSize</code>是个全局变量，下载的时候会变，而且这个值会同步数据库里的值，所以可以作为是否第一次下载的标识，当然后面还有更多用处。看看<code>openConnention</code>方法吧：</p>
+<pre><code class="java">private void openConnention(ConnectionWrapperManager manager) {
+            try {
+                if (mFileSize == 0) {
+                    mFileSize = manager.getFileSize();
+                }
+                if (mFileSize &gt; 0) {
+                    isFolderExist();
+                    mLocalFile = new RandomAccessFile(new File(mFilePath + File.separator + mFileName + &quot;.tmp&quot;), &quot;rwd&quot;);
+                    mSQLDownLoadInfo.setDownloadSize(mFileSize);
+                    if (isdownloading) {
+                        saveDownloadInfo();
+                    }
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+</code></pre>
+<p>做了几件事：</p>
+<ol>
+<li>通过<code>ConnectionWrapperManager</code>获得文件的总大小，存到数据库里面去（前面说了有两个字段是还没有被赋初值的，忘了可以倒回去看看）。</li>
+<li>新建下载的文件夹，不说了看代码吧。<pre><code class="java">private boolean isFolderExist() {
+     boolean result = false;
+     try {
+         String filepath = mFilePath;
+         File file = new File(filepath);
+         if (!file.exists()) {
+             if (file.mkdirs()) {
+                 result = true;
+             }
+         } else {
+             result = true;
+         }
+     } catch (Exception e) {
+         e.printStackTrace();
+     }
+     return result;
+ }
+</code></pre>
+</li>
+<li><p>生成了一个<code>RandomAccessFile</code>临时文件，这个非常牛逼，尤其是它的<code>seek</code>方法，可以说是断点续传的理论基础了。<br>如果不是第一次下载，那就判断有没有那个临时文件了，如果有，那么<code>mDownLoadSize</code>也肯定有值，就seek到那个值然后继续下载吧，如果没有， 就相当于是第一次下啦。<br>接下来就是下载更新回调的过程了，对照代码看看就行，反正都这样一个流程，再贴出来看看吧：</p>
+<pre><code class="java"> inputStream = manager.getInputStream();
+             byte[] buffer = new byte[1024 * 4];
+             int length = -1;
+             if (inputStream != null) {
+                 while ((length = inputStream.read(buffer)) != -1 &amp;&amp; isdownloading) {
+                     mLocalFile.write(buffer, 0, length);
+                     mDownLoadSize += length;
+                     mSafeDownLoadSize = mDownLoadSize;
+                     mHandler.sendEmptyMessage(TASK_PROGESS);
+                 }
+             }
+</code></pre>
+<p>接下来是下载完了的操作，上代码：</p>
+<pre><code class="java">             // 下载完了
+             if (mDownLoadSize == mFileSize) {
+                 boolean renameResult = renameFile();
+                 if (renameResult) {
+                     mHandler.sendEmptyMessage(TASK_SUCCESS); // 转移文件成功
+                 } else {
+                     new File(mFilePath + File.separator + mFileName + &quot;.tmp&quot;).delete();
+                     Message msg = Message.obtain();
+                     msg.what = TASK_ERROR;
+                     Bundle bundle = new Bundle();
+                     bundle.putString(ERROR_KEY, &quot;转移文件失败&quot;);
+                     msg.setData(bundle);
+                     mHandler.sendEmptyMessage(TASK_ERROR);// 转移文件失败
+                 }
+</code></pre>
+<p>简而言之，就是下完了之后重命名一下，然后根据重命名是否成功来发起成功或者失败的回调，下面是重命名的代码：</p>
+<pre><code class="java"> private boolean renameFile() {
+     File newfile = new File(mFilePath + File.separator + mFileName);
+     if (newfile.exists()) {
+         newfile.delete();
+     }
+     File oldFile = new File(mFilePath + File.separator + mFileName + &quot;.tmp&quot;);
+     return oldFile.renameTo(newfile);
+ }
+</code></pre>
+<p>然后是清理战场了：</p>
+<pre><code class="java">                 // 清除数据库任务
+                 mHelper.deleteDownLoadInfo(mSQLDownLoadInfo.getUserID(), getTaskID());
+                 mDownLoadTask = null;
+                 mDownLoadCallBack = null;
+                 ondownload = false;
+                 mDownLoadSize = 0;
+                 mSafeDownLoadSize = 0;
+</code></pre>
+<p>如果下载过程中出错了，也是需要清理战场的，如果支持断点续传的话，还需要把已经下载的信息保存在数据库里面去：</p>
+<pre><code class="java">if (isdownloading) {
+                 if (mIsSupportBreakpoint) {
+                     try {
+                         if (mLocalFile != null) {
+                             long length = mLocalFile.length();
+                             if (length &gt; 0) {
+                                 saveDownloadInfo();
+                             }
+                         }
+                     } catch (IOException e1) {
+                         e1.printStackTrace();
+                     }
+                 }
+                 ondownload = false;
+                 mPool.remove(mDownLoadTask);
+                 mDownLoadTask.stopDownLoad();
+                 mDownLoadTask = null;
+                 Message msg = Message.obtain();
+                 msg.what = TASK_ERROR;
+                 Bundle bundle = new Bundle();
+                 bundle.putString(ERROR_KEY, e.getMessage());
+                 msg.setData(bundle);
+                 mHandler.sendMessage(msg);
+             }
+</code></pre>
+<p>final里面也关闭链接，关闭文件，也算是最后的清理了：</p>
+<pre><code class="java">finally {
+             if (manager != null) {
+                 manager.disconnect();
+             }
+             if (inputStream != null) {
+                 try {
+                     inputStream.close();
+                 } catch (IOException e) {
+                     e.printStackTrace();
+                 }
+             }
+             if (mLocalFile != null) {
+                 try {
+                     mLocalFile.close();
+                 } catch (IOException e) {
+                     e.printStackTrace();
+                 }
+             }
+         }
+</code></pre>
+<p>好了，主要代码贴完了，需要注意的是清理的时候有个<code>mDownLoadTask.stopDownLoad();</code>方法，照旧来看看：</p>
+<pre><code class="java">private void stopDownLoad() {
+         isdownloading = false;
+
+         if (mLocalFile != null) {
+             long length = mSafeDownLoadSize;
+             if (length &gt; 0) {
+                 if (mIsSupportBreakpoint) {
+                     saveDownloadInfo();
+                 } else {
+                     clearDownLoadInfo();
+                 }
+             }
+         }
+         Message msg = Message.obtain();
+         msg.what = TASK_STOP;
+         Bundle bundle = new Bundle();
+         bundle.putLong(STOP_KEY, mDownLoadSize);
+         msg.setData(bundle);
+         mHandler.sendMessage(msg);
+     }
+</code></pre>
+<p>里面除了有个复制回调的handler发送消息外就是存储和清理数据库数据了，再来看看这两个方法：</p>
+<pre><code class="java">/**
+  * 是否支持断点续传就在于中断下载是否保存下载信息
+  */
+ private void saveDownloadInfo() {
+     if (mIsSupportBreakpoint) {
+         mSQLDownLoadInfo.setDownloadSize(mSafeDownLoadSize);
+         mSQLDownLoadInfo.setFileSize(mFileSize);
+         mHelper.save(mSQLDownLoadInfo);
+     }
+ }
+
+ private void clearDownLoadInfo() {
+     mDownLoadSize = 0;
+     mDownLoadCallBack = null;
+     mHelper.deleteDownLoadInfo(mSQLDownLoadInfo.getUserID(), getTaskID());
+     File file = new File(mFilePath + File.separator + mFileName + &quot;.tmp&quot;);
+     if (file.exists()) {
+         file.delete();
+     }
+ }
+</code></pre>
+<p>到目前为止，整个下载流程基本上也就是这个样子了，停止或者取消下载的时候这个类也提供一个公共方法来给外部调用，简单了解一下就行：</p>
+<pre><code class="java">public void stop() {
+     if (mDownLoadTask != null) {
+         ondownload = false;
+         mDownLoadTask.stopDownLoad();
+         mPool.remove(mDownLoadTask);
+         mDownLoadTask = null;
+     }
+ }
+
+ public void destroy() {
+     if (mDownLoadTask != null) {
+         mDownLoadTask.stopDownLoad();
+         mPool.remove(mDownLoadTask);
+         mDownLoadTask = null;
+     }
+
+     mHelper.deleteDownLoadInfo(mSQLDownLoadInfo.getUserID(), getTaskID());
+     File file = new File(mFilePath + File.separator + mFileName + &quot;.tmp&quot;);
+     if (file.exists()) {
+         file.delete();
+     }
+     mDownLoadSize = 0;
+     Message msg = Message.obtain();
+     msg.what = TASK_STOP;
+     Bundle bundle = new Bundle();
+     bundle.putLong(STOP_KEY, mDownLoadSize);
+     msg.setData(bundle);
+     mHandler.sendMessage(msg);
+ }
+</code></pre>
+<p>是不是看了这么多早就晕掉了，下载已经结束了，但感觉还有一块儿没有说到，是什么呢什么呢。</p>
+</li>
+</ol>
+<h4 id="5-数据库"><a href="#5-数据库" class="headerlink" title="5.数据库"></a>5.数据库</h4><p>对，就是它，它比较独立，就单独拧出来了，和下载其实没啥关系，但是为下载提供了持续存储，当然不仅仅是下载，太多时候各种业务需要它来提供持续了，感觉可以从零开始学习设计数据库。<br><img src="/img/003/20170328-12.png" alt="Alt text"><br>还是和上面一样，就截个类名看看就行了，这个结构稍微后面一点一点解释吧，虽然画个图会更好点。<br><code>AbstractDatabaseHelper</code>和<code>BaseDBHelper</code>是基类，前者提供数据库封装，后者提供业务封装。<code>MyDatabaseHelper</code>和<code>DownloadTaskDBHelper</code>分别负责继承他们，<code>DownloadTaskDBHelper</code>持有<code>MyDatabaseHelper</code>的实例，是不是觉得跟某个设计模式及其相似呢。<br>不说了，上代码：</p>
+<pre><code class="java">public abstract class AbstractDatabaseHelper {
+
+    /** */
+    /**
+     * SQLite数据库实例
+     */
+    public SQLiteDatabase mDb = null;
+
+    /** */
+    /**
+     * 数据库创建帮手
+     */
+    protected CreateDBHelper mDbHelper = null;
+
+    /** */
+    /**
+     * 获得当前数据库帮手类标识(一般是该类名称)，用于日志等的记录
+     * 
+     * @return
+     */
+    protected abstract String getTag();
+
+    /** */
+    /**
+     * 获得数据库名称
+     * 
+     * @return
+     */
+    protected abstract String getMyDatabaseName();
+
+    /** */
+    /**
+     * 获得数据库版本，值至少为1。 当数据库结构发生改变的时候，请将此值加1，系统会在初始化时自动调用
+     * createDBTables和dropDBTables方法更新数据库结构。
+     * 
+     * @return
+     */
+    protected abstract int getDatabaseVersion();
+
+    /** */
+    /**
+     * 创建数据库表的SQL语句，一个元素一条语句
+     * 
+     * @return
+     */
+    protected abstract String[] createDBTables();
+
+    /** */
+    /**
+     * 删除数据库表的SQL语句，一个元素一条语句
+     * 
+     * @return
+     */
+    protected abstract String[] dropDBTables();
+
+    /** */
+    /**
+     * 
+     * TODO 内部数据库创建帮手类
+     * 
+     */
+    private class CreateDBHelper extends SQLiteOpenHelper {
+        public CreateDBHelper(Context ctx) {
+            super(ctx, getMyDatabaseName(), null, getDatabaseVersion());
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            executeBatch(createDBTables(), db);
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            Log.e(getTag(), &quot;Upgrading database &#39;&quot; + getMyDatabaseName() + &quot;&#39; from version &quot; + oldVersion + &quot; to &quot;
+                    + newVersion);
+            for (int i = oldVersion; i &lt; newVersion; i++) {
+                if (i &lt;= 14) {
+                    String[] tasks = { &quot;DROP TABLE IF EXISTS UPLOAD_TASK&quot;, &quot;DROP TABLE IF EXISTS FEED_COMMENT&quot;,
+                            &quot;DROP TABLE IF EXISTS SHARE&quot;, &quot;DROP TABLE IF EXISTS MESSAGE&quot;, &quot;DROP TABLE IF EXISTS CLIPS&quot; };
+                    executeBatch(tasks, db);
+                } else if (i &lt;= 16) {
+                    String[] updateClipTable = { &quot;ALTER TABLE CLIPS ADD COLUMN FAV_ID VARCHAR(32)&quot;,
+                            &quot;ALTER TABLE CLIPS ADD COLUMN TYPE INTEGER&quot; };
+                    executeBatch(updateClipTable, db);
+                } else if (i &lt;= 18) {
+                    db.execSQL(&quot;DROP TABLE IF EXISTS MESSAGE&quot;);
+                } else if (i &lt;= 19) {
+                    db.execSQL(&quot;DROP TABLE IF EXISTS DOWNLOAD_TASK&quot;);
+                }
+            }
+            onCreate(db);
+        }
+
+        /** */
+        /**
+         * 批量执行Sql语句
+         * 
+         * @param sqls
+         * @param db
+         */
+        private void executeBatch(String[] sqls, SQLiteDatabase db) {
+            if (sqls == null)
+                return;
+
+            db.beginTransaction();
+            try {
+                int len = sqls.length;
+                for (int i = 0; i &lt; len; i++) {
+                    db.execSQL(sqls[i]);
+                }
+                db.setTransactionSuccessful();
+            } catch (Exception e) {
+                Log.d(getTag(), e.getMessage());
+            } finally {
+                db.endTransaction();
+            }
+
+        }
+    }
+
+    /** */
+    /**
+     * 打开或者创建一个指定名称的数据库
+     * 
+     * @param dbName
+     * @param ctx
+     */
+    private synchronized void open(Context ctx) {
+        if (mDbHelper == null) {
+            try {
+                mDbHelper = new CreateDBHelper(ctx);
+                mDb = mDbHelper.getWritableDatabase();
+            } catch (Exception e) {
+                Log.w(&quot;wenba&quot;, e);
+            }
+        }
+    }
+
+    protected void init(Context ctx) {
+        if (ctx == null) {
+            throw new RuntimeException(&quot;ctx is null&quot;);
+        }
+        if (mDbHelper == null) {
+            open(ctx);
+        }
+    }
+
+    /** */
+    /**
+     * 关闭数据库
+     */
+    public void close() {
+        try {
+            if (mDb != null &amp;&amp; mDb.isOpen()) {
+                mDb.close();
+            }
+            if (mDbHelper != null) {
+                mDbHelper.close();
+            }
+        } catch (Exception e) {
+            Log.w(&quot;wenba&quot;, e);
+        }
+    }
+}
+</code></pre>
+<p><code>AbstractDatabaseHelper</code>里面有一个<code>CreateDBHelper</code>的内部类来继承<code>SQLiteOpenHelper</code>，然后里面就是标准的一些函数的实现啦。需要主要的是<code>onUpgrade</code>的实现跟业务有点关系，先不管，有兴趣可以自己了解，<code>executeBatch</code>支持批处理SQL语句，然后创建数据库等操作都是用虚函数的形势交给子类去实现的。<br>那来看这个子类吧：</p>
+<pre><code class="java">public class MyDatabaseHelper extends AbstractDatabaseHelper {
+    private static MyDatabaseHelper instance = null;
+
+    private String databaseName = &quot;MYdb.db&quot;;
+    private String tag = &quot;my_database&quot;;
+    private int databaseVersion = 20;
+    private Context context;
+
+    @Override
+    protected String[] createDBTables() {
+        String[] object = {
+                &quot;CREATE TABLE IF NOT EXISTS UPLOAD_TASK(&quot; + &quot;ID INTEGER PRIMARY KEY AUTOINCREMENT&quot; + &quot;,UID VARCHAR(32)&quot;
+                        + &quot;,TASK_ID VARCHAR(100)&quot; + &quot;,CREATE_TIME TIMESTAMP&quot; + &quot;,STATUS VARHCHAR(20)&quot;
+                        + &quot;,TAKS_BEAN BLOB&quot; + &quot;)&quot;,
+
+                &quot;CREATE TABLE IF NOT EXISTS FEED_DETAIL(&quot; + &quot;ID INTEGER PRIMARY KEY AUTOINCREMENT&quot;
+                        + &quot;,FEED_ID VARCHAR(100)&quot; + &quot;,UID VARCHAR(32)&quot; + &quot;,FEED_BEAN BLOB&quot; + &quot;)&quot;,
+
+                &quot;CREATE TABLE IF NOT EXISTS SETTING(&quot; + &quot;ID INTEGER PRIMARY KEY AUTOINCREMENT&quot; + &quot;,_KEY VARCHAR(100)&quot;
+                        + &quot;,_VALUE VARCHAR(100)&quot; + &quot;)&quot;,
+
+                &quot;CREATE TABLE IF NOT EXISTS FEED_COLLECT(&quot; + &quot;ID INTEGER PRIMARY KEY AUTOINCREMENT&quot;
+                        + &quot;,UID VARCHAR(32)&quot; + &quot;,FAV_ID VARCHAR(32)&quot; + &quot;,AID VARCHAR(32)&quot; + &quot;,FEED_ID VARCHAR(100)&quot;
+                        + &quot;,SUBJECT VARCHAR(8)&quot; + &quot;,FEED_COLLECT BLOB&quot; + &quot;)&quot;,
+
+                &quot;CREATE TABLE IF NOT EXISTS FEED_COMMENT(&quot; + &quot;ID INTEGER PRIMARY KEY AUTOINCREMENT&quot;
+                        + &quot;,SID VARCHAR(32)&quot; + &quot;,UID VARCHAR(32)&quot; + &quot;,AID VARCHAR(32)&quot; + &quot;,CREATE_TIME TIMESTAMP&quot;
+                        + &quot;,FEED_COMMENT BLOB&quot; + &quot;)&quot;,
+
+                &quot;CREATE TABLE IF NOT EXISTS SHARE(&quot; + &quot;ID INTEGER PRIMARY KEY AUTOINCREMENT&quot; + &quot;,UID VARCHAR(32)&quot;
+                        + &quot;,AID VARCHAR(32)&quot; + &quot;,SID VARCHAR(32)&quot; + &quot;,TYPE INTEGER&quot; + &quot;,CREATE_TIME TIMESTAMP&quot;
+                        + &quot;,SUBJECT VARCHAR(8)&quot; + &quot;,SHARE_BEAN BLOB&quot; + &quot;)&quot;,
+
+                &quot;CREATE TABLE IF NOT EXISTS MESSAGE(&quot; + &quot;ID INTEGER PRIMARY KEY AUTOINCREMENT&quot; + &quot;,CATEGORY INTEGER&quot;
+                        + &quot;,MESSAGE_ID VARCHAR(32)&quot; + &quot;,UID VARCHAR(32)&quot; + &quot;,STATUS INTEGER&quot; + &quot;,CREATE_TIME TIMESTAMP&quot;
+                        + &quot;,MESSAGE_BEAN BLOB&quot; + &quot;)&quot;,
+
+                &quot;CREATE TABLE IF NOT EXISTS CLIPS(&quot; + &quot;ID INTEGER PRIMARY KEY AUTOINCREMENT&quot; + &quot;,UID VARCHAR(32)&quot;
+                        + &quot;,ARTICLE_ID VARCHAR(32)&quot; + &quot;,ARTICLE_INDEX INTEGER&quot; + &quot;,FAV_ID VARCHAR(32)&quot;
+                        + &quot;,TYPE INTEGER&quot; + &quot;,CREATE_TIME TIMESTAMP&quot; + &quot;,CLIPS_BEAN BLOB&quot; + &quot;)&quot;,
+
+                &quot;CREATE TABLE IF NOT EXISTS DOWNLOAD_TASK( &quot; + &quot;ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL&quot;
+                        + &quot;,UID VARCHAR&quot; + &quot;,TASK_ID VARCHAR&quot; + &quot;,URL VARCHAR&quot; + &quot;,FILE_PATH VARCHAR&quot;
+                        + &quot;,FILE_NAME VARCHAR&quot; + &quot;,FILE_SIZE INTEGER&quot; + &quot;,DOWNLOAD_SIZE INTEGER&quot;
+                        + &quot;,IS_SUPPORT_BREAKPOINT INTEGER&quot; + &quot;)&quot;,
+                &quot;CREATE TABLE IF NOT EXISTS TEST_CENTER( &quot; + &quot;ID INTEGER PRIMARY KEY AUTOINCREMENT&quot;
+                        + &quot;,UID VARCHAR(32)&quot; + &quot;,CENTER_ID VARCHAR(100)&quot; + &quot;,SUBJECT VARCHAR(32)&quot; + &quot;,CENTER_BEAN BLOB&quot;
+                        + &quot;)&quot; };
+        return object;
+    }
+
+    @Override
+    protected String[] dropDBTables() {
+        String[] object = { &quot;DROP TABLE IF EXISTS UPLOAD_TASK&quot;, &quot;DROP TABLE IF EXISTS FEED_DETAIL&quot;,
+                &quot;DROP TABLE IF EXISTS SETTING&quot;, &quot;DROP TABLE IF EXISTS FEED_COLLECT&quot;,
+                &quot;DROP TABLE IF EXISTS FEED_COMMENT&quot;, &quot;DROP TABLE IF EXISTS SHARE&quot;, &quot;DROP TABLE IF EXISTS MESSAGE&quot;,
+                &quot;DROP TABLE IF EXISTS CLIPS&quot;, &quot;DROP TABLE IF EXISTS DOWNLOAD_TASK&quot;, &quot;DROP TABLE IF EXISTS CLIPS&quot;,
+                &quot;DROP TABLE IF EXISTS TEST_CENTER&quot; };
+        return object;
+    }
+
+    @Override
+    protected String getMyDatabaseName() {
+        return databaseName;
+    }
+
+    @Override
+    protected int getDatabaseVersion() {
+        return databaseVersion;
+    }
+
+    @Override
+    protected String getTag() {
+        return tag;
+    }
+
+    private static synchronized void initSyn(Context context) {
+        instance = new MyDatabaseHelper(context);
+    }
+
+    public static MyDatabaseHelper getInstance(Context context) {
+        if (instance == null) {
+            initSyn(context);
+        }
+        return instance;
+    }
+
+    private MyDatabaseHelper(Context context) {
+        this.context = context;
+    }
+
+    public void execSQL(String sql, Object[] bindArgs) {
+        init(context);
+        if (mDb == null) {
+            return;
+        }
+        try {
+            mDb.execSQL(sql, bindArgs);
+        } catch (Exception e) {
+            Log.w(&quot;wenba&quot;, e);
+        }
+    }
+
+    public void execSQL(String[] sql, Object[][] bindArgs) {
+        if (sql == null || sql.length == 0) {
+            return;
+        }
+        init(context);
+        if (mDb == null) {
+            return;
+        }
+        for (int i = 0; i &lt; sql.length; i++) {
+            try {
+                mDb.execSQL(sql[i], bindArgs[i]);
+            } catch (Exception e) {
+                Log.w(&quot;wenba&quot;, e);
+            }
+        }
+    }
+
+    public void execSQL(String sql) {
+        init(context);
+        if (mDb == null) {
+            return;
+        }
+        try {
+            mDb.execSQL(sql);
+        } catch (Exception e) {
+            Log.w(&quot;wenba&quot;, e);
+        }
+    }
+
+    public void update(String table, ContentValues values, String whereClause, String[] whereArgs) {
+        init(context);
+        if (mDb == null) {
+            return;
+        }
+        try {
+            mDb.update(table, values, whereClause, whereArgs);
+        } catch (Exception e) {
+            Log.w(&quot;wenba&quot;, e);
+        }
+    }
+
+    public Cursor rawQuery(String sql, String[] selectionArgs) {
+        init(context);
+        if (mDb == null) {
+            return null;
+        }
+        return mDb.rawQuery(sql, selectionArgs);
+    }
+
+    public Cursor query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy,
+            String having, String orderBy) {
+        init(context);
+
+        if (mDb == null) {
+            return null;
+        }
+        return mDb.query(table, columns, selection, selectionArgs, groupBy, having, orderBy);
+    }
+}
+</code></pre>
+<p>子类除了根据业务创建了一大堆表之外，也实现了增删改查相关操作，通过名为<code>mDb</code>的<code>SQLiteDatabase</code>来进行操作，<code>mDb</code>是在父类初始化的时候就初始化好了的，可以代码倒回去看看，其他的也没什么了，接着看另外一个父类：</p>
+<pre><code class="java">public abstract class BaseDBHelper&lt;T&gt; {
+    protected String getUserId() {
+        String userId = &quot;12345&quot;;//UserManager.getCurUserId();
+        if (userId == null) {
+            return null;
+        }
+        return userId;
+    }
+
+    public abstract String getTable();
+
+    public abstract void save(T obj);
+
+    public abstract void update(T obj);
+
+    public abstract void delete(String id);
+
+    public abstract void deleteAll();
+
+    public abstract T find(String uid, String taskId);
+
+    public abstract int getCount();
+
+    public abstract List&lt;T&gt; getAllData();
+}
+</code></pre>
+<p>UID是根据业务账号系统生成保存的，这里就用一个简单字符串代替就行了。就是一堆虚函数，这些就跟业务相关了，相当与这些方法会封装刚刚<code>MyDatabaseHelper</code>里面实现的增删改查方法。最后就是<code>DownloadTaskDBHelper</code>了：</p>
+<pre><code class="java">public class DownloadTaskDBHelper extends BaseDBHelper&lt;DownLoadBean&gt; {
+    private static final String TABLE_NAME = &quot;DOWNLOAD_TASK&quot;;
+    private static final int MAX_SAVE_TIME = 5;
+    private volatile static DownloadTaskDBHelper mInstance;
+    private MyDatabaseHelper mHelper;
+    private int saveTime;
+
+    private DownloadTaskDBHelper(Context context) {
+        mHelper = MyDatabaseHelper.getInstance(context);
+    }
+
+    public static DownloadTaskDBHelper getInstance(Context context) {
+        if (mInstance == null) {
+            synchronized (DownloadTaskDBHelper.class) {
+                if (mInstance == null) {
+                    mInstance = new DownloadTaskDBHelper(context);
+                }
+            }
+        }
+        return mInstance;
+    }
+
+    @Override
+    public String getTable() {
+        return TABLE_NAME;
+    }
+
+    @Override
+    public void save(DownLoadBean obj) {
+        String sql = &quot;insert into &quot; + getTable() + &quot;(&quot; + &quot;UID,TASK_ID,URL,FILE_PATH,FILE_NAME,FILE_SIZE,DOWNLOAD_SIZE,IS_SUPPORT_BREAKPOINT&quot;
+                + &quot;)values(?,?,?,?,?,?,?,?)&quot;;
+        Object[] bindArgs = { obj.getUserID(), obj.getTaskID(), obj.getUrl(), obj.getFilePath(), obj.getFileName(), obj.getFileSize(), obj.getDownloadSize(),
+                obj.isSupportBreakpoint() == true ? 1 : 0 };
+        Cursor cursor = null;
+        try {
+            cursor = mHelper.rawQuery(&quot;SELECT * FROM &quot; + getTable() + &quot; WHERE UID = ? AND TASK_ID = ? &quot;, new String[] { obj.getUserID(), obj.getTaskID() });
+            if (cursor.moveToNext()) {
+                update(obj);
+            } else {
+                mHelper.execSQL(sql, bindArgs);
+            }
+        } catch (Exception e) {
+            saveTime++;
+            if (saveTime &lt; MAX_SAVE_TIME) {
+                save(obj);
+            } else {
+                saveTime = 0;
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        saveTime = 0;
+    }
+
+    @Override
+    public void update(DownLoadBean obj) {
+        String selection = null;
+        String[] selectionArgs = null;
+        selection = &quot;UID = ? AND TASK_ID = ?&quot;;
+        selectionArgs = new String[] { obj.getUserID(), obj.getTaskID() };
+
+        ContentValues cv = new ContentValues();
+        cv.put(&quot;URL&quot;, obj.getUrl());
+        cv.put(&quot;FILE_PATH&quot;, obj.getFilePath());
+        cv.put(&quot;FILE_NAME&quot;, obj.getFileName());
+        cv.put(&quot;FILE_SIZE&quot;, obj.getFileSize());
+        cv.put(&quot;DOWNLOAD_SIZE&quot;, obj.getDownloadSize());
+        mHelper.update(getTable(), cv, selection, selectionArgs);
+    }
+
+    public List&lt;DownLoadBean&gt; findUserDownLoadInfo(String userID) {
+        List&lt;DownLoadBean&gt; list = new ArrayList&lt;DownLoadBean&gt;();
+        String sql = &quot;SELECT * FROM &quot; + getTable() + &quot; WHERE UID = ?&quot;;
+        Cursor cursor = null;
+        try {
+            cursor = mHelper.rawQuery(sql, new String[] { userID });
+            while (cursor.moveToNext()) {
+                DownLoadBean downloadinfo = new DownLoadBean();
+                downloadinfo.setUserID(cursor.getString(cursor.getColumnIndex(&quot;UID&quot;)));
+                downloadinfo.setTaskID(cursor.getString(cursor.getColumnIndex(&quot;TASK_ID&quot;)));
+                downloadinfo.setUrl(cursor.getString(cursor.getColumnIndex(&quot;URL&quot;)));
+                downloadinfo.setFilePath(cursor.getString(cursor.getColumnIndex(&quot;FILE_PATH&quot;)));
+                downloadinfo.setFileName(cursor.getString(cursor.getColumnIndex(&quot;FILE_NAME&quot;)));
+                downloadinfo.setFileSize(cursor.getLong(cursor.getColumnIndex(&quot;FILE_SIZE&quot;)));
+                downloadinfo.setDownloadSize(cursor.getLong(cursor.getColumnIndex(&quot;DOWNLOAD_SIZE&quot;)));
+                downloadinfo.setIsSupportBreakpoint(cursor.getLong(cursor.getColumnIndex(&quot;DOWNLOAD_SIZE&quot;)) &gt; 0 ? true : false);
+                list.add(downloadinfo);
+            }
+        } catch (Exception e) {
+            Log.w(&quot;wenba&quot;, e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return list;
+    }
+
+    public DownLoadBean findDownLoadInfo(String userID, String taskID) {
+        DownLoadBean downloadinfo = null;
+        String sql = &quot;SELECT * FROM &quot; + getTable() + &quot; WHERE UID = ? AND TASK_ID = ?&quot;;
+        Cursor cursor = null;
+        try {
+            cursor = mHelper.rawQuery(sql, new String[] { userID, taskID });
+            while (cursor.moveToNext()) {
+                downloadinfo = new DownLoadBean();
+                downloadinfo.setUserID(cursor.getString(cursor.getColumnIndex(&quot;UID&quot;)));
+                downloadinfo.setTaskID(cursor.getString(cursor.getColumnIndex(&quot;TASK_ID&quot;)));
+                downloadinfo.setUrl(cursor.getString(cursor.getColumnIndex(&quot;URL&quot;)));
+                downloadinfo.setFilePath(cursor.getString(cursor.getColumnIndex(&quot;FILE_PATH&quot;)));
+                downloadinfo.setFileName(cursor.getString(cursor.getColumnIndex(&quot;FILE_NAME&quot;)));
+                downloadinfo.setFileSize(cursor.getLong(cursor.getColumnIndex(&quot;FILE_SIZE&quot;)));
+                downloadinfo.setDownloadSize(cursor.getLong(cursor.getColumnIndex(&quot;DOWNLOAD_SIZE&quot;)));
+                downloadinfo.setIsSupportBreakpoint(cursor.getLong(cursor.getColumnIndex(&quot;DOWNLOAD_SIZE&quot;)) &gt; 0 ? true : false);
+            }
+        } catch (Exception e) {
+            Log.w(&quot;wenba&quot;, e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return downloadinfo;
+    }
+
+    public List&lt;DownLoadBean&gt; findAllDownLoadInfo() {
+        List&lt;DownLoadBean&gt; list = new ArrayList&lt;DownLoadBean&gt;();
+        String sql = &quot;SELECT * FROM &quot; + getTable();
+        Cursor cursor = null;
+        try {
+            cursor = mHelper.rawQuery(sql, new String[] {});
+            while (cursor.moveToNext()) {
+                DownLoadBean downloadinfo = new DownLoadBean();
+                downloadinfo.setUserID(cursor.getString(cursor.getColumnIndex(&quot;UID&quot;)));
+                downloadinfo.setTaskID(cursor.getString(cursor.getColumnIndex(&quot;TASK_ID&quot;)));
+                downloadinfo.setUrl(cursor.getString(cursor.getColumnIndex(&quot;URL&quot;)));
+                downloadinfo.setFilePath(cursor.getString(cursor.getColumnIndex(&quot;FILE_PATH&quot;)));
+                downloadinfo.setFileName(cursor.getString(cursor.getColumnIndex(&quot;FILE_NAME&quot;)));
+                downloadinfo.setFileSize(cursor.getLong(cursor.getColumnIndex(&quot;FILE_SIZE&quot;)));
+                downloadinfo.setDownloadSize(cursor.getLong(cursor.getColumnIndex(&quot;DOWNLOAD_SIZE&quot;)));
+                downloadinfo.setIsSupportBreakpoint(cursor.getLong(cursor.getColumnIndex(&quot;DOWNLOAD_SIZE&quot;)) &gt; 0 ? true : false);
+                list.add(downloadinfo);
+            }
+        } catch (Exception e) {
+            Log.w(&quot;wenba&quot;, e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return list;
+    }
+
+    public void deleteAllDownLoadInfo() {
+        String sql = &quot;DELETE FROM &quot; + getTable();
+        mHelper.execSQL(sql);
+    }
+
+    public void deleteUserDownLoadInfo(String userID) {
+        String sql = &quot;DELETE FROM &quot; + getTable() + &quot; WHERE UID = \&quot;&quot; + userID + &quot;\&quot;&quot;;
+        mHelper.execSQL(sql);
+    }
+
+    public void deleteDownLoadInfo(String userID, String taskID) {
+        String sql = &quot;DELETE FROM &quot; + getTable() + &quot; WHERE UID = \&quot;&quot; + userID + &quot;\&quot; AND TASK_ID = \&quot;&quot; + taskID + &quot;\&quot;&quot;;
+        mHelper.execSQL(sql);
+    }
+
+    @Override
+    public void delete(String id) {
+    }
+
+    @Override
+    public void deleteAll() {
+
+    }
+
+    @Override
+    public DownLoadBean find(String uid, String taskId) {
+        return findDownLoadInfo(uid, taskId);
+    }
+
+    @Override
+    public int getCount() {
+        return 0;
+    }
+
+    @Override
+    public List&lt;DownLoadBean&gt; getAllData() {
+        return findAllDownLoadInfo();
+    }
+}
+</code></pre>
+<p>现在回去看下载的数据库相关操作，是不是就恍然大悟了，或者是标红的代码都不红了哈哈。</p>
+<h4 id="6-总结"><a href="#6-总结" class="headerlink" title="6.总结"></a>6.总结</h4><p>很长的一篇，基本上把所有代码都贴上来，本来就是以应用为导向，所以这样也是必须的，能把这些代码组合在一起就可以跑起来了。<br>如果想把APP做大，那么下载模块和数据库模块都是必不可缺的，知道原理很重要，会应用也很重要，平时积累自己的兵器库关键时候随拿随用就更重要了，啊哈。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至same4869@126.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry"><span class="miit">
+                <img src="/img/gov.png" title="中华人民共和国工业和信息化部">
+                <a href="http://beian.miit.gov.cn/">沪ICP备2022003838号-2</a>
+        </span>
+    
+    ©2023-2024 Same
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
